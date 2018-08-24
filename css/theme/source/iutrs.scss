@@ -1,0 +1,98 @@
+/**
+ * A theme for IUT Robert Schuman by Adrien Krähenbühl.
+ *
+ * MIT licensed.
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// ---------------------------------------------
+// Override theme settings (see ../template/settings.scss)
+
+// Fonts
+$mainFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+$mainFontSize: 30px;
+
+$headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+$heading1Size: 3em;
+$heading2Size: 2.5em;
+$heading3Size: 1.5em;
+$headingTextTransform: bold;
+
+// Colors
+$backgroundColor: #FEFEFE;
+$mainColor: #000;
+$headingColor: #17a6e3;
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+// First slide
+.reveal h1 {
+    margin: 10% 0;
+}
+.reveal h3 {
+    margin: 0 0 3em 0;
+    font-style: italic;
+}
+.reveal section.first-slide {
+    align-items: center;
+}
+
+// Other slides
+.reveal h2 {
+    margin: 0 0 5% 0;
+}
+
+// Listes
+.reveal li {
+    list-style-type: none;
+    &:before {
+        content: '✓';
+        font-size: .7em;
+        padding-right: .7em;
+    }
+}
+
+// Flex
+.reveal section {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.reveal div.columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+.reveal .column95 { width: 95%; }
+.reveal .column90 { width: 90%; }
+.reveal .column85 { width: 85%; }
+.reveal .column80 { width: 80%; }
+.reveal .column75 { width: 75%; }
+.reveal .column70 { width: 70%; }
+.reveal .column65 { width: 65%; }
+.reveal .column60 { width: 60%; }
+.reveal .column55 { width: 55%; }
+.reveal .column50 { width: 50%; }
+.reveal .column45 { width: 45%; }
+.reveal .column40 { width: 40%; }
+.reveal .column35 { width: 35%; }
+.reveal .column30 { width: 30%; }
+.reveal .column25 { width: 25%; }
+.reveal .column20 { width: 20%; }
+.reveal .column15 { width: 15%; }
+.reveal .column10 { width: 10%; }
+.reveal .column5  { width:  5%; }
