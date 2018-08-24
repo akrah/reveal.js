@@ -1,0 +1,46 @@
+###############################################################################
+# Example of config file to generate RevealJS slides from Markdown.
+#
+# It is used by Grunt to generate the RevealJS slides.
+# Should be used in your project folder.
+#
+# MIT licensed.
+#
+# Copyright (C) 2018 Adrien Krähenbühl
+###############################################################################
+
+#************************
+#     PANDOC CONFIG
+#
+# It is use to define the pandoc option '--template'
+
+# HTML template used to compile your index.md file.
+# It should match an existing file "tpl/tpl-$(template).html" under the RevealJS folder.
+# Example: you must define 'template: example' to use the HTML template
+#          stored in 'tpl/tpl-example.html' under the RevealJS folder.
+# REQUIRED
+template: akrah
+
+#************************
+#    TEMPLATE CONFIG
+#
+# These parameters are passed to the template file through Pandoc.
+
+# CSS theme used in your template
+# It should match an existing file "css/theme/source/$(theme).scss" under the RevealJS folder.
+# Example: you must define 'theme: example' to use the CSS theme
+#          stored in 'css/theme/source/example.scss' under the RevealJS folder.
+# OPTIONNAL, default is 'serif'
+theme: serif
+
+# HighlightJS theme used for code blocks in RevealJS
+# It should match an existing file "lib/css/$(theme).css" under the RevealJS folder.
+# Example: you must define 'highlight-css: example' to use the CSS theme
+#          stored in 'lib/css/example.css' under the RevealJS folder.
+# OPTIONNAL, used by the IUTRS template
+highlight-css: zenburn
+
+# Global transition style to use in RevealJS
+# Can be none/default/fade/slide/convex/concave/zoom/cube/page/linear
+# OPTIONNAL, default is 'default'
+transition: default

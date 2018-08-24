@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 	// Project configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		conf: grunt.file.readYAML(root[1]+'/config.yml'),
 		meta: {
 			banner:
 				'/*!\n' +
@@ -58,9 +59,13 @@ module.exports = function(grunt) {
 			options: {
 				compatibility: 'ie9'
 			},
-			compress: {
+			compressReveal: {
 				src: 'css/reveal.css',
 				dest: 'css/reveal.min.css'
+			},
+			compressTheme: {
+				src: 'css/theme/<%= conf.theme || "serif" %>.css',
+				dest: 'css/theme/<%= conf.theme || "serif" %>.min.css'
 			}
 		},
 
@@ -106,15 +111,14 @@ module.exports = function(grunt) {
 		zip: {
 			bundle: {
 				src: [
-					'index.html',
-					'css/**',
+					'css/reveal.min.css',
+					'css/theme/<%= conf.theme %>.min.js',
 					'js/**',
 					'lib/**',
-					'images/**',
 					'plugin/**',
-					'**.md'
+					'index.html',
 				],
-				dest: 'reveal-js-presentation.zip'
+				dest: root[1]+'/reveal-js-presentation.zip'
 			}
 		},
 
@@ -144,13 +148,27 @@ module.exports = function(grunt) {
 			},
 			options: {
 				livereload: true
+			},
+			pandoc: {
+				files: [ root[1]+'/*.md', root[1]+'/config.yml', root[0]+"tpl/*.html" ],
+				tasks: 'pandoc'
 			}
 		},
 
 		retire: {
 			js: [ 'js/reveal.js', 'lib/js/*.js', 'plugin/**/*.js' ],
 			node: [ '.' ]
-		}
+		},
+
+		node_pandoc: {
+			options: {
+				flags: "-t revealjs --no-highlight --mathjax --template=tpl/tpl-<%= conf.template %>.html <%= Object.entries(conf).map( tab => '-V '+tab[0]+'='+tab[1] ).join(' ') %>"
+			},
+			files: {
+				src:  root[1] + '/*.md',
+				dest: 'index.html'
+			}
+		},
 
 	});
 
@@ -165,12 +183,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-retire' );
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-zip' );
+	grunt.loadNpmTasks( 'grunt-node-pandoc' );
 
 	// Default task
-	grunt.registerTask( 'default', [ 'css', 'js' ] );
+	grunt.registerTask( 'default', [ 'css', 'js', 'pandoc' ] );
 
 	// JS task
-	grunt.registerTask( 'js', [ 'jshint', 'uglify', 'qunit' ] );
+	grunt.registerTask( 'js', [ 'jshint', 'uglify', ] ); // 'qunit'
 
 	// Theme CSS
 	grunt.registerTask( 'css-themes', [ 'sass:themes' ] );
@@ -185,9 +204,12 @@ module.exports = function(grunt) {
 	grunt.registerTask( 'package', [ 'default', 'zip' ] );
 
 	// Serve presentation locally
-	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+	grunt.registerTask( 'serve', [ 'default', 'connect', 'watch' ] );
 
 	// Run tests
 	grunt.registerTask( 'test', [ 'jshint', 'qunit' ] );
+
+	// Run Pandoc
+	grunt.registerTask( 'pandoc', [ 'node_pandoc' ] );
 
 };

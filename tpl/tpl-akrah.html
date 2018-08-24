@@ -12,14 +12,24 @@
  ************************************************************************** -->
 <html lang="fr">
 <head>
-    <title>W31 - Web côté serveur</title>
+    <title>$title$</title>
     <meta charset="utf-8">
-    <meta name="description" content="W31 - Web côté serveur">
-    <meta name="author" content="Adrien Krähenbühl">
+    <meta name="description" content="$title$">
+$for(author)$
+    <meta name="author" content="$author$">
+$endfor$
     <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="css/theme/iutrs.min.css">
+$if(theme)$
+    <link rel="stylesheet" href="css/theme/$theme$.min.css">
+$else$
+    <link rel="stylesheet" href="css/theme/serif.css">
+$endif$
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+$if(highlight-css)$
+    <link rel="stylesheet" href="lib/css/$highlight-css$.css">
+$else$
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+$endif$
 	<script src="lib/js/head.min.js"></script>
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
@@ -30,52 +40,28 @@
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
-    </head>
+    $for(header-includes)$
+        $header-includes$
+    $endfor$
+</head>
 <body>
 
+$for(include-before)$
+    $include-before$
+$endfor$
 
 <div class="reveal">
     <div class="slides">
         <section class="slide first-slide">
-            <h1>W31 - Web côté serveur</h1>
-            <h3>1 - Introduction à PHP</h3>
+            <h1>$title$</h1>
+            <h3>$subtitle$</h3>
             <address>
-                <span>Adrien Krähenbühl</span><br>
-                <span>IUT Robert Schuman</span>
+                <span>$author$</span><br>
+                <span>$place$</span>
             </address>
-            <time>12 septembre 2018</time>
+            <time>$date$</time>
         </section>
-        <section id="solution-4-synchronization" class="slide level2">
-        <h2>Solution #4: Synchronization</h2>
-        <p>Take turns.</p>
-        <div class="columns">
-        <pre class="cpp column45"><code>    Thread 0
-            while ( turn != 0) ;
-            critical_section () ;
-            turn = 1 ;</code></pre>
-        <pre class="cpp column45"><code>    Thread 1
-            while ( turn != 1) ;
-            critical_section () ;
-            turn = 0;</code></pre>
-        </div>
-        <p>Disadvantage: Forces strict alternation.</p>
-        <ul>
-        <li>X if thread 2 is really slow, thread 1 is slowed down with it.</li>
-        <li>X Turns asynchronous threads into synchronous threads</li>
-        </ul>
-        <p><span class="math display">\[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]</span></p>
-        </section>
-        <section id="déroulement-du-module" class="slide level2">
-        <h2>Déroulement du module</h2>
-        <h4 id="séances">Séances</h4>
-        <p>3 CMs + 5 TDs + 11 TPs</p>
-        <h4 id="contenu">Contenu</h4>
-        <ul>
-        <li>Syntaxe PHP</li>
-        <li>Communication avec le serveur</li>
-        <li>Intéractions avec des BDDs (Mysql)</li>
-        </ul>
-        </section>
+        $body$
     </div>
 </div>
 
@@ -151,7 +137,11 @@ hideAddressBar: true,
 previewLinks: false,
 // Transition style to choose in the following list;
 //        none/default/fade/slide/convex/concave/zoom/cube/page/linear
-  transition: Reveal.getQueryHash().transition || 'fade',
+$if(transition)$
+  transition: Reveal.getQueryHash().transition || '$transition$',
+$else$
+  transition: Reveal.getQueryHash().transition || 'default',
+$endif$
 // Transition speed
 transitionSpeed: 'fast', // default/fast/slow
 // Transition style for full page slide backgrounds
