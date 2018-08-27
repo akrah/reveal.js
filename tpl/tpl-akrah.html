@@ -86,9 +86,9 @@ progress: true,
 //  "h/v": horizontal / vertical slide number
 //    "c": flattened slide number
 //  "c/t": flattened slide number / total slides
-slideNumber: false,
+slideNumber: "c/t",
 // Push each slide change to the browser history
-history: false,
+history: true,
 // Enable keyboard shortcuts for navigation
 keyboard: true,
 // Enable the slide overview mode
@@ -161,15 +161,9 @@ parallaxBackgroundVertical: null,
 display: 'flex',
 pdfSeparateFragments : false,
 dependencies: [
-        {
-            src: 'plugin/highlight/highlight.js', async: true,
-            callback: function() { hljs.initHighlightingOnLoad(); }
-        },
-        {
-            src: 'plugin/math/math.js', async: true
-        }
-    ]
-});
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/math/math.js', async: true }
+]});
 </script>
 
 </body>
