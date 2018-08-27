@@ -20,7 +20,7 @@ $mainFontSize: 30px;
 
 $headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
 $heading1Size: 3em;
-$heading2Size: 2.5em;
+$heading2Size: 2em;
 $heading3Size: 1.5em;
 $headingTextTransform: bold;
 
@@ -39,7 +39,7 @@ $headingColor: #17a6e3;
     margin: 10% 0;
 }
 .reveal h3 {
-    margin: 0 0 3em 0;
+    margin: 0 0 2em 0;
     font-style: italic;
 }
 .reveal section.first-slide {
@@ -48,7 +48,11 @@ $headingColor: #17a6e3;
 
 // Other slides
 .reveal h2 {
-    margin: 0 0 5% 0;
+    margin: 0 0 .5em 0;
+    padding-bottom: .2em;
+    width: 100%;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    text-align: left;
 }
 
 // Listes
