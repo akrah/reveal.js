@@ -19,7 +19,8 @@ $mainFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
 $mainFontSize: 30px;
 
 $headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
-$heading1Size: 3em;
+$heading1Size: 4em;
+$heading4Size: 2em;
 $heading2Size: 2em;
 $heading3Size: 1.5em;
 $headingTextTransform: bold;
@@ -36,9 +37,9 @@ $headingColor: #17a6e3;
 
 // First slide
 .reveal h1 {
-    margin: 10% 0;
+    font-variant: small-caps;
 }
-.reveal h3 {
+.reveal h4 {
     margin: 0 0 2em 0;
     font-style: italic;
 }
@@ -55,7 +56,16 @@ $headingColor: #17a6e3;
     text-align: left;
 }
 
+// All slides
+.reveal .slides > section {
+    padding: 0;
+}
+
 // Listes
+.reveal ul,
+.reveal ol {
+    margin: 0 0 1em 1em;
+}
 .reveal li {
     list-style-type: none;
     &:before {
@@ -63,6 +73,17 @@ $headingColor: #17a6e3;
         font-size: .7em;
         padding-right: .7em;
     }
+}
+
+// Images
+.reveal section img {
+    border: initial;
+    box-shadow: initial;
+}
+
+// Blockquotes
+.reveal blockquote {
+    box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.5);
 }
 
 // Flex
@@ -75,28 +96,50 @@ $headingColor: #17a6e3;
 .reveal div.columns {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
     width: 100%;
+    & > div {
+        flex-basis: 0;
+        text-align: left;
+        flex-grow: 1;
+        &.center {
+            text-align: center;
+        }
+    }
 }
 
-.reveal .column95 { width: 95%; }
-.reveal .column90 { width: 90%; }
-.reveal .column85 { width: 85%; }
-.reveal .column80 { width: 80%; }
-.reveal .column75 { width: 75%; }
-.reveal .column70 { width: 70%; }
-.reveal .column65 { width: 65%; }
-.reveal .column60 { width: 60%; }
-.reveal .column55 { width: 55%; }
-.reveal .column50 { width: 50%; }
-.reveal .column45 { width: 45%; }
-.reveal .column40 { width: 40%; }
-.reveal .column35 { width: 35%; }
-.reveal .column30 { width: 30%; }
-.reveal .column25 { width: 25%; }
-.reveal .column20 { width: 20%; }
-.reveal .column15 { width: 15%; }
-.reveal .column10 { width: 10%; }
-.reveal .column5  { width:  5%; }
+.reveal div.anim {
+    & p {
+        display: block;
+        text-align: center;
+    }
+    & img.fragment:not(.current-fragment) {
+        display: none;
+    }
+}
+
+.reveal div.columns div.column-100 { flex-grow: 100; }
+.reveal div.columns div.column-95  { flex-grow: 95; }
+.reveal div.columns div.column-90  { flex-grow: 90; }
+.reveal div.columns div.column-85  { flex-grow: 85; }
+.reveal div.columns div.column-80  { flex-grow: 80; }
+.reveal div.columns div.column-75  { flex-grow: 75; }
+.reveal div.columns div.column-70  { flex-grow: 70; }
+.reveal div.columns div.column-65  { flex-grow: 65; }
+.reveal div.columns div.column-60  { flex-grow: 60; }
+.reveal div.columns div.column-55  { flex-grow: 55; }
+.reveal div.columns div.column-50  { flex-grow: 50; }
+.reveal div.columns div.column-45  { flex-grow: 45; }
+.reveal div.columns div.column-40  { flex-grow: 40; }
+.reveal div.columns div.column-35  { flex-grow: 35; }
+.reveal div.columns div.column-30  { flex-grow: 30; }
+.reveal div.columns div.column-25  { flex-grow: 25; }
+.reveal div.columns div.column-20  { flex-grow: 20; }
+.reveal div.columns div.column-15  { flex-grow: 15; }
+.reveal div.columns div.column-10  { flex-grow: 10; }
+.reveal div.columns div.column-5   { flex-grow:  5; }
+.reveal div.columns div.column-4   { flex-grow:  4; }
+.reveal div.columns div.column-3   { flex-grow:  3; }
+.reveal div.columns div.column-2   { flex-grow:  2; }
