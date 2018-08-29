@@ -19,17 +19,9 @@ $for(author)$
     <meta name="author" content="$author$">
 $endfor$
     <link rel="stylesheet" href="css/reveal.min.css">
-$if(theme)$
-    <link rel="stylesheet" href="css/theme/$theme$.min.css">
-$else$
-    <link rel="stylesheet" href="css/theme/serif.css">
-$endif$
+    <link rel="stylesheet" href="css/theme/$if(theme)$$theme$$else$serif$endif$.min.css">
     <!-- For syntax highlighting -->
-$if(highlight-css)$
-    <link rel="stylesheet" href="lib/css/$highlight-css$.css">
-$else$
-    <link rel="stylesheet" href="lib/css/zenburn.css">
-$endif$
+    <link rel="stylesheet" href="lib/css/$if(highlight-css)$$highlight-css$$else$zenburn$endif$.css">
 	<script src="lib/js/head.min.js"></script>
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
@@ -41,28 +33,46 @@ $endif$
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
     $for(header-includes)$
-        $header-includes$
+    $header-includes$
     $endfor$
 </head>
 <body>
 
 $for(include-before)$
-    $include-before$
+$include-before$
 $endfor$
 
 <div class="reveal">
-    <div class="slides">
-        <section class="slide first-slide">
-            <h1>$title$</h1>
-            <h3>$subtitle$</h3>
-            <address>
-                <span>$author$</span><br>
-                <span>$place$</span>
-            </address>
-            <time>$date$</time>
-        </section>
-        $body$
-    </div>
+<div class="slides">
+
+<section class="slide first-slide center">
+<h1>$title$</h1>
+$if(subtitle)$
+<h4>$subtitle$</h4>
+$endif$
+$if(author)$
+<address>
+<span>$author$</span>
+$if(institute)$
+<br>
+<span>$institute$</span>
+$endif$
+</address>
+$endif$
+$if(date)$
+<time>$date$</time>
+$endif$
+</section>
+
+<!--===========================================================================
+                              <Begin Markdown>                              -->
+
+$body$
+
+ <!--                         </End Markdown>
+ ===========================================================================-->
+
+</div>
 </div>
 
 <script src="js/reveal.js"></script>
@@ -70,96 +80,99 @@ $endfor$
 <script type="text/javascript">
 Reveal.initialize({
 // Display presentation control arrows
-controls: false,
+controls: $if(controls)$$controls$$else$true$endif$,
 // Help the user learn the controls by providing hints, for example by
 // bouncing the down arrow when they first encounter a vertical slide
-controlsTutorial: false,
+controlsTutorial: $if(controlsTutorial)$$controlsTutorial$$else$true$endif$,
 // Determines where controls appear, "edges" or "bottom-right"
-controlsLayout: 'bottom-right',
+controlsLayout: '$if(controlsLayout)$$controlsLayout$$else$bottom-right$endif$',
 // Visibility rule for backwards navigation arrows; "faded", "hidden"
 // or "visible"
-controlsBackArrows: 'faded',
+controlsBackArrows: '$if(controlsBackArrows)$$controlsBackArrows$$else$faded$endif$',
 // Display a presentation progress bar
-progress: true,
+progress: $if(progress)$$progress$$else$true$endif$,
 // Display the page number of the current slide
 //  "h.v": horizontal . vertical slide number (default)
 //  "h/v": horizontal / vertical slide number
 //    "c": flattened slide number
 //  "c/t": flattened slide number / total slides
-slideNumber: "c/t",
+$if(slideNumber)$
+slideNumber: "$slideNumber$",
+$else$
+slideNumber: false,
+$endif$
 // Push each slide change to the browser history
-history: true,
+history: $if(history)$$history$$else$false$endif$,
 // Enable keyboard shortcuts for navigation
-keyboard: true,
+keyboard: $if(keyboard)$$keyboard$$else$true$endif$,
 // Enable the slide overview mode
-overview: false,
+overview: $if(overview)$$overview$$else$true$endif$,
 // Vertical centering of slides
-center: false,
+center: $if(center)$$center$$else$true$endif$,
 // Loop the presentation
-loop: true,
+loop: $if(loop)$$loop$$else$false$endif$,
 // Turns fragments on and off globally
-fragments: true,
+fragments: $if(fragments)$$fragments$$else$true$endif$,
 // Flags whether to include the current fragment in the URL,
 // so that reloading brings you to the same fragment position
-fragmentInURL: false,
+fragmentInURL: $if(fragmentInURL)$$fragmentInURL$$else$false$endif$,
+pdfSeparateFragments: $if(pdfSeparateFragments)$$pdfSeparateFragments$$else$false$endif$,
 // Flags if the presentation is running in an embedded mode,
 // i.e. contained within a limited portion of the screen
-embedded: false,
+embedded: $if(embedded)$$embedded$$else$false$endif$,
 // Flags if we should show a help overlay when the questionmark
 // key is pressed
-help: true,
+help: $if(help)$$help$$else$true$endif$,
 // Flags if speaker notes should be visible to all viewers
-showNotes: false,
+showNotes: $if(showNotes)$$showNotes$$else$false$endif$,
 // Global override for autoplaying embedded media (video/audio/iframe)
 // - null: Media will only autoplay if data-autoplay is present
 // - true: All media will autoplay, regardless of individual setting
 // - false: No media will autoplay, regardless of individual setting
-autoPlayMedia: null,
+autoPlayMedia: $if(autoPlayMedia)$$autoPlayMedia$$else$null$endif$,
 // Number of milliseconds between automatically proceeding to the
 // next slide, disabled when set to 0, this value can be overwritten
 // by using a data-autoslide attribute on your slides
-autoSlide: 0,
+autoSlide: $if(autoSlide)$$autoSlide$$else$0$endif$,
 // Stop auto-sliding after user input
-autoSlideStoppable: true,
+autoSlideStoppable: $if(autoSlideStoppable)$$autoSlideStoppable$$else$true$endif$,
 // Use this method for navigation when auto-sliding
-autoSlideMethod: Reveal.navigateNext,
+autoSlideMethod: $if(autoSlideMethod)$$autoSlideMethod$$else$Reveal.navigateNext$endif$,
 // Specify the average time in seconds that you think you will spend
 // presenting each slide. This is used to show a pacing timer in the
 // speaker view
-defaultTiming: 60,
+defaultTiming: $if(defaultTiming)$$defaultTiming$$else$120$endif$,
 // Enable slide navigation via mouse wheel
-mouseWheel: false,
+mouseWheel: $if(mouseWheel)$$mouseWheel$$else$false$endif$,
 // Hides the address bar on mobile devices
-hideAddressBar: true,
+hideAddressBar: $if(hideAddressBar)$$hideAddressBar$$else$true$endif$,
 // Opens links in an iframe preview overlay
 // Add `data-preview-link` and `data-preview-link="false"` to customise each
 // link individually
-previewLinks: false,
-// Transition style to choose in the following list;
-//        none/default/fade/slide/convex/concave/zoom/cube/page/linear
-$if(transition)$
-  transition: Reveal.getQueryHash().transition || '$transition$',
-$else$
-  transition: Reveal.getQueryHash().transition || 'default',
-$endif$
+previewLinks: $if(previewLinks)$$previewLinks$$else$false$endif$,
+// Transition style
+//     none/default/fade/slide/convex/concave/zoom/cube/page/linear
+transition: '$if(transition)$$transition$$else$slide$endif$',
 // Transition speed
-transitionSpeed: 'fast', // default/fast/slow
+//     default/fast/slow
+transitionSpeed: '$if(transitionSpeed)$$transitionSpeed$$else$default$endif$',
 // Transition style for full page slide backgrounds
-backgroundTransition: 'convex', // none/fade/slide/convex/concave/zoom
+//    none/fade/slide/convex/concave/zoom
+backgroundTransition: '$if(backgroundTransition)$$backgroundTransition$$else$fade$endif$',
 // Number of slides away from the current that are visible
-viewDistance: 3,
+viewDistance: $if(viewDistance)$$viewDistance$$else$3$endif$,
 // Parallax background image
-parallaxBackgroundImage: '',
+parallaxBackgroundImage: '$if(parallaxBackgroundImage)$$parallaxBackgroundImage$$endif$',
 // Parallax background size
-parallaxBackgroundSize: '', // CSS syntax, e.g. "2100px 900px"
+// CSS syntax, e.g. "2100px 900px"
+parallaxBackgroundSize: '$if(parallaxBackgroundSize)$$parallaxBackgroundSize$$endif$',
 // Number of pixels to move the parallax background per slide
 // - Calculated automatically unless specified
 // - Set to 0 to disable movement along an axis
-parallaxBackgroundHorizontal: null,
-parallaxBackgroundVertical: null,
+parallaxBackgroundHorizontal: $if(parallaxBackgroundHorizontal)$$parallaxBackgroundHorizontal$$else$0$endif$,
+parallaxBackgroundVertical: $if(parallaxBackgroundVertical)$$parallaxBackgroundVertical$$else$0$endif$,
 // The display mode that will be used to show slides
-display: 'flex',
-pdfSeparateFragments : false,
+display: '$if(display)$$display$$else$block$endif$',
 dependencies: [
     { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
     { src: 'plugin/math/math.js', async: true }

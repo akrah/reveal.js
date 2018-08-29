@@ -40,7 +40,39 @@ theme: serif
 # OPTIONNAL, used by the IUTRS template
 highlight-css: zenburn
 
-# Global transition style to use in RevealJS
-# Can be none/default/fade/slide/convex/concave/zoom/cube/page/linear
-# OPTIONNAL, default is 'default'
-transition: default
+# Global RevealJS style
+# Used in the function Reveal.initialize({ ... }) instead of
+# the default values.
+# For theme "iutrs", the following parameters are required:
+#    display: flex
+#    center: false
+# OPTIONNAL
+controls: true
+controlsTutorial: true
+controlsLayout: bottom-right
+controlsBackArrows: faded
+progress: true
+slideNumber: false
+history: false
+keyboard: true
+overview: true
+center: true
+loop: false
+fragments: true
+fragmentInURL: false
+pdfSeparateFragments: false
+embedded: false
+help: true
+showNotes: false
+mouseWheel: false
+hideAddressBar: true
+previewLinks: false
+transition: slide
+transitionSpeed: default
+backgroundTransition: fade
+viewDistance: 3
+parallaxBackgroundImage:
+parallaxBackgroundSize:
+parallaxBackgroundHorizontal: 0
+parallaxBackgroundVertical: 0
+display: block
