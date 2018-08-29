@@ -30,6 +30,10 @@ $backgroundColor: #FEFEFE;
 $mainColor: #000;
 $headingColor: #17a6e3;
 
+// Sizes
+$blockMargin: .5em;
+$mainTitleBottomSpace: 2em;
+
 
 // Theme template ------------------------------
 @import "../template/theme";
@@ -40,7 +44,7 @@ $headingColor: #17a6e3;
     font-variant: small-caps;
 }
 .reveal h4 {
-    margin: 0 0 2em 0;
+    margin-bottom: $mainTitleBottomSpace;
     font-style: italic;
 }
 .reveal section.first-slide {
@@ -49,22 +53,43 @@ $headingColor: #17a6e3;
 
 // Other slides
 .reveal h2 {
-    margin: 0 0 .5em 0;
+    margin-bottom: $blockMargin;
     padding-bottom: .2em;
     width: 100%;
     border-bottom: 2px solid rgba(0,0,0,0.2);
     text-align: left;
+}
+.reveal h3 {
+    width: 100%;
+    text-align: left;
+    margin-top: $blockMargin;
+    margin-bottom: $blockMargin;
+}
+.reveal h2 + h3 {
+    margin-top: 0;
 }
 
 // All slides
 .reveal .slides > section {
     padding: 0;
 }
+// All slides
+.reveal section.centerh {
+    align-items: center;
+}
 
 // Listes
 .reveal ul,
-.reveal ol {
-    margin: 0 0 1em 1em;
+.reveal ol,
+.reveal dl {
+    margin-top: $blockMargin;
+    margin-bottom: $blockMargin;
+}
+.reveal dl dd {
+    margin-bottom: $blockMargin;
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 .reveal li {
     list-style-type: none;
