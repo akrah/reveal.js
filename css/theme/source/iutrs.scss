@@ -62,8 +62,8 @@ $mainTitleBottomSpace: 2em;
 .reveal h3 {
     width: 100%;
     text-align: left;
-    margin-top: $blockMargin;
-    margin-bottom: $blockMargin;
+    margin-top: .5*$blockMargin;
+    margin-bottom: .5*$blockMargin;
 }
 .reveal h2 + h3 {
     margin-top: 0;
@@ -84,6 +84,7 @@ $mainTitleBottomSpace: 2em;
 .reveal dl {
     margin-top: $blockMargin;
     margin-bottom: $blockMargin;
+    margin-left: 4*$blockMargin;
 }
 .reveal dl dd {
     margin-bottom: $blockMargin;
@@ -91,8 +92,9 @@ $mainTitleBottomSpace: 2em;
         margin-bottom: 0;
     }
 }
-.reveal li {
+.reveal ul li {
     list-style-type: none;
+    margin-left: -1em;
     &:before {
         content: '✓';
         font-size: .7em;
@@ -111,6 +113,14 @@ $mainTitleBottomSpace: 2em;
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.5);
 }
 
+// Code
+.reveal pre {
+    width: auto;
+    & code {
+        padding: 10px;
+    }
+}
+
 // Flex
 .reveal section {
     flex-direction: column;
@@ -121,28 +131,21 @@ $mainTitleBottomSpace: 2em;
 .reveal div.columns {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     align-content: center;
     width: 100%;
     & > div {
         flex-basis: 0;
         text-align: left;
-        flex-grow: 1;
         &.center {
             text-align: center;
         }
     }
 }
 
-.reveal div.anim {
-    & p {
-        display: block;
-        text-align: center;
-    }
-    & img.fragment:not(.current-fragment) {
-        display: none;
-    }
+.reveal .large {
+    width: inherit;
 }
 
 .reveal div.columns div.column-100 { flex-grow: 100; }
@@ -168,3 +171,4 @@ $mainTitleBottomSpace: 2em;
 .reveal div.columns div.column-4   { flex-grow:  4; }
 .reveal div.columns div.column-3   { flex-grow:  3; }
 .reveal div.columns div.column-2   { flex-grow:  2; }
+.reveal div.columns div.column-1   { flex-grow:  1; }

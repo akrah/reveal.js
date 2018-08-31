@@ -289,8 +289,8 @@ body {
 .reveal h3 {
   width: 100%;
   text-align: left;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em; }
+  margin-top: 0.25em;
+  margin-bottom: 0.25em; }
 
 .reveal h2 + h3 {
   margin-top: 0; }
@@ -305,16 +305,18 @@ body {
 .reveal ol,
 .reveal dl {
   margin-top: 0.5em;
-  margin-bottom: 0.5em; }
+  margin-bottom: 0.5em;
+  margin-left: 2em; }
 
 .reveal dl dd {
   margin-bottom: 0.5em; }
   .reveal dl dd:last-child {
     margin-bottom: 0; }
 
-.reveal li {
-  list-style-type: none; }
-  .reveal li:before {
+.reveal ul li {
+  list-style-type: none;
+  margin-left: -1em; }
+  .reveal ul li:before {
     content: '✓';
     font-size: .7em;
     padding-right: .7em; }
@@ -326,6 +328,11 @@ body {
 .reveal blockquote {
   box-shadow: 10px 10px 20px -5px rgba(0, 0, 0, 0.5); }
 
+.reveal pre {
+  width: auto; }
+  .reveal pre code {
+    padding: 10px; }
+
 .reveal section {
   flex-direction: column;
   justify-content: space-between;
@@ -334,23 +341,18 @@ body {
 .reveal div.columns {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   align-content: center;
   width: 100%; }
   .reveal div.columns > div {
     flex-basis: 0;
-    text-align: left;
-    flex-grow: 1; }
+    text-align: left; }
     .reveal div.columns > div.center {
       text-align: center; }
 
-.reveal div.anim p {
-  display: block;
-  text-align: center; }
-
-.reveal div.anim img.fragment:not(.current-fragment) {
-  display: none; }
+.reveal .large {
+  width: inherit; }
 
 .reveal div.columns div.column-100 {
   flex-grow: 100; }
@@ -420,3 +422,6 @@ body {
 
 .reveal div.columns div.column-2 {
   flex-grow: 2; }
+
+.reveal div.columns div.column-1 {
+  flex-grow: 1; }
