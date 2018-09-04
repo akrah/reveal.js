@@ -110,13 +110,17 @@ module.exports = function(grunt) {
 
 		zip: {
 			bundle: {
+				router: function (filepath) {
+					return filepath.replace( root[1]+'/', '');
+			    },
 				src: [
 					'css/reveal.min.css',
-					'css/theme/<%= conf.theme %>.min.js',
+					'css/theme/<%= conf.theme %>.min.css',
 					'js/**',
 					'lib/**',
 					'plugin/**',
 					'index.html',
+					root[1]+'/img/**'
 				],
 				dest: root[1]+'/reveal-js-presentation.zip'
 			}
