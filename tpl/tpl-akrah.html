@@ -181,23 +181,7 @@ dependencies: [
 // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
 Reveal.addEventListener( 'ready', function( event ) {
     document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
-} );
-
-// Enable animation of several fragments placed in a container of class "anim"
-Reveal.addEventListener( 'fragmentshown', function( event ) {
-	if ( event.fragment.parentElement.parentElement.classList.contains('anim') ) {
-        event.fragment.style.transition = 'display 2s';
-        event.fragment.style.display = 'block';
-        event.fragment.previousElementSibling.style.display = 'none';
-    }
-} );
-Reveal.addEventListener( 'fragmenthidden', function( event ) {
-	if ( event.fragment.parentElement.parentElement.classList.contains('anim') ) {
-        event.fragment.style.display = 'none';
-        event.fragment.previousElementSibling.style.transition = 'display 2s';
-        event.fragment.previousElementSibling.style.display = 'block';
-    }
-} );
+});
 
 </script>
 

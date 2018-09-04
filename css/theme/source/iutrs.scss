@@ -73,7 +73,6 @@ $mainTitleBottomSpace: 2em;
 .reveal .slides > section {
     padding: 0;
 }
-// All slides
 .reveal section.centerh {
     align-items: center;
 }
@@ -118,6 +117,17 @@ $mainTitleBottomSpace: 2em;
     width: auto;
     & code {
         padding: 10px;
+        font-style: normal;
+    }
+}
+
+// Animation des fragments
+.reveal section.present .anim {
+    & .current-fragment {
+        display: block;
+    }
+    & .fragment:not(.current-fragment) {
+        display: none;
     }
 }
 

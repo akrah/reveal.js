@@ -331,7 +331,14 @@ body {
 .reveal pre {
   width: auto; }
   .reveal pre code {
-    padding: 10px; }
+    padding: 10px;
+    font-style: normal; }
+
+.reveal section.present .anim .current-fragment {
+  display: block; }
+
+.reveal section.present .anim .fragment:not(.current-fragment) {
+  display: none; }
 
 .reveal section {
   flex-direction: column;
