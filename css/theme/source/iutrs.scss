@@ -50,9 +50,6 @@ $mainTitleBottomSpace: 2em;
     width: 100%;
     border-bottom: 2px solid rgba(0,0,0,0.2);
     text-align: left;
-    & + h3 {
-        margin-top: 0;
-    }
 }
 .reveal h3 {
     width: 100%;
@@ -94,6 +91,10 @@ $mainTitleBottomSpace: 2em;
     }
 }
 
+.reveal p {
+    margin: 0;
+}
+
 // ---------------------------------------------
 
 // ---------------------------------------------
@@ -108,10 +109,13 @@ $mainTitleBottomSpace: 2em;
 .reveal ol {
     margin-left: 4*$blockMargin;
 }
-.reveal dl dd {
-    margin-bottom: $blockMargin;
-    &:last-child {
-        margin-bottom: 0;
+.reveal dl {
+    margin-left: 0;
+    & dd {
+        margin-bottom: $blockMargin;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 .reveal ul li {
@@ -138,6 +142,7 @@ $mainTitleBottomSpace: 2em;
 .reveal blockquote {
     text-align: center;
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.5);
+    margin: 1em auto;
 }
 // ---------------------------------------------
 
@@ -149,6 +154,13 @@ $mainTitleBottomSpace: 2em;
     & code {
         padding: 10px;
         font-style: normal;
+    }
+}
+.reveal :not(pre) > code {
+    font-size: .6*$mainFontSize;
+    &.hljs {
+        display: inline;
+        padding: .3em;
     }
 }
 // ---------------------------------------------
@@ -183,6 +195,9 @@ $mainTitleBottomSpace: 2em;
     }
     & > pre {
         flex-grow: 0;
+    }
+    & + p {
+        margin-top: 1em;
     }
     & > .column-100 { flex-grow: 100; }
     & > .column-95  { flex-grow:  95; }
@@ -230,3 +245,7 @@ $mainTitleBottomSpace: 2em;
 .reveal .width-15  { width: 15%; }
 .reveal .width-10  { width: 10%; }
 // ---------------------------------------------
+
+.reveal h2 + * {
+    margin-top: 0;
+}
