@@ -178,9 +178,20 @@ dependencies: [
     { src: 'plugin/math/math.js', async: true },
 ]});
 
-// Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
 Reveal.addEventListener( 'ready', function( event ) {
+    // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
     document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
+    document.querySelectorAll('.frag-0').forEach( el => el.setAttribute("data-fragment-index","0"));
+    document.querySelectorAll('.frag-1').forEach( el => el.setAttribute("data-fragment-index","1"));
+    document.querySelectorAll('.frag-2').forEach( el => el.setAttribute("data-fragment-index","2"));
+    document.querySelectorAll('.frag-3').forEach( el => el.setAttribute("data-fragment-index","3"));
+    document.querySelectorAll(':not(pre) > code').forEach( el => el.classList.add('hljs'));
+});
+
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    event.currentSlide.querySelectorAll('.anim').forEach( function(anim) {
+        anim.querySelectorAll("[data-fragment-index='0']").forEach( el => el.classList.add('current-fragment'));
+    });
 });
 
 </script>
