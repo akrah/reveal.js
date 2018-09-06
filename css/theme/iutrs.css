@@ -333,12 +333,12 @@ body {
       margin-bottom: 0; }
 
 .reveal ul li {
-  list-style-type: none;
-  margin-left: -1em; }
+  list-style-type: none; }
   .reveal ul li:before {
     content: '✓';
     font-size: .7em;
-    padding-right: .7em; }
+    padding-right: .6em;
+    margin-left: -1.3em; }
 
 .reveal section img {
   border: initial;
@@ -422,6 +422,14 @@ body {
     flex-grow: 15; }
   .reveal .columns > .column-10 {
     flex-grow: 10; }
+  .reveal .columns > .column-9 {
+    flex-grow: 5; }
+  .reveal .columns > .column-8 {
+    flex-grow: 5; }
+  .reveal .columns > .column-7 {
+    flex-grow: 5; }
+  .reveal .columns > .column-6 {
+    flex-grow: 5; }
   .reveal .columns > .column-5 {
     flex-grow: 5; }
   .reveal .columns > .column-4 {
