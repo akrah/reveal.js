@@ -120,11 +120,11 @@ $mainTitleBottomSpace: 2em;
 }
 .reveal ul li {
     list-style-type: none;
-    margin-left: -1em;
     &:before {
         content: '✓';
         font-size: .7em;
-        padding-right: .7em;
+        padding-right: .6em;
+        margin-left: -1.3em;
     }
 }
 // ---------------------------------------------
@@ -218,6 +218,10 @@ $mainTitleBottomSpace: 2em;
     & > .column-20  { flex-grow:  20; }
     & > .column-15  { flex-grow:  15; }
     & > .column-10  { flex-grow:  10; }
+    & > .column-9   { flex-grow:   5; }
+    & > .column-8   { flex-grow:   5; }
+    & > .column-7   { flex-grow:   5; }
+    & > .column-6   { flex-grow:   5; }
     & > .column-5   { flex-grow:   5; }
     & > .column-4   { flex-grow:   4; }
     & > .column-3   { flex-grow:   3; }
