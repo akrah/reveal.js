@@ -4,70 +4,76 @@
  * MIT licensed.
  */
 
-
-// Default mixins and settings -----------------
+// Default mixins and settings ------------------------------------------------
 @import "../template/mixins";
 @import "../template/settings";
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 // Override theme settings (see ../template/settings.scss)
 
-// Fonts
+// Background of the presentation
+$backgroundColor: #fefefe;
+
+// Primary/body text
 $mainFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
 $mainFontSize: 30px;
+$mainColor: #000;
 
+// Vertical spacing between blocks of text
+$blockMargin: .5em;
+
+// Headings
+$headingMargin: 0 0 $blockMargin 0;
 $headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+$headingColor: #17a6e3;
+$headingLineHeight: 1.2;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingTextShadow: none;
+$headingFontWeight: normal;
+$heading1TextShadow: .04em .04em 3px black;
+
 $heading1Size: 4em;
 $heading4Size: 2em;
 $heading2Size: 2em;
 $heading3Size: 1.5em;
-$headingTextTransform: bold;
 
-// Colors
-$backgroundColor: #FEFEFE;
-$mainColor: #000;
-$headingColor: #17a6e3;
+// Links and actions
+$linkColor: #E35417;
+$linkColorHover: lighten( $linkColor, 20% );
 
-// Sizes
-$blockMargin: .5em;
-$mainTitleBottomSpace: 2em;
+// Text selection
+$selectionBackgroundColor: #FF5E99;
+$selectionColor: #eee;
 
 
-// Theme template ------------------------------
+// Theme template -------------------------------------------------------------
 @import "../template/theme";
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Titles
-.reveal h1 {
-    font-variant: small-caps;
-}
-.reveal h2 {
-    margin-bottom: $blockMargin;
-    padding-bottom: .2em;
-    width: 100%;
-    border-bottom: 2px solid rgba(0,0,0,0.2);
-    text-align: left;
-}
-.reveal h3 {
-    width: 100%;
-    text-align: left;
-    margin-top: .5*$blockMargin;
-    margin-bottom: .5*$blockMargin;
-}
-.reveal h4 {
-    margin-bottom: $mainTitleBottomSpace;
-    font-style: italic;
-}
-// ---------------------------------------------
+$headingChapterColor: $selectionColor;
+$firstSlideTitleSpacing: 2em;
 
-// ---------------------------------------------
-// Slides
+// Slides ---------------------------------------------------------------------
 .reveal .slides section.first-slide {
     align-items: center;
     text-align: center;
+    & address {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        font-size: .8em;
+        font-variant: small-caps;
+    }
+}
+.reveal .first-slide .slide-background-content {
+    background-image: url('/img/firstPage.jpg');
+    background-color: $backgroundColor;
+    background-blend-mode: luminosity;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
 }
 .reveal .slides > section {
     text-align: left;
@@ -81,8 +87,11 @@ $mainTitleBottomSpace: 2em;
         align-items: center;
     }
 }
-.reveal .slides .large {
-    width: inherit;
+.reveal .chapter .slide-background-content {
+    background-color: $headingColor;
+}
+.reveal .progress {
+    height: 6px;
 }
 .centerh {
     align-self: center;
@@ -90,15 +99,48 @@ $mainTitleBottomSpace: 2em;
         text-align: center;
     }
 }
-
 .reveal p {
     margin: 0;
 }
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
+// Titles ---------------------------------------------------------------------
+.reveal h1 {
+    font-variant: small-caps;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+}
+.reveal h2 {
+    margin-bottom: $blockMargin;
+    padding: 0;
+    width: 100%;
+    border-bottom: 2px dashed rgba(0,0,0,0.2);
+    text-align: left;
+    line-height: 1.1;
+}
+.reveal .chapter h2 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    width: inherit;
+    border-bottom: 0;
+    text-align: center;
+    color: $backgroundColor;
+    text-shadow: $heading1TextShadow;
+}
+.reveal h3 {
+    width: 100%;
+    text-align: left;
+    margin-top: .5*$blockMargin;
+    margin-bottom: .5*$blockMargin;
+}
+.reveal h4 {
+    padding-top: 2em;
+    text-shadow: $heading1TextShadow;
+}
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Listes
+// Lists ----------------------------------------------------------------------
 .reveal ul,
 .reveal ol,
 .reveal dl {
@@ -127,27 +169,24 @@ $mainTitleBottomSpace: 2em;
         margin-left: -1.3em;
     }
 }
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Images
+// Images ---------------------------------------------------------------------
 .reveal section img {
     border: initial;
     box-shadow: initial;
 }
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Blockquotes
+// Blockquotes ----------------------------------------------------------------
 .reveal blockquote {
     text-align: center;
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.5);
     margin: 1em auto;
 }
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Code
+// Code blocks ----------------------------------------------------------------
 .reveal pre {
     width: auto;
     margin: .5em;
@@ -157,16 +196,13 @@ $mainTitleBottomSpace: 2em;
     }
 }
 .reveal :not(pre) > code {
-    font-size: .6*$mainFontSize;
-    &.hljs {
-        display: inline;
-        padding: .3em;
-    }
+    font-size: .7*$mainFontSize;
+    background-color: $selectionColor;
+    padding: .1*$mainFontSize;
 }
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Animation des fragments
+// Fragment animation ---------------------------------------------------------
 .reveal section.present .anim {
     & .current-fragment {
         display: block;
@@ -175,10 +211,9 @@ $mainTitleBottomSpace: 2em;
         display: none;
     }
 }
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
 
-// ---------------------------------------------
-// Columns
+// Column environment ---------------------------------------------------------
 .reveal .columns {
     display: flex;
     flex-direction: row;
@@ -186,6 +221,9 @@ $mainTitleBottomSpace: 2em;
     align-items: center;
     align-content: center;
     width: 100%;
+    &.start {
+        align-items: flex-start;
+    }
     & > * {
         flex-grow: 1;
         flex-basis: 0;
@@ -197,7 +235,7 @@ $mainTitleBottomSpace: 2em;
         flex-grow: 0;
     }
     & + p {
-        margin-top: 1em;
+        margin-top: .5em;
     }
     & > .column-100 { flex-grow: 100; }
     & > .column-95  { flex-grow:  95; }
@@ -229,6 +267,9 @@ $mainTitleBottomSpace: 2em;
     & > .column-1   { flex-grow:   1; }
 }
 
+// ----------------------------------------------------------------------------
+
+// Trick classes --------------------------------------------------------------
 .reveal .width-100 { width: 100%; }
 .reveal .width-95  { width: 95%; }
 .reveal .width-90  { width: 90%; }
@@ -248,7 +289,8 @@ $mainTitleBottomSpace: 2em;
 .reveal .width-20  { width: 20%; }
 .reveal .width-15  { width: 15%; }
 .reveal .width-10  { width: 10%; }
-// ---------------------------------------------
+// ----------------------------------------------------------------------------
+
 
 .reveal h2 + * {
     margin-top: 0;
