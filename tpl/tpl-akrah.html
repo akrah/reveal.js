@@ -47,21 +47,12 @@ $endfor$
 
 <section class="slide first-slide center">
 <h1>$title$</h1>
-$if(subtitle)$
-<h4>$subtitle$</h4>
-$endif$
-$if(author)$
+$if(subtitle)$<h4 class="stretch">$subtitle$</h4>$endif$
 <address>
-<span>$author$</span>
-$if(institute)$
-<br>
-<span>$institute$</span>
-$endif$
+$if(author)$<span>$author$</span>$endif$
+$if(date)$<time>$date$</time>$endif$
+$if(institute)$<span>$institute$</span>$endif$
 </address>
-$endif$
-$if(date)$
-<time>$date$</time>
-$endif$
 </section>
 
 <!--===========================================================================
@@ -185,7 +176,7 @@ Reveal.addEventListener( 'ready', function( event ) {
     document.querySelectorAll('.frag-1').forEach( el => el.setAttribute("data-fragment-index","1"));
     document.querySelectorAll('.frag-2').forEach( el => el.setAttribute("data-fragment-index","2"));
     document.querySelectorAll('.frag-3').forEach( el => el.setAttribute("data-fragment-index","3"));
-    document.querySelectorAll(':not(pre) > code').forEach( el => el.classList.add('hljs'));
+    document.querySelectorAll('.chapter').forEach( el => el.classList.add('center'));
 });
 
 Reveal.addEventListener( 'slidechanged', function( event ) {
