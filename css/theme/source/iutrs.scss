@@ -25,9 +25,9 @@ $blockMargin: .5em;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
-$headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+$headingFont: $mainFont;
 $headingColor: #17a6e3;
-$headingLineHeight: 1.2;
+$headingLineHeight: 1.1;
 $headingLetterSpacing: normal;
 $headingTextTransform: none;
 $headingTextShadow: none;
@@ -55,10 +55,18 @@ $selectionColor: #eee;
 $headingChapterColor: $selectionColor;
 $firstSlideTitleSpacing: 2em;
 
-// Slides ---------------------------------------------------------------------
-.reveal .slides section.first-slide {
+// First slides ---------------------------------------------------------------
+.reveal .slides .first-slide {
+    height: 100%;
     align-items: center;
     text-align: center;
+    & h1 + * {
+        display: flex;
+    }
+    & h4 {
+        padding-bottom: 1em;
+        text-shadow: $heading1TextShadow;
+    }
     & address {
         display: flex;
         flex-direction: row;
@@ -66,15 +74,36 @@ $firstSlideTitleSpacing: 2em;
         width: 100%;
         font-size: .8em;
         font-variant: small-caps;
+        & time {
+            font-style: italic;
+        }
+        & > * {
+            color: $mainColor;
+        }
     }
 }
-.reveal .first-slide .slide-background-content {
-    background-image: url('/img/firstPage.jpg');
-    background-color: $backgroundColor;
-    background-blend-mode: luminosity;
-    opacity: 0.3;
-    filter: alpha(opacity=30);
+// ----------------------------------------------------------------------------
+
+// Chapter slides -------------------------------------------------------------
+.reveal .backgrounds .chapter .slide-background-content {
+    background-color: $headingColor;
 }
+.reveal .slides .chapter {
+    height: 100%;
+    & h2 {
+        margin: auto;
+        padding-bottom: 0;
+        width: inherit;
+        border-bottom: 0;
+        text-align: center;
+        color: $backgroundColor;
+        font-weight: bold;
+        text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+    }
+}
+// ----------------------------------------------------------------------------
+
+// Other slides ---------------------------------------------------------------
 .reveal .slides > section {
     text-align: left;
     padding: 0;
@@ -87,71 +116,50 @@ $firstSlideTitleSpacing: 2em;
         align-items: center;
     }
 }
-.reveal .chapter .slide-background-content {
-    background-color: $headingColor;
-}
+// ----------------------------------------------------------------------------
+
+// Slide elements -------------------------------------------------------------
 .reveal .progress {
     height: 6px;
 }
-.centerh {
-    align-self: center;
-    & pre + p {
-        text-align: center;
-    }
-}
-.reveal p {
+.reveal .slides p {
     margin: 0;
 }
 // ----------------------------------------------------------------------------
 
 // Titles ---------------------------------------------------------------------
-.reveal h1 {
+.reveal .slides h1 {
     font-variant: small-caps;
     font-weight: bold;
-    line-height: 1;
     margin: 0;
 }
-.reveal h2 {
+.reveal .slides h2 {
     margin-bottom: $blockMargin;
     padding: 0;
     width: 100%;
     border-bottom: 2px dashed rgba(0,0,0,0.2);
     text-align: left;
-    line-height: 1.1;
 }
-.reveal .chapter h2 {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    width: inherit;
-    border-bottom: 0;
-    text-align: center;
-    color: $backgroundColor;
-    text-shadow: $heading1TextShadow;
-}
-.reveal h3 {
+.reveal .slides h3 {
     width: 100%;
     text-align: left;
     margin-top: .5*$blockMargin;
     margin-bottom: .5*$blockMargin;
 }
-.reveal h4 {
-    padding-top: 2em;
-    text-shadow: $heading1TextShadow;
-}
 // ----------------------------------------------------------------------------
 
 // Lists ----------------------------------------------------------------------
-.reveal ul,
-.reveal ol,
-.reveal dl {
+.reveal .slides ul,
+.reveal .slides ol,
+.reveal .slides dl {
     margin-top: $blockMargin;
     margin-bottom: $blockMargin;
 }
-.reveal ul,
-.reveal ol {
+.reveal .slides ul,
+.reveal .slides ol {
     margin-left: 4*$blockMargin;
 }
-.reveal dl {
+.reveal .slides dl {
     margin-left: 0;
     & dd {
         margin-bottom: $blockMargin;
@@ -159,8 +167,11 @@ $firstSlideTitleSpacing: 2em;
             margin-bottom: 0;
         }
     }
+    & dd ~ dd > ul:first-child {
+        margin-top: -.5*$blockMargin;
+    }
 }
-.reveal ul li {
+.reveal .slides ul li {
     list-style-type: none;
     &:before {
         content: '✓';
@@ -172,14 +183,14 @@ $firstSlideTitleSpacing: 2em;
 // ----------------------------------------------------------------------------
 
 // Images ---------------------------------------------------------------------
-.reveal section img {
+.reveal .slides img {
     border: initial;
     box-shadow: initial;
 }
 // ----------------------------------------------------------------------------
 
 // Blockquotes ----------------------------------------------------------------
-.reveal blockquote {
+.reveal .slides blockquote {
     text-align: center;
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.5);
     margin: 1em auto;
@@ -187,7 +198,7 @@ $firstSlideTitleSpacing: 2em;
 // ----------------------------------------------------------------------------
 
 // Code blocks ----------------------------------------------------------------
-.reveal pre {
+.reveal .slides pre {
     width: auto;
     margin: .5em;
     & code {
@@ -195,7 +206,7 @@ $firstSlideTitleSpacing: 2em;
         font-style: normal;
     }
 }
-.reveal :not(pre) > code {
+.reveal .slides :not(pre) > code {
     font-size: .7*$mainFontSize;
     background-color: $selectionColor;
     padding: .1*$mainFontSize;
@@ -203,7 +214,7 @@ $firstSlideTitleSpacing: 2em;
 // ----------------------------------------------------------------------------
 
 // Fragment animation ---------------------------------------------------------
-.reveal section.present .anim {
+.reveal .slides .present .anim {
     & .current-fragment {
         display: block;
     }
@@ -266,10 +277,22 @@ $firstSlideTitleSpacing: 2em;
     & > .column-2   { flex-grow:   2; }
     & > .column-1   { flex-grow:   1; }
 }
-
 // ----------------------------------------------------------------------------
 
 // Trick classes --------------------------------------------------------------
+.centerh {
+    align-self: center;
+    & pre + p {
+        text-align: center;
+    }
+}
+.columns.centerh img,
+.columns .centerh img {
+    align-self: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .reveal .width-100 { width: 100%; }
 .reveal .width-95  { width: 95%; }
 .reveal .width-90  { width: 90%; }
@@ -292,6 +315,6 @@ $firstSlideTitleSpacing: 2em;
 // ----------------------------------------------------------------------------
 
 
-.reveal h2 + * {
+.reveal .slides h2 + * {
     margin-top: 0;
 }
