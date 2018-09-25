@@ -356,7 +356,7 @@ body {
     margin-bottom: 0.5em; }
     .reveal .slides dl dd:last-child {
       margin-bottom: 0; }
-  .reveal .slides dl dd ~ dd > ul:first-child {
+  .reveal .slides dl dd + dd > ul:first-child {
     margin-top: -0.25em; }
 
 .reveal .slides ul li {
@@ -386,7 +386,8 @@ body {
 .reveal .slides :not(pre) > code {
   font-size: 21px;
   background-color: #eee;
-  padding: 3px; }
+  padding: 3px;
+  font-style: normal; }
 
 .reveal .slides .present .anim .current-fragment {
   display: block; }
