@@ -20,6 +20,15 @@ $for(author)$
 $endfor$
     <link rel="stylesheet" href="css/reveal.min.css">
     <link rel="stylesheet" href="css/theme/$if(theme)$$theme$$else$serif$endif$.min.css">
+    $if(first-slide-background-image)$
+    <style>
+    .reveal .backgrounds .first-slide .slide-background-content {
+        background-image: url($first-slide-background-image$);
+        background-color: #ccc;
+        background-blend-mode: overlay;
+    }
+    </style>
+    $endif$
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/$if(highlight-css)$$highlight-css$$else$zenburn$endif$.css">
 	<script src="lib/js/head.min.js"></script>
@@ -45,13 +54,19 @@ $endfor$
 <div class="reveal">
 <div class="slides">
 
-<section class="slide first-slide center">
+<section class="slide level2 first-slide">
 <h1>$title$</h1>
-$if(subtitle)$<h4 class="stretch">$subtitle$</h4>$endif$
+$if(subtitle)$<div><h4>$subtitle$</h4></div>$endif$
 <address>
-$if(author)$<span>$author$</span>$endif$
+$if(author)$
+    $if(author-link)$<a href="$author-link$">$author$</a>
+    $else$<span>$author$</span>$endif$
+$endif$
 $if(date)$<time>$date$</time>$endif$
-$if(institute)$<span>$institute$</span>$endif$
+$if(institute)$
+    $if(institute-link)$<a href="$institute-link$">$institute$</a>
+    $else$<span>$institute$</span>$endif$
+$endif$
 </address>
 </section>
 
@@ -66,7 +81,7 @@ $body$
 </div>
 </div>
 
-<script src="js/reveal.js"></script>
+<script src="js/reveal.min.js"></script>
 
 <script type="text/javascript">
 Reveal.initialize({
@@ -83,10 +98,7 @@ controlsBackArrows: '$if(controlsBackArrows)$$controlsBackArrows$$else$faded$end
 // Display a presentation progress bar
 progress: $if(progress)$$progress$$else$true$endif$,
 // Display the page number of the current slide
-//  "h.v": horizontal . vertical slide number (default)
-//  "h/v": horizontal / vertical slide number
-//    "c": flattened slide number
-//  "c/t": flattened slide number / total slides
+// h.v|h/v|c|c/t
 $if(slideNumber)$
 slideNumber: "$slideNumber$",
 $else$
@@ -164,24 +176,82 @@ parallaxBackgroundHorizontal: $if(parallaxBackgroundHorizontal)$$parallaxBackgro
 parallaxBackgroundVertical: $if(parallaxBackgroundVertical)$$parallaxBackgroundVertical$$else$0$endif$,
 // The display mode that will be used to show slides
 display: '$if(display)$$display$$else$block$endif$',
+math: { mathjax: 'plugin/math/MathJax.js' },
+menu: {
+		// Side of the the menu
+        // left|right
+		side: 'left',
+		// Specifies the width of the menu.
+		// normal|wide|third|half|full|any valid css length value
+		width: 'normal',
+		// Slide numbers to the titles in the slide list.
+		// false|true|h.v|h/v|c|c/t
+		numbers: false,
+		// Slide elements used for generating the slide titles
+		titleSelector: 'h1, h2',
+		// If slides do not have a matching title, attempt to use the
+		// start of the text content as the title instead
+		useTextContentForMissingTitles: false,
+		// Hide slides from the menu that do not have a title.
+		hideMissingTitles: false,
+		// Adds markers to the slide titles to indicate the
+		// progress through the presentation.
+		markers: false,
+		// Specify custom panels to be included in the menu, by
+		// providing an array of objects with 'title', 'icon'
+		// properties, and either a 'src' or 'content' property.
+		custom: false,
+		// Specifies the themes that will be available in the themes
+		// menu panel. Set to 'true' to show the themes menu panel
+		// with the default themes list. Alternatively, provide an
+		// array to specify the themes to make available in the
+		// themes menu panel, for example...
+		// [
+		//     { name: 'Black', theme: 'css/theme/black.css' },
+		//     { name: 'White', theme: 'css/theme/white.css' },
+		//     { name: 'League', theme: 'css/theme/league.css' }
+		// ]
+		themes: false,
+		// Specifies the path to the default theme files.
+		themesPath: 'css/theme/',
+		// Specifies if the transitions menu panel will be shown.
+		transitions: false,
+		// Adds a menu button to the slides to open the menu panel.
+		openButton: true,
+		// Allows the slide number to open the menu panel
+		openSlideNumber: false,
+		// Allows the user to open and navigate the menu using the keyboard.
+		keyboard: true,
+		// Leave the menu open until it is explicitly closed
+		sticky: false,
+		// If 'true' the menu will not be created until it is explicitly
+		// requested by calling RevealMenu.init().
+		delayInit: false,
+		// If 'true' the menu will be shown when the menu is initialised.
+		openOnInit: false,
+		// By default the menu will load it's own font-awesome library
+		// icons. If your presentation needs to load a different
+		// font-awesome library the 'loadIcons' option can be set to false
+		// and the menu will not attempt to load the font-awesome library.
+		loadIcons: true
+	},
 dependencies: [
     { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
     { src: 'plugin/math/math.js', async: true },
+    { src: 'plugin/reveal.js-menu/menu.js' },
 ]});
 
 Reveal.addEventListener( 'ready', function( event ) {
     // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
     document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
-    document.querySelectorAll('.frag-0').forEach( el => el.setAttribute("data-fragment-index","0"));
-    document.querySelectorAll('.frag-1').forEach( el => el.setAttribute("data-fragment-index","1"));
-    document.querySelectorAll('.frag-2').forEach( el => el.setAttribute("data-fragment-index","2"));
-    document.querySelectorAll('.frag-3').forEach( el => el.setAttribute("data-fragment-index","3"));
-    document.querySelectorAll('.chapter').forEach( el => el.classList.add('center'));
 });
 
 Reveal.addEventListener( 'slidechanged', function( event ) {
     event.currentSlide.querySelectorAll('.anim').forEach( function(anim) {
-        anim.querySelectorAll("[data-fragment-index='0']").forEach( el => el.classList.add('current-fragment'));
+        if ( event.currentSlide.nextElementSibling == event.previousSlide )
+            anim.querySelectorAll(".fragment:last-child").forEach( el => {el.classList.add('current-fragment'); el.classList.add('visible');});
+        else
+            anim.querySelectorAll("[data-fragment-index='0']").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
     });
 });
 

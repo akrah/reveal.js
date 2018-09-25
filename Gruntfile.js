@@ -115,12 +115,15 @@ module.exports = function(grunt) {
 			    },
 				src: [
 					'css/reveal.min.css',
+					'css/print/paper.css',
 					'css/theme/<%= conf.theme %>.min.css',
-					'js/**',
-					'lib/**',
-					'plugin/**',
+					'js/reveal.min.js',
+					"lib/<%= conf.libs %>",
+					"lib/{<%= conf.libs %>}",
+					"plugin/<%= conf.plugins %>/**",
+					"plugin/{<%= conf.plugins %>}/**",
+					root[1]+'/img/**.{jpg,jpeg,png,gif}',
 					'index.html',
-					root[1]+'/img/**'
 				],
 				dest: root[1]+'/reveal-js-presentation.zip'
 			}
@@ -148,13 +151,13 @@ module.exports = function(grunt) {
 				files: root.map(path => path + '/*.html')
 			},
 			markdown: {
-				files: root.map(path => path + '/*.md')
+				files: root.map(path => path + '/index.md')
 			},
 			options: {
 				livereload: true
 			},
 			pandoc: {
-				files: [ root[1]+'/*.md', root[1]+'/config.yml', root[0]+"tpl/*.html" ],
+				files: [ root[1]+'/index.md', root[1]+'/config.yml', root[0]+"tpl/*.html" ],
 				tasks: 'pandoc'
 			}
 		},
@@ -169,7 +172,7 @@ module.exports = function(grunt) {
 				flags: "-t revealjs --no-highlight --mathjax --template=tpl/tpl-<%= conf.template %>.html <%= Object.entries(conf).map( tab => '-V '+tab[0]+'='+tab[1] ).join(' ') %>"
 			},
 			files: {
-				src:  root[1] + '/*.md',
+				src:  root[1] + '/index.md',
 				dest: 'index.html'
 			}
 		},

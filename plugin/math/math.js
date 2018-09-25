@@ -10,7 +10,7 @@ var RevealMath = window.RevealMath || (function(){
 	options.mathjax = options.mathjax || 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js';
 	options.config = options.config || 'TeX-AMS_HTML-full';
 	options.tex2jax = options.tex2jax || {
-				inlineMath: [['$','$'],['\\(','\\)']] ,
+				inlineMath: [['$$','$$'],['\\(','\\)']] ,
 				skipTags: ['script','noscript','style','textarea','pre'] };
 
 	loadScript( options.mathjax + '?config=' + options.config, function() {
