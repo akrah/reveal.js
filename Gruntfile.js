@@ -122,7 +122,7 @@ module.exports = function(grunt) {
 					"lib/{<%= conf.libs %>}",
 					"plugin/<%= conf.plugins %>/**",
 					"plugin/{<%= conf.plugins %>}/**",
-					root[1]+'/img/**.{jpg,jpeg,png,gif,svg}',
+					root[1]+'/img/**',
 					'index.html',
 				],
 				dest: root[1]+'/reveal-js-presentation.zip'

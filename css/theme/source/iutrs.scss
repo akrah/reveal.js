@@ -154,6 +154,10 @@ $firstSlideTitleSpacing: 2em;
 .reveal .slides dl {
     margin-top: $blockMargin;
     margin-bottom: $blockMargin;
+    & ul, & ol, & dl {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 .reveal .slides ul,
 .reveal .slides ol {
@@ -179,6 +183,9 @@ $firstSlideTitleSpacing: 2em;
         padding-right: .6em;
         margin-left: -1.3em;
     }
+    & li:before {
+        content: '•';
+    }
 }
 // ----------------------------------------------------------------------------
 
@@ -186,6 +193,7 @@ $firstSlideTitleSpacing: 2em;
 .reveal .slides img {
     border: initial;
     box-shadow: initial;
+    align-self: center;
 }
 // ----------------------------------------------------------------------------
 
@@ -269,10 +277,10 @@ $firstSlideTitleSpacing: 2em;
     & > .column-20  { flex-grow:  20; }
     & > .column-15  { flex-grow:  15; }
     & > .column-10  { flex-grow:  10; }
-    & > .column-9   { flex-grow:   5; }
-    & > .column-8   { flex-grow:   5; }
-    & > .column-7   { flex-grow:   5; }
-    & > .column-6   { flex-grow:   5; }
+    & > .column-9   { flex-grow:   9; }
+    & > .column-8   { flex-grow:   8; }
+    & > .column-7   { flex-grow:   7; }
+    & > .column-6   { flex-grow:   6; }
     & > .column-5   { flex-grow:   5; }
     & > .column-4   { flex-grow:   4; }
     & > .column-3   { flex-grow:   3; }
@@ -320,4 +328,29 @@ $firstSlideTitleSpacing: 2em;
 
 .reveal .slides h2 + * {
     margin-top: 0;
+}
+
+.reveal .slides .reset-this {
+    all: initial;
+    display: block;
+    padding: .5em;
+    border: 2px dashed rgba(0,0,0,0.2);
+    font-size: 1.4rem;
+    font-family: "Arial", sans-serif;
+    line-height: 1;
+    & * {
+        margin: 0;
+        padding: 0;
+        color: inherit;
+    }
+    & h3 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    & a {
+        color: #0000ff;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
 }
