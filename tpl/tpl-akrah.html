@@ -42,6 +42,9 @@ $endfor$
     $for(header-includes)$
     $header-includes$
     $endfor$
+    $for(header-includes-js)$
+    <script src="$header-includes-js$"></script>
+    $endfor$
 </head>
 <body>
 
@@ -249,7 +252,8 @@ Reveal.addEventListener( 'slidechanged', function( event ) {
         if ( event.currentSlide.nextElementSibling == event.previousSlide )
             anim.querySelectorAll(".fragment:last-child").forEach( el => {el.classList.add('current-fragment'); el.classList.add('visible');});
         else
-            anim.querySelectorAll("[data-fragment-index='0']").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
+            // anim.querySelectorAll("[data-fragment-index='0']").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
+            anim.querySelectorAll(".fragment:first-of-type").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
     });
 });
 
