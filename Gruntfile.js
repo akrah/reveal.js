@@ -123,6 +123,7 @@ module.exports = function(grunt) {
 					"plugin/<%= conf.plugins %>/**",
 					"plugin/{<%= conf.plugins %>}/**",
 					root[1]+'/img/**',
+					root[1]+'/js/**',
 					'index.html',
 				],
 				dest: root[1]+'/reveal-js-presentation.zip'
@@ -131,7 +132,11 @@ module.exports = function(grunt) {
 
 		watch: {
 			js: {
-				files: [ 'Gruntfile.js', 'js/reveal.js' ],
+				files: [
+					'Gruntfile.js',
+					'js/reveal.js',
+					root[1]+'/js/**',
+				],
 				tasks: 'js'
 			},
 			theme: {
