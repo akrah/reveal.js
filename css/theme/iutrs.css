@@ -146,7 +146,7 @@ body {
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); }
 
 .reveal code {
   font-family: monospace;
@@ -367,6 +367,8 @@ body {
     margin-bottom: 0.5em; }
     .reveal .slides dl dd:last-child {
       margin-bottom: 0; }
+  .reveal .slides dl dd > ul:first-child {
+    margin-left: 1.1em; }
   .reveal .slides dl dd + dd > ul:first-child {
     margin-top: -0.25em; }
 
@@ -462,8 +464,24 @@ body {
     flex-grow: 25; }
   .reveal .columns > .column-20 {
     flex-grow: 20; }
+  .reveal .columns > .column-19 {
+    flex-grow: 19; }
+  .reveal .columns > .column-18 {
+    flex-grow: 18; }
+  .reveal .columns > .column-17 {
+    flex-grow: 17; }
+  .reveal .columns > .column-16 {
+    flex-grow: 16; }
   .reveal .columns > .column-15 {
     flex-grow: 15; }
+  .reveal .columns > .column-14 {
+    flex-grow: 14; }
+  .reveal .columns > .column-13 {
+    flex-grow: 13; }
+  .reveal .columns > .column-12 {
+    flex-grow: 12; }
+  .reveal .columns > .column-11 {
+    flex-grow: 11; }
   .reveal .columns > .column-10 {
     flex-grow: 10; }
   .reveal .columns > .column-9 {
@@ -485,14 +503,18 @@ body {
   .reveal .columns > .column-1 {
     flex-grow: 1; }
 
-.centerh {
+.reveal .slides .centerh {
   align-self: center;
   text-align: center; }
-  .centerh pre + p {
+  .reveal .slides .centerh pre + p {
     text-align: center; }
 
-.columns.centerh img,
-.columns .centerh img {
+.reveal .slides .centerm {
+  margin-left: auto;
+  margin-right: auto; }
+
+.reveal .slides .columns.centerh img,
+.reveal .slides .columns .centerh img {
   align-self: center;
   text-align: center;
   vertical-align: middle; }
@@ -551,8 +573,29 @@ body {
 .reveal .slides .width-19 {
   width: 19%; }
 
+.reveal .slides .width-18 {
+  width: 18%; }
+
+.reveal .slides .width-17 {
+  width: 17%; }
+
+.reveal .slides .width-16 {
+  width: 16%; }
+
 .reveal .slides .width-15 {
   width: 15%; }
+
+.reveal .slides .width-14 {
+  width: 14%; }
+
+.reveal .slides .width-13 {
+  width: 13%; }
+
+.reveal .slides .width-12 {
+  width: 12%; }
+
+.reveal .slides .width-11 {
+  width: 11%; }
 
 .reveal .slides .width-10 {
   width: 10%; }
@@ -610,4 +653,8 @@ body {
 .reveal .slides hr {
   height: 0;
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.4); }
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  width: 66.66%; }
+
+.reveal .slides .nomargin {
+  margin: 0; }
