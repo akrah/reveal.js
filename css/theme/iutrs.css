@@ -4,6 +4,11 @@
  *
  * MIT licensed.
  */
+@font-face {
+  font-family: 'Palatino';
+  font-style: normal;
+  src: url("/css/theme/fonts/pala.ttf"); }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -12,7 +17,7 @@ body {
   background-color: #fefefe; }
 
 .reveal {
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
+  font-family: "Palatino", serif;
   font-size: 30px;
   font-weight: normal;
   color: #000; }
@@ -43,7 +48,7 @@ body {
 .reveal h6 {
   margin: 0 0 0.5em 0;
   color: #17a6e3;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
+  font-family: "Palatino", serif;
   font-weight: normal;
   line-height: 1.1;
   letter-spacing: normal;
@@ -564,8 +569,32 @@ body {
 .reveal .slides .width-30 {
   width: 30%; }
 
+.reveal .slides .width-29 {
+  width: 29%; }
+
+.reveal .slides .width-28 {
+  width: 28%; }
+
+.reveal .slides .width-27 {
+  width: 27%; }
+
+.reveal .slides .width-26 {
+  width: 26%; }
+
 .reveal .slides .width-25 {
   width: 25%; }
+
+.reveal .slides .width-24 {
+  width: 24%; }
+
+.reveal .slides .width-23 {
+  width: 23%; }
+
+.reveal .slides .width-22 {
+  width: 22%; }
+
+.reveal .slides .width-21 {
+  width: 21%; }
 
 .reveal .slides .width-20 {
   width: 20%; }

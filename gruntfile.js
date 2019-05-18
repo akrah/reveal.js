@@ -126,6 +126,7 @@ module.exports = grunt => {
 					'css/reveal.min.css',
 					'css/print/paper.css',
 					'css/theme/<%= conf.theme %>.min.css',
+					'css/theme/fonts/**',
 					'js/reveal.min.js',
 					"lib/<%= conf.libs %>",
 					"lib/{<%= conf.libs %>}",
