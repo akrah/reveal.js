@@ -206,6 +206,10 @@ $firstSlideTitleSpacing: 2em;
     border: initial;
     box-shadow: initial;
     align-self: center;
+    &.pixelated {
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+    }
 }
 // ----------------------------------------------------------------------------
 
@@ -329,19 +333,75 @@ $firstSlideTitleSpacing: 2em;
 }
 
 .reveal .slides .width-100 { width: 100%; }
+.reveal .slides .width-99  { width: 99%; }
+.reveal .slides .width-98  { width: 98%; }
+.reveal .slides .width-97  { width: 97%; }
+.reveal .slides .width-96  { width: 96%; }
 .reveal .slides .width-95  { width: 95%; }
+.reveal .slides .width-94  { width: 94%; }
+.reveal .slides .width-93  { width: 93%; }
+.reveal .slides .width-92  { width: 92%; }
+.reveal .slides .width-91  { width: 91%; }
 .reveal .slides .width-90  { width: 90%; }
+.reveal .slides .width-89  { width: 89%; }
+.reveal .slides .width-88  { width: 88%; }
+.reveal .slides .width-87  { width: 87%; }
+.reveal .slides .width-86  { width: 86%; }
 .reveal .slides .width-85  { width: 85%; }
+.reveal .slides .width-84  { width: 84%; }
+.reveal .slides .width-83  { width: 83%; }
+.reveal .slides .width-82  { width: 82%; }
+.reveal .slides .width-81  { width: 81%; }
 .reveal .slides .width-80  { width: 80%; }
+.reveal .slides .width-79  { width: 79%; }
+.reveal .slides .width-78  { width: 78%; }
+.reveal .slides .width-77  { width: 77%; }
+.reveal .slides .width-76  { width: 76%; }
 .reveal .slides .width-75  { width: 75%; }
+.reveal .slides .width-74  { width: 74%; }
+.reveal .slides .width-73  { width: 73%; }
+.reveal .slides .width-72  { width: 72%; }
+.reveal .slides .width-71  { width: 71%; }
 .reveal .slides .width-70  { width: 70%; }
+.reveal .slides .width-69  { width: 69%; }
+.reveal .slides .width-68  { width: 68%; }
+.reveal .slides .width-67  { width: 67%; }
+.reveal .slides .width-66  { width: 66%; }
 .reveal .slides .width-65  { width: 65%; }
+.reveal .slides .width-64  { width: 64%; }
+.reveal .slides .width-63  { width: 63%; }
+.reveal .slides .width-62  { width: 62%; }
+.reveal .slides .width-61  { width: 61%; }
 .reveal .slides .width-60  { width: 60%; }
+.reveal .slides .width-59  { width: 59%; }
+.reveal .slides .width-58  { width: 58%; }
+.reveal .slides .width-57  { width: 57%; }
+.reveal .slides .width-56  { width: 56%; }
 .reveal .slides .width-55  { width: 55%; }
+.reveal .slides .width-54  { width: 54%; }
+.reveal .slides .width-53  { width: 53%; }
+.reveal .slides .width-52  { width: 52%; }
+.reveal .slides .width-51  { width: 51%; }
 .reveal .slides .width-50  { width: 50%; }
+.reveal .slides .width-49  { width: 49%; }
+.reveal .slides .width-48  { width: 48%; }
+.reveal .slides .width-47  { width: 47%; }
+.reveal .slides .width-46  { width: 46%; }
 .reveal .slides .width-45  { width: 45%; }
+.reveal .slides .width-44  { width: 44%; }
+.reveal .slides .width-43  { width: 43%; }
+.reveal .slides .width-42  { width: 42%; }
+.reveal .slides .width-41  { width: 41%; }
 .reveal .slides .width-40  { width: 40%; }
+.reveal .slides .width-39  { width: 39%; }
+.reveal .slides .width-38  { width: 38%; }
+.reveal .slides .width-37  { width: 37%; }
+.reveal .slides .width-36  { width: 36%; }
 .reveal .slides .width-35  { width: 35%; }
+.reveal .slides .width-34  { width: 34%; }
+.reveal .slides .width-33  { width: 33%; }
+.reveal .slides .width-32  { width: 32%; }
+.reveal .slides .width-31  { width: 31%; }
 .reveal .slides .width-30  { width: 30%; }
 .reveal .slides .width-29  { width: 29%; }
 .reveal .slides .width-28  { width: 28%; }
