@@ -332,7 +332,9 @@ body {
 .reveal .slides h1 {
   font-variant: small-caps;
   font-weight: bold;
-  margin: 0; }
+  margin: 0;
+  line-height: .9;
+  margin-top: .2em; }
 
 .reveal .slides h2 {
   margin-bottom: 0.5em;
@@ -522,10 +524,14 @@ body {
   margin-right: auto; }
 
 .reveal .slides .columns.centerh img,
-.reveal .slides .columns .centerh img {
+.reveal .slides .columns .centerh img,
+.reveal .slides img.centerv {
   align-self: center;
   text-align: center;
   vertical-align: middle; }
+
+.reveal .slides .inline-block {
+  display: inline-block; }
 
 .reveal .slides .width-100 {
   width: 100%; }
