@@ -19,17 +19,36 @@ $for(author)$
     <meta name="author" content="$author$">
 $endfor$
     <link rel="stylesheet" href="css/reveal.min.css">
+$for(fonts)$
+    <link rel="stylesheet" href="lib/font/$fonts$/$fonts$.css">
+$endfor$
     <link rel="stylesheet" href="css/theme/$if(theme)$$theme$$else$serif$endif$.min.css">
-    $if(first-slide-background-image)$
     <style>
-    .reveal .backgrounds .first-slide .slide-background-content {
+    .reveal .first-slide .slide-background-content {
+$if(first-slide-background-image)$
         background-image: url($first-slide-background-image$);
+$endif$
+$if(first-slide-background-color)$
+        background-color: $first-slide-background-color$;
+$endif$
+$if(first-slide-background-opacity)$
+        opacity: $first-slide-background-opacity$;
+$endif$
+    }
+    .reveal .slides .first-slide h4 {
+$if(first-slide-h4-family)$
+        font-family: $first-slide-h4-family$;
+$endif$
+$if(first-slide-h4-style)$
+        font-style: $first-slide-h4-style$;
+$endif$
+$if(first-slide-h4-size)$
+        font-size: $first-slide-h4-size$;
+$endif$
     }
     </style>
-    $endif$
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/$if(highlight-css)$$highlight-css$$else$zenburn$endif$.css">
-	<script src="lib/js/head.min.js"></script>
+    <link rel="stylesheet" href="lib/css/$if(highlightCSS)$$highlightCSS$$else$zenburn$endif$.css">
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
     document.write( '<link rel="stylesheet" href="css/print/' +
@@ -57,7 +76,7 @@ $endfor$
 
 <section class="slide level2 first-slide">
 <h1>$title$</h1>
-$if(subtitle)$<div><h4>$subtitle$</h4></div>$endif$
+$if(subtitle)$<h4>$subtitle$</h4>$endif$
 <address>
 $if(author)$
     $if(author-link)$<a href="$author-link$">$author$</a>
@@ -249,11 +268,11 @@ Reveal.addEventListener( 'ready', function( event ) {
 
 Reveal.addEventListener( 'slidechanged', function( event ) {
     event.currentSlide.querySelectorAll('.anim').forEach( function(anim) {
-        if ( event.currentSlide.nextElementSibling == event.previousSlide )
-            anim.querySelectorAll(".fragment:last-child").forEach( el => {el.classList.add('current-fragment'); el.classList.add('visible');});
-        else
-            // anim.querySelectorAll("[data-fragment-index='0']").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
-            anim.querySelectorAll(".fragment:first-of-type").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
+    //     if ( event.currentSlide.nextElementSibling == event.previousSlide )
+    //         anim.querySelectorAll(".fragment:last-child").forEach( el => {el.classList.add('current-fragment'); el.classList.add('visible');});
+    //     else
+    //         // anim.querySelectorAll("[data-fragment-index='0']").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
+    //         anim.querySelectorAll(".fragment:first-of-type").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
     });
 });
 

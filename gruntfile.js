@@ -130,6 +130,11 @@ module.exports = grunt => {
 					'js/reveal.min.js',
 					"lib/<%= conf.libs %>",
 					"lib/{<%= conf.libs %>}",
+					"lib/css/<%= conf.highlightCSS?conf.highlightCSS:'zenburn' %>.css",
+					"lib/font/<%= conf.fonts %>/*.ttf",
+					"lib/font/<%= conf.fonts %>/*.css",
+					"lib/font/{<%= conf.fonts %>}/*.ttf",
+					"lib/font/{<%= conf.fonts %>}/*.css",
 					"plugin/<%= conf.plugins %>/**",
 					"plugin/{<%= conf.plugins %>}/**",
 					root[1]+'/img/**',
@@ -188,7 +193,7 @@ module.exports = grunt => {
 
 		node_pandoc: {
 			options: {
-				flags: "-t revealjs --no-highlight --mathjax --template=tpl/tpl-<%= conf.template %>.html <%= Object.entries(conf).map( tab => '-V '+tab[0]+'='+tab[1] ).join(' ') %>"
+				flags: "-t revealjs --no-highlight --mathjax --template=tpl/tpl-<%= conf.template %>.html <%= Object.entries(conf).map( function(tab) { if (typeof tab[1] === 'object') return Object.entries(tab[1]).map( entry => '-V '+tab[0]+'='+entry[1] ).join(' '); else return '-V '+tab[0]+'='+tab[1]; } ).join(' ') %>"
 			},
 			files: {
 				src:  root[1] + '/index.md',

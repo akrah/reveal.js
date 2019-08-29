@@ -57,13 +57,13 @@ body {
   word-wrap: break-word; }
 
 .reveal h1 {
-  font-size: 4em; }
+  font-size: 4.5em; }
 
 .reveal h2 {
-  font-size: 2em; }
+  font-size: 2.5em; }
 
 .reveal h3 {
-  font-size: 1.5em; }
+  font-size: 1.3em; }
 
 .reveal h4 {
   font-size: 2em; }
@@ -278,10 +278,8 @@ body {
   height: 100%;
   align-items: center;
   text-align: center; }
-  .reveal .slides .first-slide h1 + * {
-    display: flex; }
   .reveal .slides .first-slide h4 {
-    padding-bottom: 1em;
+    font-style: italic;
     text-shadow: 0.04em 0.04em 3px black; }
   .reveal .slides .first-slide address {
     display: flex;
@@ -289,24 +287,24 @@ body {
     justify-content: space-between;
     width: 100%;
     font-size: .8em;
-    font-variant: small-caps; }
-    .reveal .slides .first-slide address time {
-      font-style: italic; }
+    font-variant: small-caps;
+    font-style: normal; }
     .reveal .slides .first-slide address > * {
       color: #000; }
 
-.reveal .backgrounds .chapter .slide-background-content {
+.reveal .slide-background.chapter {
   background-color: #17a6e3; }
 
-.reveal .slides .chapter {
-  height: 100%; }
-  .reveal .slides .chapter h2 {
-    margin: auto;
-    padding-bottom: 0;
+.reveal .slide.chapter {
+  height: 100%;
+  justify-content: space-around; }
+  .reveal .slide.chapter h2 {
+    margin: 0;
     width: inherit;
     border-bottom: 0;
     text-align: center;
     color: #fefefe;
+    font-family: "Palatino", serif;
     font-weight: bold;
     text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15); }
 
@@ -330,18 +328,18 @@ body {
     margin-top: 1em; }
 
 .reveal .slides h1 {
+  font-family: "League Gothic", sans;
   font-variant: small-caps;
-  font-weight: bold;
-  margin: 0;
-  line-height: .9;
-  margin-top: .2em; }
+  line-height: 1;
+  margin-top: .5em; }
 
 .reveal .slides h2 {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.4em;
   padding: 0;
   width: 100%;
   border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
-  text-align: left; }
+  font-family: "League Gothic", sans;
+  text-align: center; }
 
 .reveal .slides h3 {
   width: 100%;
@@ -415,9 +413,6 @@ body {
   background-color: #eee;
   padding: 3px;
   font-style: normal; }
-
-.reveal .slides .present .anim .current-fragment {
-  display: block; }
 
 .reveal .slides .present .anim .fragment:not(.current-fragment) {
   display: none; }
@@ -514,8 +509,7 @@ body {
     flex-grow: 1; }
 
 .reveal .slides .centerh {
-  align-self: center;
-  text-align: center; }
+  align-self: center; }
   .reveal .slides .centerh pre + p {
     text-align: center; }
 
@@ -525,6 +519,7 @@ body {
 
 .reveal .slides .columns.centerh img,
 .reveal .slides .columns .centerh img,
+.reveal .slides .images.centerh p,
 .reveal .slides img.centerv {
   align-self: center;
   text-align: center;

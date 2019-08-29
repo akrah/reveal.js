@@ -31,6 +31,9 @@ $blockMargin: .5em;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
+$headingFirstSlideFont: 'League Gothic', sans;
+$headingSlideFont: 'League Gothic', sans;
+$headingChapterFont: $mainFont;
 $headingFont: $mainFont;
 $headingColor: #17a6e3;
 $headingLineHeight: 1.1;
@@ -40,10 +43,10 @@ $headingTextShadow: none;
 $headingFontWeight: normal;
 $heading1TextShadow: .04em .04em 3px black;
 
-$heading1Size: 4em;
+$heading1Size: 4.5em;
 $heading4Size: 2em;
-$heading2Size: 2em;
-$heading3Size: 1.5em;
+$heading2Size: 2.5em;
+$heading3Size: 1.3em;
 
 // Links and actions
 $linkColor: #E35417;
@@ -66,11 +69,8 @@ $firstSlideTitleSpacing: 2em;
     height: 100%;
     align-items: center;
     text-align: center;
-    & h1 + * {
-        display: flex;
-    }
     & h4 {
-        padding-bottom: 1em;
+        font-style: italic;
         text-shadow: $heading1TextShadow;
     }
     & address {
@@ -80,9 +80,7 @@ $firstSlideTitleSpacing: 2em;
         width: 100%;
         font-size: .8em;
         font-variant: small-caps;
-        & time {
-            font-style: italic;
-        }
+        font-style: normal;
         & > * {
             color: $mainColor;
         }
@@ -91,18 +89,19 @@ $firstSlideTitleSpacing: 2em;
 // ----------------------------------------------------------------------------
 
 // Chapter slides -------------------------------------------------------------
-.reveal .backgrounds .chapter .slide-background-content {
+.reveal .slide-background.chapter {
     background-color: $headingColor;
 }
-.reveal .slides .chapter {
+.reveal .slide.chapter {
     height: 100%;
+    justify-content: space-around;
     & h2 {
-        margin: auto;
-        padding-bottom: 0;
+        margin: 0;
         width: inherit;
         border-bottom: 0;
         text-align: center;
         color: $backgroundColor;
+        font-family: $headingChapterFont;
         font-weight: bold;
         text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
     }
@@ -138,18 +137,19 @@ $firstSlideTitleSpacing: 2em;
 
 // Titles ---------------------------------------------------------------------
 .reveal .slides h1 {
+    font-family: $headingFirstSlideFont;
     font-variant: small-caps;
-    font-weight: bold;
-    margin: 0;
-    line-height: .9;
-    margin-top: .2em;
+    // font-weight: bold;
+    line-height: 1;
+    margin-top: .5em;
 }
 .reveal .slides h2 {
-    margin-bottom: $blockMargin;
+    margin-bottom: $blockMargin*0.8;
     padding: 0;
     width: 100%;
     border-bottom: 2px dashed rgba(0,0,0,0.2);
-    text-align: left;
+    font-family: $headingSlideFont;
+    text-align: center;
 }
 .reveal .slides h3 {
     width: 100%;
@@ -243,9 +243,6 @@ $firstSlideTitleSpacing: 2em;
 
 // Fragment animation ---------------------------------------------------------
 .reveal .slides .present .anim {
-    & .current-fragment {
-        display: block;
-    }
     & .fragment:not(.current-fragment) {
         display: none;
     }
@@ -318,17 +315,23 @@ $firstSlideTitleSpacing: 2em;
 // Trick classes --------------------------------------------------------------
 .reveal .slides .centerh {
     align-self: center;
-    text-align: center;
     & pre + p {
         text-align: center;
     }
 }
+// .reveal .slides .centerh:not(pre,) {
+//     text-align: center;
+//     & pre + p {
+//         text-align: center;
+//     }
+// }
 .reveal .slides .centerm {
     margin-left: auto;
     margin-right: auto;
 }
 .reveal .slides .columns.centerh img,
 .reveal .slides .columns .centerh img,
+.reveal .slides .images.centerh p,
 .reveal .slides img.centerv {
     align-self: center;
     text-align: center;
