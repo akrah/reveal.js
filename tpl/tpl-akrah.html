@@ -36,16 +36,40 @@ $if(first-slide-background-opacity)$
 $endif$
     }
     .reveal .slides .first-slide h4 {
-$if(first-slide-h4-family)$
-        font-family: $first-slide-h4-family$;
+$if(first-slide-subtitle-font)$
+        font-family: $first-slide-subtitle-font$;
 $endif$
-$if(first-slide-h4-style)$
-        font-style: $first-slide-h4-style$;
+$if(first-slide-subtitle-style)$
+        font-style: $first-slide-subtitle-style$;
 $endif$
-$if(first-slide-h4-size)$
-        font-size: $first-slide-h4-size$;
+$if(first-slide-subtitle-size)$
+        font-size: $first-slide-subtitle-size$;
 $endif$
     }
+$if(text-font)$
+    .reveal {
+        font-family: "$text-font$";
+    }
+$endif$
+$if(content-title-font)$
+    .reveal h2,
+    .reveal h3,
+    .reveal h4,
+    .reveal h5,
+    .reveal h6 {
+        font-family: "$content-title-font$";
+    }
+$endif$
+$if(first-slide-title-font)$
+    .reveal .slides h1 {
+        font-family: "$first-slide-title-font$";
+    }
+$endif$
+$if(slide-title-font)$
+    .reveal .slides h2:not(:only-child) {
+        font-family: "$slide-title-font$";
+    }
+$endif$
     </style>
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/$if(highlightCSS)$$highlightCSS$$else$zenburn$endif$.css">

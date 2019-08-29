@@ -1,5 +1,5 @@
 @font-face {
 font-family: 'Palatino';
-src: url("/lib/font/palatino/palatino.ttf") format('truetype');
+src: url("palatino.ttf") format('truetype');
 font-style: normal;
 }

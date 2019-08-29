@@ -1,5 +1,5 @@
 @font-face {
-font-family: 'League Gothic Condensed';
-src: url("/lib/leaguegothic-condensed/leaguegothic-condensed.ttf") format('truetype');
+font-family: 'League-Gothic-Condensed';
+src: url("leaguegothic-condensed.ttf") format('truetype');
 font-style: normal;
 }

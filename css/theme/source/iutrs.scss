@@ -4,16 +4,9 @@
  * MIT licensed.
  */
 
-@font-face {
-font-family: 'Palatino';
-font-style: normal;
-src: url("/css/theme/fonts/pala.ttf");
-}
-
 // Default mixins and settings ------------------------------------------------
 @import "../template/mixins";
 @import "../template/settings";
-// ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
 // Override theme settings (see ../template/settings.scss)
@@ -22,7 +15,6 @@ src: url("/css/theme/fonts/pala.ttf");
 $backgroundColor: #fefefe;
 
 // Primary/body text
-$mainFont: 'Palatino', serif;
 $mainFontSize: 30px;
 $mainColor: #000;
 
@@ -31,10 +23,6 @@ $blockMargin: .5em;
 
 // Headings
 $headingMargin: 0 0 $blockMargin 0;
-$headingFirstSlideFont: 'League Gothic', sans;
-$headingSlideFont: 'League Gothic', sans;
-$headingChapterFont: $mainFont;
-$headingFont: $mainFont;
 $headingColor: #17a6e3;
 $headingLineHeight: 1.1;
 $headingLetterSpacing: normal;
@@ -61,8 +49,6 @@ $selectionColor: #eee;
 @import "../template/theme";
 // ----------------------------------------------------------------------------
 
-$headingChapterColor: $selectionColor;
-$firstSlideTitleSpacing: 2em;
 
 // First slides ---------------------------------------------------------------
 .reveal .slides .first-slide {
@@ -101,7 +87,6 @@ $firstSlideTitleSpacing: 2em;
         border-bottom: 0;
         text-align: center;
         color: $backgroundColor;
-        font-family: $headingChapterFont;
         font-weight: bold;
         text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
     }
@@ -137,9 +122,7 @@ $firstSlideTitleSpacing: 2em;
 
 // Titles ---------------------------------------------------------------------
 .reveal .slides h1 {
-    font-family: $headingFirstSlideFont;
     font-variant: small-caps;
-    // font-weight: bold;
     line-height: 1;
     margin-top: .5em;
 }
@@ -148,7 +131,6 @@ $firstSlideTitleSpacing: 2em;
     padding: 0;
     width: 100%;
     border-bottom: 2px dashed rgba(0,0,0,0.2);
-    font-family: $headingSlideFont;
     text-align: center;
 }
 .reveal .slides h3 {
