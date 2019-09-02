@@ -316,15 +316,19 @@ body {
 .reveal .progress {
   height: 6px; }
 
-.reveal .slides p {
+.reveal .slide p {
   margin: 0; }
-  .reveal .slides p + p {
-    margin-top: 1em; }
+
+.reveal .slide > p + p {
+  margin-top: 1em; }
 
 .reveal .slides h1 {
   font-variant: small-caps;
   line-height: 1;
-  margin-top: .5em; }
+  margin: .5em 0 0 0; }
+
+.reveal .slides .pdf-page h1 {
+  margin-bottom: .7em; }
 
 .reveal .slides h2 {
   margin-bottom: 0.4em;
@@ -333,11 +337,17 @@ body {
   border-bottom: 2px dashed rgba(0, 0, 0, 0.2);
   text-align: center; }
 
+.reveal .slides .pdf-page .chapter h2 {
+  margin-top: 30%; }
+
 .reveal .slides h3 {
   width: 100%;
   text-align: left;
   margin-top: 0.25em;
   margin-bottom: 0.25em; }
+
+.reveal .slides .pdf-page .first-slide h4 {
+  margin-bottom: 3em; }
 
 .reveal .slides ul,
 .reveal .slides ol,

@@ -291,12 +291,10 @@ Reveal.addEventListener( 'ready', function( event ) {
 });
 
 Reveal.addEventListener( 'slidechanged', function( event ) {
-    event.currentSlide.querySelectorAll('.anim').forEach( function(anim) {
-    //     if ( event.currentSlide.nextElementSibling == event.previousSlide )
-    //         anim.querySelectorAll(".fragment:last-child").forEach( el => {el.classList.add('current-fragment'); el.classList.add('visible');});
-    //     else
-    //         // anim.querySelectorAll("[data-fragment-index='0']").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
-    //         anim.querySelectorAll(".fragment:first-of-type").forEach( el => { el.classList.add('current-fragment'); el.classList.add('visible');});
+    event.currentSlide.querySelectorAll('.anim.auto').forEach( function(anim) {
+        let childs = anim.children;
+        for( el of childs )
+            el.classList.add('fragment');
     });
 });
 
