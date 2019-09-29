@@ -130,7 +130,7 @@ module.exports = grunt => {
 					'js/reveal.min.js',
 					"lib/<%= conf.libs %>",
 					"lib/{<%= conf.libs %>}",
-					"lib/css/<%= conf.highlightCSS?conf.highlightCSS:'zenburn' %>.css",
+					"lib/css/<%= conf.highlightcss?conf.highlightcss:'zenburn' %>.css",
 					"lib/font/<%= conf.fonts %>/*.ttf",
 					"lib/font/<%= conf.fonts %>/*.css",
 					"lib/font/{<%= conf.fonts %>}/*.ttf",

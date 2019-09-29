@@ -208,10 +208,12 @@ $selectionColor: #eee;
 // ----------------------------------------------------------------------------
 
 // Blockquotes ----------------------------------------------------------------
-.reveal .slides blockquote {
+.reveal .slides blockquote,
+.reveal .slides .box {
     text-align: center;
     box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.5);
-    margin: 1em auto;
+    margin: .5em auto 1em auto;
+    width: auto;
 }
 // ----------------------------------------------------------------------------
 
@@ -438,7 +440,8 @@ $selectionColor: #eee;
 // ----------------------------------------------------------------------------
 
 
-.reveal .slides h2 + * {
+.reveal .slides h2 + *,
+.reveal .slides h2 + .images img {
     margin-top: 0;
 }
 
