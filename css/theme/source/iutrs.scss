@@ -143,8 +143,11 @@ $selectionColor: #eee;
 .reveal .slides h3 {
     width: 100%;
     text-align: left;
-    margin-top: .5*$blockMargin;
+    margin-top: $blockMargin;
     margin-bottom: .5*$blockMargin;
+    &:first-child {
+        margin-top: 0;
+    }
 }
 .reveal .slides .pdf-page .first-slide h4 {
     margin-bottom: 3em;
@@ -181,7 +184,7 @@ $selectionColor: #eee;
         margin-top: -.5*$blockMargin;
     }
 }
-.reveal .slides ul li {
+.reveal .slides ul > li {
     list-style-type: none;
     &:before {
         content: '✓';
@@ -189,7 +192,7 @@ $selectionColor: #eee;
         padding-right: .6em;
         margin-left: -1.3em;
     }
-    & li:before {
+    & ul > li:before {
         content: '•';
     }
 }
@@ -313,6 +316,9 @@ $selectionColor: #eee;
         text-align: center;
     }
 }
+.reveal .slides .centertext {
+    text-align: center;
+}
 // .reveal .slides .centerh:not(pre,) {
 //     text-align: center;
 //     & pre + p {
@@ -336,6 +342,10 @@ $selectionColor: #eee;
     display: inline-block;
 }
 
+.reveal .slides .width-120 { width: 120%; }
+.reveal .slides .width-115 { width: 115%; }
+.reveal .slides .width-110 { width: 110%; }
+.reveal .slides .width-105 { width: 105%; }
 .reveal .slides .width-100 { width: 100%; }
 .reveal .slides .width-99  { width: 99%; }
 .reveal .slides .width-98  { width: 98%; }
@@ -452,21 +462,48 @@ $selectionColor: #eee;
     border: 2px dashed rgba(0,0,0,0.2);
     font-size: 1.4rem;
     font-family: "Arial", sans-serif;
+    font-variant: inherit;
     line-height: 1;
     & * {
+        font-family: "Arial", sans-serif;
         margin: 0;
         padding: 0;
         color: inherit;
+        text-shadow: none;
+        font-variant: initial;
     }
     & h3 {
         font-size: 2rem;
         font-weight: bold;
+    }
+    & h4 {
+        font-size: 1.4rem;
+    }
+    & h2:not(:only-child) {
+        font-family: "Arial", sans-serif;
+        width: initial;
+        border: none;
+        text-align: initial;
     }
     & a {
         color: #0000ff;
         &:hover{
             text-decoration: underline;
         }
+    }
+}
+.reveal .slides ul.reset-this > li {
+    list-style-type: disc;
+    margin-left: 1em;
+    &::before {
+        all: initial;
+    }
+}
+.reveal .slides ol.reset-this > li {
+    list-style-type: decimal;
+    margin-left: 1em;
+    &::before {
+        all: initial;
     }
 }
 

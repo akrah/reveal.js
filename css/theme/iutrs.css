@@ -343,8 +343,10 @@ body {
 .reveal .slides h3 {
   width: 100%;
   text-align: left;
-  margin-top: 0.25em;
+  margin-top: 0.5em;
   margin-bottom: 0.25em; }
+  .reveal .slides h3:first-child {
+    margin-top: 0; }
 
 .reveal .slides .pdf-page .first-slide h4 {
   margin-bottom: 3em; }
@@ -379,14 +381,14 @@ body {
   .reveal .slides dl dd + dd > ul:first-child {
     margin-top: -0.25em; }
 
-.reveal .slides ul li {
+.reveal .slides ul > li {
   list-style-type: none; }
-  .reveal .slides ul li:before {
+  .reveal .slides ul > li:before {
     content: '✓';
     font-size: .7em;
     padding-right: .6em;
     margin-left: -1.3em; }
-  .reveal .slides ul li li:before {
+  .reveal .slides ul > li ul > li:before {
     content: '•'; }
 
 .reveal .slides img {
@@ -517,6 +519,9 @@ body {
   .reveal .slides .centerh pre + p {
     text-align: center; }
 
+.reveal .slides .centertext {
+  text-align: center; }
+
 .reveal .slides .centerm {
   margin-left: auto;
   margin-right: auto; }
@@ -531,6 +536,18 @@ body {
 
 .reveal .slides .inline-block {
   display: inline-block; }
+
+.reveal .slides .width-120 {
+  width: 120%; }
+
+.reveal .slides .width-115 {
+  width: 115%; }
+
+.reveal .slides .width-110 {
+  width: 110%; }
+
+.reveal .slides .width-105 {
+  width: 105%; }
 
 .reveal .slides .width-100 {
   width: 100%; }
@@ -843,18 +860,41 @@ body {
   border: 2px dashed rgba(0, 0, 0, 0.2);
   font-size: 1.4rem;
   font-family: "Arial", sans-serif;
+  font-variant: inherit;
   line-height: 1; }
   .reveal .slides .reset-this * {
+    font-family: "Arial", sans-serif;
     margin: 0;
     padding: 0;
-    color: inherit; }
+    color: inherit;
+    text-shadow: none;
+    font-variant: initial; }
   .reveal .slides .reset-this h3 {
     font-size: 2rem;
     font-weight: bold; }
+  .reveal .slides .reset-this h4 {
+    font-size: 1.4rem; }
+  .reveal .slides .reset-this h2:not(:only-child) {
+    font-family: "Arial", sans-serif;
+    width: initial;
+    border: none;
+    text-align: initial; }
   .reveal .slides .reset-this a {
     color: #0000ff; }
     .reveal .slides .reset-this a:hover {
       text-decoration: underline; }
+
+.reveal .slides ul.reset-this > li {
+  list-style-type: disc;
+  margin-left: 1em; }
+  .reveal .slides ul.reset-this > li::before {
+    all: initial; }
+
+.reveal .slides ol.reset-this > li {
+  list-style-type: decimal;
+  margin-left: 1em; }
+  .reveal .slides ol.reset-this > li::before {
+    all: initial; }
 
 .reveal .slides hr {
   height: 0;
