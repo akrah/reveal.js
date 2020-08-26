@@ -1,0 +1,1200 @@
+<!doctype html>
+<!-- **************************************************************************
+ * HTML Template used by Pandoc to generate Reveal.js slides
+ * from a Markdown file.
+ *
+ * In order to use it, Define the parameter 'template: akrah' in the
+ * config file config.yml of your project.
+ *
+ * MIT licensed.
+ *
+ * Copyright (C) 2018 Adrien Krähenbühl
+ ************************************************************************** -->
+<html lang="fr">
+<head>
+    <title>W11 - Conception de documents et d’interfaces numériques</title>
+    <meta charset="utf-8">
+    <meta name="description" content="W11 - Conception de documents et d’interfaces numériques">
+    <meta name="author" content="Adrien Krähenbühl">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="lib/font/palatino/palatino.css">
+    <link rel="stylesheet" href="lib/font/source-sans-pro/source-sans-pro.css">
+    <link rel="stylesheet" href="lib/font/league-gothic/league-gothic.css">
+    <link rel="stylesheet" href="css/theme/iutrs.min.css">
+    <style>
+    .reveal .first-slide .slide-background-content {
+        background-image: url(img/firstPage.svg);
+        opacity: 0.8;
+    }
+    .reveal .slides .first-slide h4 {
+        font-family: monospace;
+        font-style: normal;
+        font-size: 1.3em;
+    }
+    .reveal {
+        font-family: "Palatino";
+    }
+    .reveal h2,
+    .reveal h3,
+    .reveal h4,
+    .reveal h5,
+    .reveal h6 {
+        font-family: "Palatino";
+    }
+    .reveal .slides h1 {
+        font-family: "League-Gothic";
+    }
+    .reveal .slides h2:not(:only-child) {
+        font-family: "League-Gothic";
+    }
+    </style>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+    document.write( '<link rel="stylesheet" href="css/print/' +
+        ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) +
+        '.css" type="text/css" media="print">' );
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+            <script src="js/index.js"></script>
+    </head>
+<body>
+
+
+<div class="reveal">
+<div class="slides">
+
+<section class="slide level2 first-slide">
+<h1>W11 - Conception de documents et d’interfaces numériques</h1>
+
+<address>
+    <a href="http://adrien.krahenbuhl.fr">Adrien Krähenbühl</a>
+    
+<time>2 décembre 2019</time>
+    <a href="http://iutrs.unistra.fr/formation/dut/dut-informatique">IUT Robert Schuman</a>
+    
+</address>
+</section>
+
+<!--===========================================================================
+                              <Begin Markdown>                              -->
+
+<section id="avant-de-commencer" class="slide level2">
+<h2>Avant de commencer</h2>
+<div class="columns">
+<div class="column-8">
+<dl>
+<dt>Version de JS</dt>
+<dd>Ce cours se base entièrement sur les possibilités offertes par <strong>ES 6</strong>.
+</dd>
+</dl>
+</div><div class="images centerh column-3">
+<p><img data-src="img/logo_JS.svg" class="width-40" /></p>
+</div>
+</div>
+<div class="columns fragment">
+<div class="column-8">
+<dl>
+<dt>Rappel doc &amp; stackoverflow-like</dt>
+<dd><span class="math inline">\(\rightarrow\)</span> ne recopiez pas bêtement<br />
+<span class="math inline">\(\rightarrow\)</span> <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference">developpez.mozilla</a> est une doc. fiable
+</dd>
+</dl>
+</div><div class="images centerh column-3">
+<p><img data-src="img/logo_mozilla.png" class="width-75" /></p>
+</div>
+</div>
+<div class="columns fragment">
+<div class="column-8">
+<dl>
+<dt>Second QCM</dt>
+<dd><span class="math inline">\(\rightarrow\)</span> sur Moodle<br />
+<span class="math inline">\(\rightarrow\)</span> au début du prochain TP
+</dd>
+</dl>
+</div><div class="images centerh column-3">
+<p><img data-src="img/qcm.svg" class="width-35" /></p>
+</div>
+</div>
+</section>
+<section id="ce-que-lon-a-vu" class="slide level2">
+<h2>Ce que l’on a vu</h2>
+<ol type="1">
+<li><strong>HTML</strong>
+<ul>
+<li>les balises et les éléments</li>
+<li>les attributs</li>
+<li><strong>l’imbrication</strong></li>
+<li>navigateurs et protocole HTTP</li>
+</ul></li>
+<li><strong>CSS</strong>
+<ul>
+<li>la syntaxe</li>
+<li>les <strong>sélecteurs</strong> : simples, combinateurs, pseudo-classes</li>
+<li>les <strong>propriétés</strong> : texte et blocs, <code>display</code>, marges et padding, etc.</li>
+<li>l’agencement <strong>Flex</strong> (Flexible Box)</li>
+</ul></li>
+</ol>
+</section>
+<section id="au-programme-aujourdhui" class="slide level2">
+<h2>Au programme aujourd’hui</h2>
+<ol type="1">
+<li><strong>Les concepts du Javascript</strong>
+<ul>
+<li>dynamique</li>
+</ul></li>
+<li><strong>la syntaxe</strong>
+<ul>
+<li>variables, types et opérateurs</li>
+<li>les tableaux</li>
+<li>les objets</li>
+</ul></li>
+<li><strong>Manipulation du DOM</strong>
+<ul>
+<li>sélection globale d’éléments</li>
+<li>sélection par filiation</li>
+<li>manipuler un élément : attributs, classes, contenu</li>
+<li>modifier le DOM : créer/ajouter/supprimer</li>
+</ul></li>
+<li><strong>Événements</strong></li>
+<li><strong>Requêtes asynchrones</strong>
+<ul>
+<li>API fetch</li>
+</ul></li>
+</ol>
+</section>
+<section id="javascript-les-concepts" class="slide level2 chapter">
+<h2>Javascript, les concepts</h2>
+</section>
+<section id="javascript-quest-ce-que-cest" class="slide level2">
+<h2>Javascript, qu’est-ce que c’est ?</h2>
+<div class="centerh width-20">
+<p><img data-src="img/logo_JS.svg" /></p>
+</div>
+<dl>
+<dt>Javascript</dt>
+<dd><em>(Abrégé JS)</em> C’est un langage de <strong>script</strong> orienté <strong>objet</strong> qui permet d’ajouter des interactions <strong>statiques</strong> et <strong>dynamique</strong> aux page HTML :
+</dd>
+</dl>
+<ul>
+<li>manipulation des éléments HTML (ajouter, modifier, supprimer)</li>
+<li>chargement dynamique du contenu (requêtes asynchrones)</li>
+<li>gestion des événements (clics, survols, …)</li>
+</ul>
+</section>
+<section id="mais-javascript" class="slide level2">
+<h2>Mais Javascript…</h2>
+<div class="centerh images width-90">
+<p><img data-src="img/logo_java.svg" class="width-25" /><br> <img data-src="img/logo_nodejs.png" class="width-25" />            <img data-src="img/logo_couchdb.png" class="width-35" /></p>
+</div>
+<p>Attention, Javascript :</p>
+<ul>
+<li><strong>n’est pas</strong> du Java interprété, c’est un langage indépendant avec des concepts très différents.</li>
+<li>est aussi utilisé en dehors des navigateurs web, comme par exemple avec <a href="https://nodejs.org/en/">Node.js</a> ou <a href="http://couchdb.apache.org/">CouchDB</a> : rendez-vous en 2A.</li>
+</ul>
+</section>
+<section id="intégration-à-html" class="slide level2">
+<h2>Intégration à HTML</h2>
+<div class="columns centerh">
+<div>
+<pre class="html contenteditable"><code>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;script&gt; /* Code */ &lt;/script&gt;
+        &lt;title&gt;Ma page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        ...
+        &lt;script&gt; /* Autre code */ &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><code>index_with_code.html</code></p>
+</div><div>
+<pre class="html contenteditable"><code>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;script src=&quot;script1.js&quot;&gt;&lt;/script&gt;
+        &lt;title&gt;Ma page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        ...
+        &lt;script src=&quot;script2.js&quot;&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><code>index_with_file.html</code></p>
+</div>
+</div>
+<ul>
+<li>Le code JS peut être écrit :
+<ol type="1">
+<li>directement dans l’élément <code>&lt;script&gt;</code></li>
+<li>dans un fichier externe référencé avec l’attribut <code>src</code> de <code>&lt;script&gt;</code></li>
+</ol></li>
+<li>Un document HTML peut contenir plusieurs éléments <code>&lt;script&gt;</code></li>
+</ul>
+</section>
+<section id="syntaxe-les-bases" class="slide level2 chapter">
+<h2>Syntaxe : les bases</h2>
+</section>
+<section id="les-commentaires" class="slide level2">
+<h2>Les commentaires</h2>
+<pre class="js contenteditable centerh"><code>// Premier type de commentaire sur une seule ligne
+
+/* Second type de commentaire sur plusieurs lignes.
+ * Seules les étoiles initiales et finales (après et
+ * avant les deux slashs) son nécessaires, les autres
+ * c&#39;est de la décoration */</code></pre>
+<p><br />
+</p>
+<p>La syntaxe des commentaires est identique à celle de Java et C# :</p>
+<ul>
+<li>sur une ligne avec <code>//</code></li>
+<li>sur une ou plusieurs lignes avec <code>/* */</code></li>
+</ul>
+</section>
+<section id="les-variables" class="slide level2">
+<h2>Les variables</h2>
+<div class="columns">
+<pre class="js contenteditable"><code>/* Déclarer une variable
+ * avec var */
+var a;
+var b = 5;</code></pre><div class="column-3">
+
+</div><div class="column-60">
+<p><strong><code>var</code></strong> est l’instruction la plus ancienne :</p>
+<ul>
+<li>ces variables ont une portée de fonction</li>
+<li><img data-src="img/alert.svg" class="width-7 nomargin" /> <strong>À ÉVITER AU MAXIMUM</strong> <img data-src="img/alert.svg" class="width-7 nomargin" /></li>
+</ul>
+</div>
+</div>
+<hr class="width-80">
+<div class="columns fragment">
+<pre class="js contenteditable"><code>/* Déclarer une variable
+ * avec let */
+let c;
+let d = 5;</code></pre><div class="column-3">
+
+</div><div class="column-60">
+<p><strong><code>let</code></strong> est une instruction plus récente :</p>
+<ul>
+<li>ces variables ont une portée de bloc</li>
+<li>elle est à utilisé de préférence à <code>var</code></li>
+</ul>
+</div>
+</div>
+<hr class="width-80">
+<div class="columns fragment">
+<pre class="js contenteditable"><code>/* Déclarer une constante
+ * avec const */
+const E = 5;</code></pre><div class="column-3">
+
+</div><div class="column-60">
+<p><strong><code>const</code></strong> permet de déclarer des constantes :</p>
+<ul>
+<li>elle doit être affectée à la déclaration</li>
+<li>sa valeur ne pourra pas être modifiée</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="point-virgule-et-casse" class="slide level2">
+<h2>Point virgule et casse</h2>
+<div class="centerh width-9">
+<p><img data-src="img/pointVirgule.svg" /></p>
+</div>
+<ul>
+<li>Le point-virgule n’est pas nécessaire mais il est <strong>très fortement recommandé et d’usage</strong> de le mettre après chaque instruction.</li>
+<li>Tous les noms de variables sont quasiment possibles, à l’exception des <a href="https://mathiasbynens.be/notes/reserved-keywords#ecmascript-6">mots-clés réservés</a>.</li>
+<li>Javascript est <strong>sensible à la casse</strong> : <code>maVariable</code> et <code>MaVariable</code> sont deux variables différentes !</li>
+</ul>
+</section>
+<section id="typage" class="slide level2">
+<h2>Typage</h2>
+<div class="columns">
+<div class="centerh">
+<pre class="js contenteditable"><code>let a;
+typeof a;
+// &quot;undefined&quot;</code></pre>
+<p>
+<button onclick="typeofa()">
+alert(typeof a);
+</button>
+</div>
+<div class="centerh">
+<pre class="js contenteditable"><code>let b = true;
+typeof b;
+// &quot;boolean&quot;</code></pre>
+<p>
+<button class="centerh" onclick="typeofb()">
+alert(typeof b);
+</button>
+</p>
+</div>
+<div class="centerh">
+<pre class="js contenteditable"><code>let c = 12;
+typeof c;
+// &quot;number&quot;</code></pre>
+<p>
+<button class="centerh" onclick="typeofc()">
+alert(typeof c);
+</button>
+</p>
+</div>
+<div class="centerh">
+<pre class="js contenteditable"><code>let d = 12.5;
+typeof d;
+// &quot;number&quot;</code></pre>
+<p>
+<button class="centerh" onclick="typeofd()">
+alert(typeof d);
+</button>
+</p>
+</div>
+<div class="centerh">
+<pre class="js contenteditable"><code>let e = &#39;W11&#39;;
+typeof e;
+// &quot;string&quot;</code></pre>
+<p>
+<button class="centerh" onclick="typeofe()">
+alert(typeof e);
+</button>
+</p>
+</div>
+</div>
+<ul>
+<li>Javascript est un langage à <strong>typage dynamique</strong> : il n’y a pas de type déclaré… mais il y a un type quand même !</li>
+<li>Il n’y a qu’<strong>un seul type pour les nombres</strong>, pas de distinction entre les entiers et les décimaux.</li>
+<li>Les chaînes de caractères peuvent se déclarer avec des guillemets simples ou doubles.</li>
+</ul>
+<div class="centerh fragment width-60">
+<blockquote>
+<p>Attention au typage dynamique !   <button class="centerh" onclick="typageDynamique()">Tester</button></p>
+<pre class="js"><code>let a = 10;         // a est un nombre
+alert(typeof a);    // affiche &quot;number&quot;
+a = &quot;dix&quot;;          // a est maintenant une chaîne
+alert(typeof a);    // affiche &quot;string&quot;</code></pre>
+</blockquote>
+</div>
+</section>
+<section id="opérateurs" class="slide level2">
+<h2>Opérateurs</h2>
+<p><strong><code>=</code></strong> permet d’affecter des variables.</p>
+<div class="columns">
+<div>
+<dl>
+<dt><code>+</code></dt>
+<dd>permet d’additionner des nombres et de concaténer des chaînes.
+</dd>
+</dl>
+</div><pre class="js contenteditable centerh"><code>let a = 3+8;      // 11
+let b = &#39;W&#39;+&#39;11&#39;; // W11</code></pre>
+</div>
+<div class="columns">
+<div>
+<dl>
+<dt><code>==</code> et <code>!=</code> : comparateurs “faibles”</dt>
+<dd>Les opérandes sont transtypés avant d’être comparés.
+</dd>
+</dl>
+</div><pre class="js contenteditable centerh"><code>let c = (5 == &#39;5&#39;);  // Vrai
+let d = (5 != &#39;5&#39;);  // Faux</code></pre>
+</div>
+<div class="columns">
+<div>
+<dl>
+<dt><code>===</code> et <code>!==</code> : comparateurs “stricts”</dt>
+<dd>Les opérandes ne sont pas transtypés avant d’être comparés.
+</dd>
+</dl>
+</div><pre class="js contenteditable centerh"><code>let e = (5 === &#39;5&#39;); // Faux
+let f = (5 !== &#39;5&#39;); // Vrai</code></pre>
+</div>
+</section>
+<section id="les-tableaux" class="slide level2">
+<h2>Les tableaux</h2>
+<div class="columns">
+<div>
+<pre class="js fragment"><code>// Déclarer un tableau
+let tab1 = [ 11, 22 ];
+let tab2= [ &quot;W&quot;, 11, &quot;A&quot;, 22 ];</code></pre>
+<pre class="js fragment"><code>// Taille d&#39;un tableau
+let size1 = tab1.length;   // 2</code></pre>
+<pre class="js fragment"><code>// Accéder à un élément
+let val1 = tab1[0];        // 11</code></pre>
+<pre class="js fragment"><code>// Modifier un élément
+tab2[0] = &quot;S&quot;;</code></pre>
+<pre class="js fragment"><code>// Indice d&#39;un élément
+let i = tab2.indexOf(&quot;A&quot;); // 2</code></pre>
+</div><div>
+<pre class="js fragment"><code>// Ajouter à la fin
+tab1.push(33);    // [ 11, 22, 33 ]</code></pre>
+<pre class="js fragment"><code>// Supprimer le dernier
+tab1.pop();       // [ 11, 22 ]</code></pre>
+<pre class="js fragment"><code>// Supprimer le premier
+tab1.shift();     // [ 22 ]</code></pre>
+<pre class="js fragment"><code>// Ajouter au début
+tab1.unshift(33); // [ 33, 22 ]</code></pre>
+<pre class="js fragment"><code>// Trier
+tab1.sort();      // [ 22, 33 ]</code></pre>
+</div>
+</div>
+<button class="centerh fragment" onclick="tableaux()">
+Tester
+</button>
+<div class="fragment">
+<ul>
+<li>Les tableaux peuvent contenir des éléments de types différents.</li>
+<li>La classe <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array"><code>Array</code></a> implémente de nombreuses fonctions permettant de manipuler les tableaux : en plus des fonctions ci-dessus, vous pouvez regarder <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/join"><code>join()</code></a>, <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/filter"><code>filter()</code></a>, <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce"><code>reduce()</code></a>, …</li>
+</ul>
+</div>
+</section>
+<section id="les-objets-level-1" class="slide level2">
+<h2>Les objets, level 1</h2>
+<div class="columns centerh width-75">
+<div>
+<pre class="js contenteditable"><code>let moi = {
+    nom: &#39;Papeur&#39;,
+    prenom: &#39;Jé&#39;,
+};</code></pre>
+<pre class="js contenteditable"><code>let lui = {};
+lui.nom = &#39;peur&#39;;
+lui.prenom = &#39;Ila&#39;;
+lui.age = 20;</code></pre>
+</div><div class="centerh">
+<pre class="js contenteditable"><code>console.log( moi.prenom ); // &quot;Jé&quot;
+console.log( lui[&#39;nom&#39;] ); // &quot;peur&quot;
+console.log( lui.age );    // 20</code></pre>
+<p class="centerh">
+<button onclick="objetLevel1()">
+Tester
+</button>
+</p>
+</div>
+</div>
+<p><br />
+</p>
+<p>Un <strong>objet</strong> Javascript :</p>
+<ul>
+<li>se déclare avec des accolades</li>
+<li>est une <strong>structure associative</strong> <code>property: value</code>.</li>
+<li>peut se voir attribuer de nouvelles propriétés <strong>dynamiquement</strong></li>
+</ul>
+</section>
+<section id="les-objets-level-2" class="slide level2">
+<h2>Les objets, level 2</h2>
+<div class="columns">
+<pre class="js contenteditable"><code>let moi = {
+    prenom: &#39;Julien&#39;,
+    age: 28,
+    frere: {
+        prenom: &#39;Mathieu&#39;,
+        age: 25
+    },
+    sports: [ &#39;Échecs&#39;, &#39;Curling&#39; ]
+};</code></pre><div class="centerh">
+<pre class="js contenteditable"><code>console.log( moi.prenom );        // &quot;Julien&quot;
+console.log( moi.frere.prenom );  // &quot;Mathieu&quot;
+console.log( moi.sports.length ); // 2</code></pre>
+<p class="centerh">
+<button onclick="objetLevel2(this)">
+Tester
+</button>
+</p>
+</div>
+</div>
+<p><br />
+</p>
+<p>Une <strong>propriété</strong> d’un objet :</p>
+<ul>
+<li>peut être un type primitif, un tableau, un objet ou une fonction.</li>
+<li>peut être accéder avec <code>obj.property</code> ou <code>obj['property']</code></li>
+</ul>
+</section>
+<section id="dialogue-avec-lutilisateur" class="slide level2">
+<h2>Dialogue avec l’utilisateur</h2>
+<pre class="js contenteditable centerh"><code>let nom = prompt(&#39;Entrez votre nom :&#39;);
+let classe = prompt(&#39;Entrez votre classe :&#39;);
+alert(&#39;Bonjour &#39; + nom + &#39;. Vous êtes un &#39; + classe);
+
+let start = confirm(&quot;Souhaitez-vous démarrer l&#39;aventure ?&quot;);
+if (start) {
+    alert(&quot;C&#39;est parti !&quot;);
+}</code></pre>
+<button class="centerh" onclick="dialogue()">
+Tester
+</button>
+<dl>
+<dt><code>alert()</code></dt>
+<dd><strong>Affiche du texte</strong> dans une fenêtre surgissante (popup).
+</dd>
+<dt><code>let val = prompt()</code></dt>
+<dd>Demande à l’utilisateur de <strong>saisir une valeur</strong>. La valeur sera <code>null</code> en cas d’appui sur le bouton “Annuler”.
+</dd>
+<dt><code>let val = confirm()</code></dt>
+<dd>Propose un <strong>choix booléen</strong> à l’utilisateur. La valeur dépend du clic sur l’un des boutons “Ok” et “Annuler”.
+</dd>
+</dl>
+</section>
+<section id="le-dom" class="slide level2 chapter">
+<h2>Le DOM</h2>
+</section>
+<section id="le-dom-quest-ce-que-cest" class="slide level2">
+<h2>Le DOM, qu’est-ce que c’est ?</h2>
+<div class="columns centerh">
+<pre class="html contenteditable"><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Mon titre&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Mon titre&lt;/h1&gt;
+        &lt;a href=&quot;#&quot;&gt;Lien&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><p><img data-src="img/dom2.svg" class="width-80" /></p>
+</div>
+<p>Le <strong>Document Object Model</strong> est une représentation arborescente d’un document HTML qui peut être manipulé pour :</p>
+<ul>
+<li><strong>ajouter</strong> et <strong>supprimer</strong> des éléments</li>
+<li><strong>modifier</strong> un élément : son <strong>contenu</strong>, ses <strong>attributs</strong> ou son <strong>style</strong></li>
+</ul>
+</section>
+<section id="le-dom-en-javascript" class="slide level2">
+<h2>Le DOM en Javascript</h2>
+<div class="columns centerh">
+<pre class="html contenteditable"><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Mon titre&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Mon titre&lt;/h1&gt;
+        &lt;a href=&quot;#&quot;&gt;Lien&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><p><img data-src="img/dom2.svg" class="width-75" /></p>
+</div>
+<dl>
+<dt>L’objet <a href="https://developer.mozilla.org/fr/docs/Web/API/document"><code>document</code></a></dt>
+<dd>regroupe un ensemble de <strong>fonctionnalités globales</strong> pour manipuler le DOM.
+</dd>
+<dt>La classe <a href="https://developer.mozilla.org/fr/docs/Web/API/Element"><code>Element</code></a></dt>
+<dd>représente n’importe quel élément HTML et permet de manipuler ses attributs et ses propriétés CSS.
+</dd>
+</dl>
+</section>
+<section id="dom-document" class="slide level2 chapter">
+<h2>DOM : document</h2>
+</section>
+<section id="sélection-par-id" class="slide level2 centerh">
+<h2>Sélection par id</h2>
+<pre class="js contenteditable"><code>let elem = document.getElementById(&#39;monId&#39;);</code></pre>
+<p>Retourne l’<strong>unique élément</strong> d’identifiant <code>monId</code>.</p>
+<div class="width-60">
+<p><img data-src="img/getElementById.svg" /></p>
+</div>
+</section>
+<section id="selection-par-balise" class="slide level2 centerh">
+<h2>Selection par balise</h2>
+<pre class="js contenteditable"><code>let elems = document.getElementsByTagName(&#39;a&#39;);</code></pre>
+<p>Retourne <strong>un tableau</strong> contenant tous les éléments de type <code>&lt;a&gt;</code>.</p>
+<div class="width-60">
+<p><img data-src="img/getElementByTagName.svg" /></p>
+</div>
+</section>
+<section id="sélection-par-classe" class="slide level2 centerh">
+<h2>Sélection par classe</h2>
+<pre class="js contenteditable"><code>let elems = document.getElementsByClassName(&#39;recent&#39;);</code></pre>
+<p>Retourne <strong>un tableau</strong> contenant tous les éléments de classe <code>recent</code>.</p>
+<div class="width-60">
+<p><img data-src="img/getElementByClassName.svg" /></p>
+</div>
+</section>
+<section id="sélection-css" class="slide level2 centerh">
+<h2>Sélection CSS</h2>
+<pre class="js contenteditable"><code>let elem = document.querySelector(&#39;article &gt; h3&#39;);</code></pre>
+<p>Retourne le <strong>1<span class="math inline">\(^{er}\)</span> élément</strong> correspondant au sélecteur CSS <code>article &gt; h3</code>.</p>
+<div class="width-60">
+<p><img data-src="img/querySelector.svg" /></p>
+</div>
+</section>
+<section id="sélection-css-multiple" class="slide level2 centerh">
+<h2>Sélection CSS multiple</h2>
+<pre class="js contenteditable"><code>let elems = document.querySelectorAll(&#39;article &gt; h3&#39;);</code></pre>
+<p>Retourne <strong>tous les éléments</strong> correspondant au sélecteur <code>article &gt; h3</code>.</p>
+<div class="width-60">
+<p><img data-src="img/querySelectorAll.svg" /></p>
+</div>
+</section>
+<section id="dom-elements" class="slide level2 chapter">
+<h2>DOM : elements</h2>
+</section>
+<section id="accéder-aux-éléments-par-filiation" class="slide level2">
+<h2>Accéder aux éléments par filiation</h2>
+<p>La classe <code>Element</code> propose plusieurs méthodes pour accéder aux éléments relatifs à l’élément courant.</p>
+<div class="columns">
+<pre class="js contenteditable"><code>let p = document.querySelector(&#39;.recent&#39;);
+// Le parent de p
+let body = p.parentElement;
+// Les enfants de p
+let childs = p.childNodes;
+// Le premier enfant de p
+let h3 = p.firstElementChild;
+// Le voisin direct de p
+let a = p.nextElementSibling;</code></pre><div class="anim images centerh">
+<div class="fragment">
+<p><img data-src="img/filiation.svg" /> <code>document.querySelector('.recent')</code></p>
+</div>
+<div class="fragment">
+<p><img data-src="img/parent.svg" /> <code>parentElement</code></p>
+</div>
+<div class="fragment">
+<p><img data-src="img/childs.svg" /> <code>childNodes</code></p>
+</div>
+<div class="fragment">
+<p><img data-src="img/firstChild.svg" /> <code>firstElementChild</code></p>
+</div>
+<div class="fragment">
+<p><img data-src="img/nextSibling.svg" /> <code>nextElementSibling</code></p>
+</div>
+</div>
+</div>
+</section>
+<section id="accéder-aux-attributs-html" class="slide level2">
+<h2>Accéder aux attributs HTML</h2>
+<div class="columns">
+<div>
+<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
+    &lt;h3&gt;Médina&lt;/h3&gt;
+    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
+    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<pre class="js contenteditable"><code>let url = document.querySelector(&#39;a&#39;).href;
+let id = document.querySelector(&#39;p&#39;).id;</code></pre>
+</div><div>
+<div class="reset-this">
+<article class="recent">
+<h3>
+Médina
+</h3>
+<a id="aHref" href="m.html">lien</a>
+<p id="i">
+Pas mal
+</p>
+</article>
+</div>
+<div class="images centerh">
+<p>
+<button onclick="aHref()">
+alert( url );
+</button>
+<button onclick="pId()">
+alert( id );
+</button>
+</p>
+</div>
+</div>
+</div>
+<p><br />
+</p>
+<p>On accède à la valeur de l’attribut <code>att</code> d’un élément HTML <code>elem</code> avec la notation <code>elem.att</code>.</p>
+</section>
+<section id="manipuler-les-classes" class="slide level2">
+<h2>Manipuler les classes</h2>
+<style>
+.droite { text-align: right; }
+.vert   { background-color: green; }
+</style>
+<div class="columns">
+<div>
+<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
+    &lt;h3&gt;Médina&lt;/h3&gt;
+    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
+    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<pre class="js contenteditable"><code>let p = document.getElementById(&#39;i&#39;);
+p.classList.add(&#39;droite&#39;,&#39;vert&#39;);
+p.classList.remove(&#39;droite&#39;);
+p.classList.toggle(&#39;vert&#39;);</code></pre>
+</div><div>
+<pre class="css contenteditable"><code>.droite { text-align: right; }
+.vert   { background-color: green; }</code></pre>
+<div class="reset-this">
+<article class="recent">
+<h3>
+Médina
+</h3>
+<a href="m.html">lien</a>
+<p id="iClassList">
+Pas mal
+</p>
+</article>
+</div>
+<div class="images centerh">
+<p>
+<button onclick="addDroiteVert()">
+add(‘droite’,‘vert’)
+</button>
+<button onclick="removeDroite()">
+remove(‘droite’)
+</button>
+<button onclick="toggleVert()">
+toggle(‘vert’)
+</button>
+</p>
+</div>
+</div>
+</div>
+<p><br />
+Le membre <code>classList</code> de la class <code>Element</code> permet de manipuler les classes d’un élément, notamment :</p>
+<ul>
+<li>d’en ajouter avec <code>add( String [, String])</code></li>
+<li>d’en supprimer avec <code>remove( String [, String])</code></li>
+<li>d’en inverser la présence avec <code>toggle(String)</code></li>
+</ul>
+</section>
+<section id="modifier-le-contenu" class="slide level2">
+<h2>Modifier le contenu</h2>
+<div class="columns">
+<div>
+<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
+    &lt;h3&gt;Médina&lt;/h3&gt;
+    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
+    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<pre class="js contenteditable"><code>let p = document.getElementById(&#39;i&#39;);
+p.innerHTML = &quot;Incroyable !&quot;;
+p.innerHTML = &quot;&lt;a href=&#39;t.html&#39;&gt;lien 2&lt;/a&gt;&quot;;</code></pre>
+</div><div>
+<div class="reset-this">
+<article class="recent">
+<h3>
+Médina
+</h3>
+<a href="m.html">lien</a>
+<p id="iInnerHtml">
+Pas mal
+</p>
+</article>
+</div>
+<div class="images centerh">
+<p>
+<button onclick="innerHtml()">
+p.innerHTML = “Incroyable !”;
+</button>
+<button onclick="innerHtml2()">
+p.innerHTML = “&lt;a href=‘t.html’&gt;lien 2&lt;/a&gt;”;
+</button>
+</p>
+</div>
+</div>
+</div>
+<p><br />
+</p>
+<p>Le membre <code>innerHTML</code> de la class <code>Element</code> donne un accès direct en écriture au contenu de l’élément qui peut être :</p>
+<ul>
+<li>du texte</li>
+<li>du contenu HTML</li>
+</ul>
+</section>
+<section id="combo-manipuler-le-dom" class="slide level2">
+<h2>Combo : manipuler le DOM</h2>
+<div class="columns">
+<div>
+<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
+    &lt;h3&gt;Médina&lt;/h3&gt;
+    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
+    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<pre class="js contenteditable"><code>let ar = document.getElementsByTagName(&#39;article&#39;)[0];
+
+let p = document.createElement(&quot;p&quot;);
+p.innerHTML = &quot;Incroyable !&quot;;
+ar.appendChild(p); // Ajout
+
+let last = ar.lastElementChild;
+ar.removeChild(last); // Suppression</code></pre>
+</div><div>
+<div class="reset-this">
+<article id="appendP">
+<h3>
+Médina
+</h3>
+<a href="m.html">lien</a>
+<p id="iInnerHtml">
+Pas mal
+</p>
+</article>
+</div>
+<div class="images centerh">
+<p>
+<button class="centerh" onclick="appendP()">
+ar.appendChild(p);
+</button>
+<button class="centerh" onclick="removeP()">
+ar.removeChild(f);
+</button>
+</p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column-10">
+<dl>
+<dt><code>document.createElement(tagName)</code></dt>
+<dd>Crée un élément.
+</dd>
+</dl>
+</div><div class="column-12">
+<dl>
+<dt><code>elemA.appendChild(elemB)</code></dt>
+<dd>Ajoute <code>elemB</code> comme enfant de <code>elemA</code>
+</dd>
+</dl>
+</div>
+</div>
+<dl>
+<dt><code>elemA.removeChild(elemB)</code></dt>
+<dd>Supprime <code>elemB</code> des enfants de <code>elemA</code>.
+</dd>
+</dl>
+</section>
+<section id="les-événements" class="slide level2 chapter">
+<h2>Les événements</h2>
+</section>
+<section id="un-événement-quest-ce-que-cest" class="slide level2">
+<h2>Un événement, qu’est-ce que c’est ?</h2>
+<div class="centerh">
+<p><img data-src="img/events.svg" class="width-85" /><br />
+</p>
+</div>
+<dl>
+<dt>La class <code>Event</code></dt>
+<dd><p>Elle représente n’importe quel événement survenu lors de l’interaction de l’utilisateur avec le DOM. Tous les événements sont <strong>notifiés au DOM</strong> et JavaScript permet :</p>
+<ul>
+<li>d’<strong>écouter</strong> ces événements</li>
+<li>d’<strong>exécuter du code</strong> lorsqu’ils surviennent.</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="exemple-avec-la-souris" class="slide level2">
+<h2>Exemple avec la souris</h2>
+<div class="columns">
+<div>
+<pre class="js contenteditable"><code>function changeColor(event) {
+    event.preventDefault();
+    let a = event.target;
+    a.style.color = &#39;green&#39;;
+}
+
+let h = document.getElementsByTagName(&#39;h3&#39;)[0];
+
+h.addEventListener(&#39;click&#39;, changeColor);
+h.nextElementSibling
+ .addEventListener(&#39;mouseover&#39;, changeColor);</code></pre>
+</div><div>
+<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
+&lt;h3&gt;Médina&lt;/h3&gt;
+&lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
+&lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+<div>
+<div class="reset-this">
+<article>
+<h3 id="iChangeColor">
+Médina
+</h3>
+<a href="m.html">lien</a>
+<p id="i">
+Pas mal
+</p>
+</article>
+<script>
+let h = document.getElementById('iChangeColor');
+h.addEventListener('click', changeColor);
+h.nextElementSibling
+ .addEventListener('mouseover', changeColor);
+</script>
+</div>
+</div>
+</div>
+</div>
+<div class="anim">
+<div class="fragment">
+<p><br />
+<strong>Tous</strong> les <code>Element</code> possèdent la fonction <code>addEventListener</code> à laquelle on passe deux paramètres obligatoires :</p>
+<ul>
+<li>le nom de l’<strong>événement à écouter</strong></li>
+<li>la <strong>fonction à exécuter</strong> lorsque l’événement est déclenché</li>
+</ul>
+</div>
+<div class="fragment">
+<p><br />
+</p>
+<ul>
+<li>La fonction passée en paramètre de <code>addEventListerner</code> prend <strong>un paramètre de type <code>Event</code></strong> qui contient des informations sur l’événement déclenché.</li>
+<li>La méthode <code>preventDefault()</code> permet d’<strong>empêcher l’exécution du comportement par défaut</strong> de l’élément à cet événement.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="requêtes-asynchrones-avec-fetch" class="slide level2 chapter">
+<h2>Requêtes asynchrones avec Fetch</h2>
+</section>
+<section id="asynchrone-quest-ce-que-cest" class="slide level2">
+<h2>Asynchrone, qu’est-ce que c’est ?</h2>
+<dl>
+<dt>AJAX <em>(Asynchronous Javascript And XML)</em></dt>
+<dd>Méthode de gestion des requêtes asynchrones en JavaScript
+</dd>
+</dl>
+<div class="centerh width-65">
+<p><img data-src="img/ajax.svg" /></p>
+</div>
+<p>Une <strong>requête asynchrone</strong> :</p>
+<ul>
+<li>est une requête <strong>non bloquante</strong>.</li>
+<li>permet de continuer à manipuler la page web jusqu’à réception de la réponse.</li>
+</ul>
+</section>
+<section id="fetch" class="slide level2">
+<h2>Fetch</h2>
+<pre class="js contenteditable centerh"><code>fetch( URL ).then( fonction1 ).then( fonction2 ).catch( fonctionErreur );</code></pre>
+<pre class="js contenteditable centerh"><code>fetch( URL )
+.then( function (response) {
+    // Exécuté lorsque l&#39;on reçoit la réponse
+})
+.then( function (data) {
+    // Exécuté lorsque le 1er then est terminé
+})
+.catch( function (error) {
+    // Exécuté lorsqu&#39;une exception est
+    // déclenchée dans un des blocs fetch
+    // ou then.
+});</code></pre>
+<p>Fetch permet d’effectuer des traitements <strong>asynchrones en cascade</strong> :</p>
+<ul>
+<li><strong><code>fetch()</code></strong> envoie une requête HTTP et transmet la réponse.</li>
+<li>un bloc <strong><code>then</code></strong> exécute une fonction dont l’argument correspond au <strong>à la valeur de retour</strong> du bloc précédent.</li>
+<li>un bloc <strong><code>catch</code></strong> est exécuté lorsqu’une erreur survient dans l’un des blocs précédents.</li>
+</ul>
+</section>
+<section id="un-exemple-concret" class="slide level2">
+<h2>Un exemple concret</h2>
+<div class="columns">
+<pre class="js contenteditable centerh"><code>fetch(&#39;http://monsite.fr/api/?s=bond&#39;)
+.then( function (response) {
+    if (response.ok)
+        return response.json();
+    throw new Error(&#39;Response is not OK&#39;);
+})
+.then( function (data) {
+    doSomething(data);
+})
+.catch( function (error) {
+    console.log(error.message);
+});</code></pre><div>
+<pre class="js contenteditable centerh"><code>// Contenu de la réponse au format JSON
+{
+    &#39;nom&#39;: &#39;Bond&#39;,
+    &#39;prenom&#39;: &#39;James&#39;,
+    &#39;age&#39;: 35
+}</code></pre>
+<pre class="js contenteditable centerh"><code>function doSomething(data) {
+    const p = document.querySelector(&#39;#p&#39;);
+    p.innerHTML = `
+        Vous êtes ${data.prenom} ${data.nom}.
+        Vous avez ${data.age} ans.`;
+}</code></pre>
+</div>
+</div>
+<p>Le retour de <code>fetch</code> est de type <a href="https://developer.mozilla.org/fr/docs/Web/API/Response"><code>Response</code></a> et permet :</p>
+<ul>
+<li>de savoir si c’est un <strong>succès</strong> avec le booléen <code>ok</code>.</li>
+<li>d’obtenir le <strong><code>status</code></strong> de la réponse HTTP (200, 400, etc.).</li>
+<li>d’obtenir les données aux formats <strong>JSON</strong> ou <strong>texte</strong> avec les méthodes <code>.json()</code> et <code>.text()</code>.</li>
+</ul>
+</section>
+
+ <!--                         </End Markdown>
+ ===========================================================================-->
+
+</div>
+</div>
+
+<script src="js/reveal.min.js"></script>
+
+<script type="text/javascript">
+Reveal.initialize({
+// Display presentation control arrows
+controls: true,
+// Help the user learn the controls by providing hints, for example by
+// bouncing the down arrow when they first encounter a vertical slide
+controlsTutorial: false,
+// Determines where controls appear, "edges" or "bottom-right"
+controlsLayout: 'edges',
+// Visibility rule for backwards navigation arrows; "faded", "hidden"
+// or "visible"
+controlsBackArrows: 'faded',
+// Display a presentation progress bar
+progress: true,
+// Display the page number of the current slide
+// h.v|h/v|c|c/t
+slideNumber: "c/t",
+// Push each slide change to the browser history
+history: true,
+// Enable keyboard shortcuts for navigation
+keyboard: true,
+// Enable the slide overview mode
+overview: true,
+// Vertical centering of slides
+center: false,
+// Loop the presentation
+loop: true,
+// Turns fragments on and off globally
+fragments: true,
+// Flags whether to include the current fragment in the URL,
+// so that reloading brings you to the same fragment position
+fragmentInURL: true,
+pdfSeparateFragments: false,
+// Flags if the presentation is running in an embedded mode,
+// i.e. contained within a limited portion of the screen
+embedded: false,
+// Flags if we should show a help overlay when the questionmark
+// key is pressed
+help: true,
+// Flags if speaker notes should be visible to all viewers
+showNotes: false,
+// Global override for autoplaying embedded media (video/audio/iframe)
+// - null: Media will only autoplay if data-autoplay is present
+// - true: All media will autoplay, regardless of individual setting
+// - false: No media will autoplay, regardless of individual setting
+autoPlayMedia: null,
+// Number of milliseconds between automatically proceeding to the
+// next slide, disabled when set to 0, this value can be overwritten
+// by using a data-autoslide attribute on your slides
+autoSlide: 0,
+// Stop auto-sliding after user input
+autoSlideStoppable: true,
+// Use this method for navigation when auto-sliding
+autoSlideMethod: Reveal.navigateNext,
+// Specify the average time in seconds that you think you will spend
+// presenting each slide. This is used to show a pacing timer in the
+// speaker view
+defaultTiming: 120,
+// Enable slide navigation via mouse wheel
+mouseWheel: false,
+// Hides the address bar on mobile devices
+hideAddressBar: true,
+// Opens links in an iframe preview overlay
+// Add `data-preview-link` and `data-preview-link="false"` to customise each
+// link individually
+previewLinks: false,
+// Transition style
+//     none/default/fade/slide/convex/concave/zoom/cube/page/linear
+transition: 'slide',
+// Transition speed
+//     default/fast/slow
+transitionSpeed: 'fast',
+// Transition style for full page slide backgrounds
+//    none/fade/slide/convex/concave/zoom
+backgroundTransition: 'fade',
+// Number of slides away from the current that are visible
+viewDistance: 3,
+// Parallax background image
+parallaxBackgroundImage: '',
+// Parallax background size
+// CSS syntax, e.g. "2100px 900px"
+parallaxBackgroundSize: '',
+// Number of pixels to move the parallax background per slide
+// - Calculated automatically unless specified
+// - Set to 0 to disable movement along an axis
+parallaxBackgroundHorizontal: 0,
+parallaxBackgroundVertical: 0,
+// The display mode that will be used to show slides
+display: 'flex',
+math: { mathjax: 'plugin/math/MathJax.js' },
+menu: {
+		// Side of the the menu
+        // left|right
+		side: 'left',
+		// Specifies the width of the menu.
+		// normal|wide|third|half|full|any valid css length value
+		width: 'normal',
+		// Slide numbers to the titles in the slide list.
+		// false|true|h.v|h/v|c|c/t
+		numbers: false,
+		// Slide elements used for generating the slide titles
+		titleSelector: 'h1, h2',
+		// If slides do not have a matching title, attempt to use the
+		// start of the text content as the title instead
+		useTextContentForMissingTitles: false,
+		// Hide slides from the menu that do not have a title.
+		hideMissingTitles: false,
+		// Adds markers to the slide titles to indicate the
+		// progress through the presentation.
+		markers: false,
+		// Specify custom panels to be included in the menu, by
+		// providing an array of objects with 'title', 'icon'
+		// properties, and either a 'src' or 'content' property.
+		custom: false,
+		// Specifies the themes that will be available in the themes
+		// menu panel. Set to 'true' to show the themes menu panel
+		// with the default themes list. Alternatively, provide an
+		// array to specify the themes to make available in the
+		// themes menu panel, for example...
+		// [
+		//     { name: 'Black', theme: 'css/theme/black.css' },
+		//     { name: 'White', theme: 'css/theme/white.css' },
+		//     { name: 'League', theme: 'css/theme/league.css' }
+		// ]
+		themes: false,
+		// Specifies the path to the default theme files.
+		themesPath: 'css/theme/',
+		// Specifies if the transitions menu panel will be shown.
+		transitions: false,
+		// Adds a menu button to the slides to open the menu panel.
+		openButton: true,
+		// Allows the slide number to open the menu panel
+		openSlideNumber: false,
+		// Allows the user to open and navigate the menu using the keyboard.
+		keyboard: true,
+		// Leave the menu open until it is explicitly closed
+		sticky: false,
+		// If 'true' the menu will not be created until it is explicitly
+		// requested by calling RevealMenu.init().
+		delayInit: false,
+		// If 'true' the menu will be shown when the menu is initialised.
+		openOnInit: false,
+		// By default the menu will load it's own font-awesome library
+		// icons. If your presentation needs to load a different
+		// font-awesome library the 'loadIcons' option can be set to false
+		// and the menu will not attempt to load the font-awesome library.
+		loadIcons: true
+	},
+dependencies: [
+    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+    { src: 'plugin/math/math.js', async: true },
+    { src: 'plugin/reveal.js-menu/menu.js' },
+]});
+
+Reveal.addEventListener( 'ready', function( event ) {
+    // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
+    document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
+});
+
+Reveal.addEventListener( 'slidechanged', function( event ) {
+    event.currentSlide.querySelectorAll('.anim.auto').forEach( function(anim) {
+        let childs = anim.children;
+        for( el of childs )
+            el.classList.add('fragment');
+    });
+});
+
+</script>
+
+</body>
+</html>
