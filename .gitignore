@@ -8,9 +8,8 @@ out/
 log/*.log
 tmp/**
 node_modules/
-dist/*.map
 .sass-cache
-css/reveal.min.css
-js/reveal.min.js
-css/theme/*.min.css
+dist/*.map
+*.min.css
+*.min.js
 index.html

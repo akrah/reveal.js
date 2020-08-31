@@ -79,10 +79,10 @@ module.exports = grunt => {
 
 		jshint: {
 			options: {
+				esversion: 9,
 				curly: false,
 				eqeqeq: true,
 				immed: true,
-				esnext: true,
 				latedef: 'nofunc',
 				newcap: true,
 				noarg: true,

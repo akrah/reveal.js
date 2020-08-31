@@ -21,6 +21,9 @@ const minify = require('gulp-clean-css')
 const connect = require('gulp-connect')
 const autoprefixer = require('gulp-autoprefixer')
 
+const readYAML = require('read-yaml');
+const pandoc = require('node-pandoc');
+
 const root = yargs.argv.root || '.'
 const port = yargs.argv.port || 8000
 
@@ -67,6 +70,35 @@ babelConfigESM.presets[0][1].targets = { browsers: [
 ] };
 
 let cache = {};
+
+const conf = readYAML.sync(root[1]+'/config.yml');
+
+gulp.task('pandoc', () => {
+    let confArgs = Object.entries(conf).map(
+        tab => {
+            if (typeof tab[1] === 'object')
+                return Object.entries(tab[1]).map( entry => '--variable='+tab[0]+':'+entry[1] );
+            else
+                return '--variable='+tab[0]+':'+tab[1];
+        }).flat();
+    let args = [
+        '--template=tpl/tpl-'+conf.template+'.html',
+        '-f', 'markdown',
+        '-t', 'revealjs',
+        '--no-highlight',
+        '--mathjax',
+        ...confArgs,
+        '-o', root[0]+'/index.html'
+    ];
+    pandoc(
+        root[1]+'/index.md',
+        args,
+        (err, res) => {
+            if (err) console.error('Pandoc: ',err);
+        }
+    );
+    return Promise.resolve();
+})
 
 // Creates a bundle with broad browser support, exposed
 // as UMD
@@ -241,7 +273,7 @@ gulp.task('eslint', () => gulp.src(['./js/**', 'gulpfile.js'])
 
 gulp.task('test', gulp.series( 'eslint', 'qunit' ))
 
-gulp.task('default', gulp.series(gulp.parallel('js', 'css', 'plugins'), 'test'))
+gulp.task('default', gulp.series(gulp.parallel('js', 'css', 'plugins', 'pandoc')))
 
 gulp.task('build', gulp.parallel('js', 'css', 'plugins'))
 
@@ -250,10 +282,10 @@ gulp.task('package', gulp.series('default', () =>
     gulp.src([
         './index.html',
         './dist/**',
-        './lib/**',
         './images/**',
         './plugin/**',
-        './**.md'
+        root[1]+'/img/**',
+        root[1]+'/js/**',
     ]).pipe(zip('reveal-js-presentation.zip')).pipe(gulp.dest('./'))
 
 ))
@@ -272,7 +304,7 @@ gulp.task('serve', () => {
 
     gulp.watch(['*.html', '*.md'], gulp.series('reload'))
 
-    gulp.watch(['js/**'], gulp.series('js', 'reload', 'test'))
+    gulp.watch(['js/**', root[1]+'/js/**'], gulp.series('js', 'reload', 'test'))
 
     gulp.watch(['plugin/**/plugin.js'], gulp.series('plugins', 'reload'))
 
@@ -287,5 +319,11 @@ gulp.task('serve', () => {
     ], gulp.series('css-core', 'reload'))
 
     gulp.watch(['test/*.html'], gulp.series('test'))
+
+    gulp.watch([
+        root[1]+'/index.md',
+        root[1]+'/config.yml',
+        root[0]+"tpl/*.html"
+    ], gulp.series('pandoc'))
 
 })

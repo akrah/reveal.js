@@ -1,29 +1,29 @@
-import SlideContent from './controllers/slidecontent.js'
-import SlideNumber from './controllers/slidenumber.js'
-import Backgrounds from './controllers/backgrounds.js'
-import AutoAnimate from './controllers/autoanimate.js'
-import Fragments from './controllers/fragments.js'
-import Overview from './controllers/overview.js'
-import Keyboard from './controllers/keyboard.js'
-import Location from './controllers/location.js'
-import Controls from './controllers/controls.js'
-import Progress from './controllers/progress.js'
-import Pointer from './controllers/pointer.js'
-import Plugins from './controllers/plugins.js'
-import Print from './controllers/print.js'
-import Touch from './controllers/touch.js'
-import Focus from './controllers/focus.js'
-import Notes from './controllers/notes.js'
-import Playback from './components/playback.js'
-import defaultConfig from './config.js'
-import * as Util from './utils/util.js'
-import * as Device from './utils/device.js'
+import SlideContent from './controllers/slidecontent.js';
+import SlideNumber from './controllers/slidenumber.js';
+import Backgrounds from './controllers/backgrounds.js';
+import AutoAnimate from './controllers/autoanimate.js';
+import Fragments from './controllers/fragments.js';
+import Overview from './controllers/overview.js';
+import Keyboard from './controllers/keyboard.js';
+import Location from './controllers/location.js';
+import Controls from './controllers/controls.js';
+import Progress from './controllers/progress.js';
+import Pointer from './controllers/pointer.js';
+import Plugins from './controllers/plugins.js';
+import Print from './controllers/print.js';
+import Touch from './controllers/touch.js';
+import Focus from './controllers/focus.js';
+import Notes from './controllers/notes.js';
+import Playback from './components/playback.js';
+import defaultConfig from './config.js';
+import * as Util from './utils/util.js';
+import * as Device from './utils/device.js';
 import {
 	SLIDES_SELECTOR,
 	HORIZONTAL_SLIDES_SELECTOR,
 	VERTICAL_SLIDES_SELECTOR,
 	POST_MESSAGE_METHOD_BLACKLIST
-} from './utils/constants.js'
+} from './utils/constants.js';
 
 // The reveal.js version
 export const VERSION = '4.0.2';
@@ -402,7 +402,7 @@ export default function( revealElement, options ) {
 	 */
 	function configure( options ) {
 
-		const oldConfig = { ...config }
+		const oldConfig = { ...config };
 
 		// New config options may be passed when this method
 		// is invoked through the API after initialization
@@ -1768,7 +1768,7 @@ export default function( revealElement, options ) {
 
 			// Don't count the wrapping section for vertical slides and
 			// slides marked as uncounted
-			if( horizontalSlide.classList.contains( 'stack' ) === false && !horizontalSlide.dataset.visibility !== 'uncounted' ) {
+			if( !horizontalSlide.classList.contains( 'stack' ) && horizontalSlide.dataset.visibility === 'uncounted' ) {
 				pastCount++;
 			}
 
@@ -2099,7 +2099,7 @@ export default function( revealElement, options ) {
 			if( autoSlide && !autoSlidePaused && !isPaused() && !overview.isActive() && ( !isLastSlide() || fragments.availableRoutes().next || config.loop === true ) ) {
 				autoSlideTimeout = setTimeout( () => {
 					if( typeof config.autoSlideMethod === 'function' ) {
-						config.autoSlideMethod()
+						config.autoSlideMethod();
 					}
 					else {
 						navigateNext();
@@ -2586,4 +2586,4 @@ export default function( revealElement, options ) {
 
 	return API;
 
-};
+}

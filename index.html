@@ -12,19 +12,19 @@
  ************************************************************************** -->
 <html lang="fr">
 <head>
-    <title>W11 - Conception de documents et d’interfaces numériques</title>
+    <title>W31 - Programmation Web<br>côté serveur</title>
     <meta charset="utf-8">
-    <meta name="description" content="W11 - Conception de documents et d’interfaces numériques">
+    <meta name="description" content="W31 - Programmation Web<br>côté serveur">
     <meta name="author" content="Adrien Krähenbühl">
-    <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="lib/font/palatino/palatino.css">
-    <link rel="stylesheet" href="lib/font/source-sans-pro/source-sans-pro.css">
-    <link rel="stylesheet" href="lib/font/league-gothic/league-gothic.css">
-    <link rel="stylesheet" href="css/theme/iutrs.min.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/fonts/palatino/palatino.css">
+    <link rel="stylesheet" href="dist/theme/fonts/source-sans-pro/source-sans-pro.css">
+    <link rel="stylesheet" href="dist/theme/fonts/league-gothic/league-gothic.css">
+    <link rel="stylesheet" href="dist/theme/iutrs.css">
     <style>
     .reveal .first-slide .slide-background-content {
-        background-image: url(img/firstPage.svg);
-        opacity: 0.8;
+        background-image: url(img/firstPage2.png);
+        opacity: 0.3;
     }
     .reveal .slides .first-slide h4 {
         font-family: monospace;
@@ -49,18 +49,8 @@
     }
     </style>
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
-    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-    <script>
-    document.write( '<link rel="stylesheet" href="css/print/' +
-        ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) +
-        '.css" type="text/css" media="print">' );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
-            <script src="js/index.js"></script>
-    </head>
+    <link rel="stylesheet" href="plugin/highlight/tomorrow-night-eighties.css">
+        </head>
 <body>
 
 
@@ -68,12 +58,12 @@
 <div class="slides">
 
 <section class="slide level2 first-slide">
-<h1>W11 - Conception de documents et d’interfaces numériques</h1>
-
+<h1>W31 - Programmation Web<br>côté serveur</h1>
+<h4><?php echo "1. Introduction à PHP"; ?></h4>
 <address>
     <a href="http://adrien.krahenbuhl.fr">Adrien Krähenbühl</a>
     
-<time>2 décembre 2019</time>
+<time>3 septembre 2020</time>
     <a href="http://iutrs.unistra.fr/formation/dut/dut-informatique">IUT Robert Schuman</a>
     
 </address>
@@ -82,941 +72,758 @@
 <!--===========================================================================
                               <Begin Markdown>                              -->
 
-<section id="avant-de-commencer" class="slide level2">
-<h2>Avant de commencer</h2>
+<section id="déroulement-du-module" class="slide level2 chapter">
+<h2>Déroulement du module</h2>
+</section>
+<section id="présentations" class="slide level2">
+<h2>Présentations</h2>
+<h3 id="équipe-pédagogique">Équipe pédagogique</h3>
+<dl>
+<dt>Adrien Krähenbühl</dt>
+<dd>CMx + Groupe 12 de TDs/TPs
+</dd>
+</dl>
 <div class="columns">
-<div class="column-8">
-<dl>
-<dt>Version de JS</dt>
-<dd>Ce cours se base entièrement sur les possibilités offertes par <strong>ES 6</strong>.
-</dd>
-</dl>
-</div><div class="images centerh column-3">
-<p><img data-src="img/logo_JS.svg" class="width-40" /></p>
-</div>
-</div>
-<div class="columns fragment">
-<div class="column-8">
-<dl>
-<dt>Rappel doc &amp; stackoverflow-like</dt>
-<dd><span class="math inline">\(\rightarrow\)</span> ne recopiez pas bêtement<br />
-<span class="math inline">\(\rightarrow\)</span> <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference">developpez.mozilla</a> est une doc. fiable
-</dd>
-</dl>
-</div><div class="images centerh column-3">
-<p><img data-src="img/logo_mozilla.png" class="width-75" /></p>
-</div>
-</div>
-<div class="columns fragment">
-<div class="column-8">
-<dl>
-<dt>Second QCM</dt>
-<dd><span class="math inline">\(\rightarrow\)</span> sur Moodle<br />
-<span class="math inline">\(\rightarrow\)</span> au début du prochain TP
-</dd>
-</dl>
-</div><div class="images centerh column-3">
-<p><img data-src="img/qcm.svg" class="width-35" /></p>
-</div>
-</div>
-</section>
-<section id="ce-que-lon-a-vu" class="slide level2">
-<h2>Ce que l’on a vu</h2>
-<ol type="1">
-<li><strong>HTML</strong>
-<ul>
-<li>les balises et les éléments</li>
-<li>les attributs</li>
-<li><strong>l’imbrication</strong></li>
-<li>navigateurs et protocole HTTP</li>
-</ul></li>
-<li><strong>CSS</strong>
-<ul>
-<li>la syntaxe</li>
-<li>les <strong>sélecteurs</strong> : simples, combinateurs, pseudo-classes</li>
-<li>les <strong>propriétés</strong> : texte et blocs, <code>display</code>, marges et padding, etc.</li>
-<li>l’agencement <strong>Flex</strong> (Flexible Box)</li>
-</ul></li>
-</ol>
-</section>
-<section id="au-programme-aujourdhui" class="slide level2">
-<h2>Au programme aujourd’hui</h2>
-<ol type="1">
-<li><strong>Les concepts du Javascript</strong>
-<ul>
-<li>dynamique</li>
-</ul></li>
-<li><strong>la syntaxe</strong>
-<ul>
-<li>variables, types et opérateurs</li>
-<li>les tableaux</li>
-<li>les objets</li>
-</ul></li>
-<li><strong>Manipulation du DOM</strong>
-<ul>
-<li>sélection globale d’éléments</li>
-<li>sélection par filiation</li>
-<li>manipuler un élément : attributs, classes, contenu</li>
-<li>modifier le DOM : créer/ajouter/supprimer</li>
-</ul></li>
-<li><strong>Événements</strong></li>
-<li><strong>Requêtes asynchrones</strong>
-<ul>
-<li>API fetch</li>
-</ul></li>
-</ol>
-</section>
-<section id="javascript-les-concepts" class="slide level2 chapter">
-<h2>Javascript, les concepts</h2>
-</section>
-<section id="javascript-quest-ce-que-cest" class="slide level2">
-<h2>Javascript, qu’est-ce que c’est ?</h2>
-<div class="centerh width-20">
-<p><img data-src="img/logo_JS.svg" /></p>
-</div>
-<dl>
-<dt>Javascript</dt>
-<dd><em>(Abrégé JS)</em> C’est un langage de <strong>script</strong> orienté <strong>objet</strong> qui permet d’ajouter des interactions <strong>statiques</strong> et <strong>dynamique</strong> aux page HTML :
-</dd>
-</dl>
-<ul>
-<li>manipulation des éléments HTML (ajouter, modifier, supprimer)</li>
-<li>chargement dynamique du contenu (requêtes asynchrones)</li>
-<li>gestion des événements (clics, survols, …)</li>
-</ul>
-</section>
-<section id="mais-javascript" class="slide level2">
-<h2>Mais Javascript…</h2>
-<div class="centerh images width-90">
-<p><img data-src="img/logo_java.svg" class="width-25" /><br> <img data-src="img/logo_nodejs.png" class="width-25" />            <img data-src="img/logo_couchdb.png" class="width-35" /></p>
-</div>
-<p>Attention, Javascript :</p>
-<ul>
-<li><strong>n’est pas</strong> du Java interprété, c’est un langage indépendant avec des concepts très différents.</li>
-<li>est aussi utilisé en dehors des navigateurs web, comme par exemple avec <a href="https://nodejs.org/en/">Node.js</a> ou <a href="http://couchdb.apache.org/">CouchDB</a> : rendez-vous en 2A.</li>
-</ul>
-</section>
-<section id="intégration-à-html" class="slide level2">
-<h2>Intégration à HTML</h2>
-<div class="columns centerh">
 <div>
-<pre class="html contenteditable"><code>&lt;!doctype html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;script&gt; /* Code */ &lt;/script&gt;
-        &lt;title&gt;Ma page&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        ...
-        &lt;script&gt; /* Autre code */ &lt;/script&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><code>index_with_code.html</code></p>
+<dl>
+<dt>Gabriel Frey</dt>
+<dd>Groupe 34 de TDs/TPs
+</dd>
+</dl>
 </div><div>
-<pre class="html contenteditable"><code>&lt;!doctype html&gt;
+<dl>
+<dt>Gil Gross</dt>
+<dd>Groupe 56 de TDs/TPs
+</dd>
+</dl>
+</div>
+</div>
+<h3 id="séances">Séances</h3>
+<pre class="php contenteditable centerh"><code>&lt;?php
+    $CM     =  3;
+    $TDs    =  4;
+    $TPs    = 13;
+    $nbHeures = ($CM + $TDs + $TPs) * 2;
+
+    echo &#39;Nb. heures = &#39;.$nbHeures;
+?&gt;</code></pre>
+</section>
+<section id="détail-des-séances" class="slide level2">
+<h2>Détail des séances</h2>
+<h3 id="contenu">Contenu</h3>
+<div class="columns centerh images">
+<ol type="1">
+<li>Syntaxe PHP</li>
+<li>Communication avec un serveur</li>
+<li>Programmation objet</li>
+<li>BDD : persistance des données</li>
+<li>Framework PHP : Laravrel</li>
+</ol><p><img data-src="img/logoPhpMysql.png" class="width-70" /></p>
+</div>
+<p><em>Note : Le contenu est construit sur la base du <a href="http://www.iut.fr/files/fck/File/documents/PPN/fran%C3%A7ais/PPN_INFORMATIQUE_256097.pdf">PPN 2013</a> (page 45).</em></p>
+<h3 id="répartition">Répartition</h3>
+<ul>
+<li>Syntaxe et serveur : <strong>1</strong> CM + <strong>1</strong> TD + <strong>3</strong> TPs</li>
+<li>POO et BDD : <strong>1</strong> CM + <strong>1</strong> TD + <strong>3</strong> TPs</li>
+<li>Laravel : <strong>1</strong> CM + <strong>2</strong> TD + <strong>7</strong> TPs</li>
+</ul>
+</section>
+<section id="évaluation-du-module" class="slide level2">
+<h2>Évaluation du module</h2>
+<h3 id="trois-notes">Trois notes</h3>
+<dl>
+<dt>2 notes de suivi</dt>
+<dd>Après les deux derniers CMx.
+</dd>
+<dt>1 note finale</dt>
+<dd>Examen sous forme de TP noté en Janvier.
+</dd>
+</dl>
+<h3 id="calcul-de-votre-moyenne">Calcul de votre moyenne</h3>
+<pre class="php contenteditable centerh"><code>&lt;?php
+    /* $note1   QCM sur la 1ère partie
+     * $note2   QCM sur la 2nde partie
+     * $noteTP  TP noté sur machine en Janvier */
+    function noteFinale( $note1, $note2, $noteTP )
+    {
+        return ($note1 + $note2) / 2 * 0.4 + $noteTP * 0.6;
+    }
+?&gt;</code></pre>
+</section>
+<section id="lenvironnement-php" class="slide level2 chapter">
+<h2>L’environnement PHP</h2>
+</section>
+<section id="php-cest-quoi" class="slide level2">
+<h2>PHP, c’est quoi ?</h2>
+<pre class="php contenteditable centerh"><code>&lt;!DOCTYPE html&gt;
 &lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;script src=&quot;script1.js&quot;&gt;&lt;/script&gt;
-        &lt;title&gt;Ma page&lt;/title&gt;
-    &lt;/head&gt;
+    &lt;head&gt;...&lt;/head&gt;
     &lt;body&gt;
-        ...
-        &lt;script src=&quot;script2.js&quot;&gt;&lt;/script&gt;
+        &lt;p&gt;&lt;?php echo &quot;Hello IUT !&quot;; ?&gt;&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-<p><code>index_with_file.html</code></p>
-</div>
-</div>
-<ul>
-<li>Le code JS peut être écrit :
-<ol type="1">
-<li>directement dans l’élément <code>&lt;script&gt;</code></li>
-<li>dans un fichier externe référencé avec l’attribut <code>src</code> de <code>&lt;script&gt;</code></li>
-</ol></li>
-<li>Un document HTML peut contenir plusieurs éléments <code>&lt;script&gt;</code></li>
-</ul>
-</section>
-<section id="syntaxe-les-bases" class="slide level2 chapter">
-<h2>Syntaxe : les bases</h2>
-</section>
-<section id="les-commentaires" class="slide level2">
-<h2>Les commentaires</h2>
-<pre class="js contenteditable centerh"><code>// Premier type de commentaire sur une seule ligne
-
-/* Second type de commentaire sur plusieurs lignes.
- * Seules les étoiles initiales et finales (après et
- * avant les deux slashs) son nécessaires, les autres
- * c&#39;est de la décoration */</code></pre>
 <p><br />
-</p>
-<p>La syntaxe des commentaires est identique à celle de Java et C# :</p>
+<strong>PHP</strong> est un langage de programmation :</p>
 <ul>
-<li>sur une ligne avec <code>//</code></li>
-<li>sur une ou plusieurs lignes avec <code>/* */</code></li>
+<li>principalement utilisé <strong>côté serveur</strong></li>
+<li>qui peut être embarqué dans du HTML</li>
+<li>open source</li>
+<li><span><strong>interprété</strong></span> <span class="fragment"><em>(En fait non, mais on va faire comme si ;))</em><br>                                 <img data-src="img/thinksmart.gif" class="width-30" /></span></li>
 </ul>
+</section>
+<section id="php-pourquoi" class="slide level2">
+<h2>PHP, pourquoi ?</h2>
+<p><strong>PHP</strong>, c’est le langage de programmation utilisé par <strong>80%</strong> des sites web au niveau mondial.</p>
+<div class="images centerh">
+<p><a href="https://w3techs.com/technologies/history_overview/programming_language"><img data-src="https://w3techs.com/diagram/history_overview/programming_language/ms/m" class="width-80" /></a></p>
+</div>
+<p class="centerh">
+<em>Javascript, c’est seulement <span class="math inline">\(\approx0.8\%\)</span></em>
+</p>
+</section>
+<section id="php-sur-un-serveur" class="slide level2 chapter">
+<h2>PHP sur un serveur</h2>
+</section>
+<section id="quelques-définitions" class="slide level2">
+<h2>Quelques définitions</h2>
+<div class="columns">
+<div>
+<dl>
+<dt>Client</dt>
+<dd>Envoie une requête et attend une réponse.
+</dd>
+</dl>
+</div><div>
+<dl>
+<dt>Serveur</dt>
+<dd>Attend une requête, la traite et envoie une réponse.
+</dd>
+</dl>
+</div>
+</div>
+<hr>
+<dl>
+<dt>Protocole HTTP</dt>
+<dd>Ensemble de <strong>règles</strong> à respecter pour transmettre des informations entre un client et un serveur. Ce protocole dispose de plusieurs <strong>méthodes</strong> dont GET et POST.
+</dd>
+</dl>
+<hr>
+<div class="columns">
+<div>
+<dl>
+<dt>Requête/réponse HTTP</dt>
+<dd>Messages entre client et serveur via le <strong>protocole</strong> HTTP.
+</dd>
+</dl>
+</div>
+<div>
+<dl>
+<dt>Serveur HTTP</dt>
+<dd><strong>Logiciel</strong> qui traite les requêtes HTTP reçues par le serveur web.
+</dd>
+</dl>
+</div>
+</section>
+<section id="interactions-client-serveur" class="slide level2">
+<h2>Interactions client-serveur</h2>
+<p class="r-stack">
+<img data-src="img/clientserveur1.png" class="fragment" /> <img data-src="img/clientserveur2.png" class="fragment" /> <img data-src="img/clientserveur3.png" class="fragment" /> <img data-src="img/clientserveur4.png" class="fragment" /> <img data-src="img/clientserveur5.png" class="fragment" /> <img data-src="img/clientserveur6.png" class="fragment" /> <img data-src="img/clientserveur7.png" class="fragment" /> <img data-src="img/clientserveur8.png" class="fragment" /> <img data-src="img/clientserveur1.png" class="fragment" /> <img data-src="img/clientserveur9.png" class="fragment" /> <img data-src="img/clientserveur10.png" class="fragment" /> <img data-src="img/clientserveur11.png" class="fragment" /> <img data-src="img/clientserveur12.png" class="fragment" /> <img data-src="img/clientserveur13.png" class="fragment" /> <img data-src="img/clientserveur14.png" class="fragment" /> <img data-src="img/clientserveur15.png" class="fragment" /> <img data-src="img/clientserveur16.png" class="fragment" /> <img data-src="img/clientserveur17.png" class="fragment" />
+</p>
+</section>
+<section id="configuration-du-serveur-http" class="slide level2 centerh">
+<h2>Configuration du serveur HTTP</h2>
+<div class="columns images centerh">
+<p><img data-src="img/logoNginx.png" class="width-70" /></p><p><img data-src="img/logoApache.png" class="width-50" /></p>
+</div>
+<div class="r-stack">
+<div class="fragment fade-out">
+<p>C’est la configuration du serveur HTTP qui précise les <strong>conditions nécessaires</strong> pour qu’une requête soit transmise au module PHP.</p>
+<p>Cela peut être :</p>
+<ul>
+<li>si la requête comporte une URL spécifique</li>
+<li>si la requête comporte une extension .php</li>
+<li>si la requête est envoyé sur un port particulier</li>
+<li>une combinaison de ces règles</li>
+<li>une autre règle</li>
+</ul>
+</div>
+<div class="fragment">
+<pre class="contenteditable"><code>server {
+    listen 80;
+    server_name site.fr;
+
+    # Path to the root of your installation
+    root /var/www/site.fr/;
+    index index.php;
+
+    location ~ \.php$ {
+        ...
+        fastcgi_pass module-php;
+        ...
+    }
+}</code></pre>
+<p><em>Exemple de fichier de configuration de Nginx.</em></p>
+</div>
+</div>
+</section>
+<section id="syntaxe-environnement" class="slide level2 chapter">
+<h2>Syntaxe &amp; environnement</h2>
 </section>
 <section id="les-variables" class="slide level2">
 <h2>Les variables</h2>
 <div class="columns">
-<pre class="js contenteditable"><code>/* Déclarer une variable
- * avec var */
-var a;
-var b = 5;</code></pre><div class="column-3">
+<div>
+<pre class="php contenteditable fragment"><code>// Commentaire sur une ligne
 
-</div><div class="column-60">
-<p><strong><code>var</code></strong> est l’instruction la plus ancienne :</p>
-<ul>
-<li>ces variables ont une portée de fonction</li>
-<li><img data-src="img/alert.svg" class="width-7 nomargin" /> <strong>À ÉVITER AU MAXIMUM</strong> <img data-src="img/alert.svg" class="width-7 nomargin" /></li>
-</ul>
+/* Commentaire sur
+ * plusieurs lignes */</code></pre>
+<pre class="php contenteditable fragment"><code>// Déclaration et affectation de variables
+$a;
+$a = 8;
+$b = 10;</code></pre>
+<pre class="php contenteditable fragment"><code>// Définition d&#39;une constante
+const NOM_MODULE = &#39;W31&#39;;</code></pre>
+<pre class="php contenteditable fragment"><code>// Chaînes de caractères
+$message = &#39;calcul sur &#39; . $a . &#39; et &#39; . $b;</code></pre>
+</div><div>
+<pre class="php contenteditable fragment"><code>// Opérateurs arithmétiques
+$res = $a + $b;
+$res *= $b - $a;</code></pre>
+<pre class="php contenteditable fragment"><code>// Test d&#39;existence d&#39;une variable
+isset($res);</code></pre>
+<pre class="php contenteditable fragment"><code>// Test sur le type d&#39;une variable
+is_int($a);    // true
+is_string($b); // false</code></pre>
+<pre class="php contenteditable fragment"><code>/* Obtenir le type d&#39;une variable
+   sous forme de chaine de caractères */
+gettype($a);       // &#39;integer&#39;
+gettype($message); // &#39;string&#39;</code></pre>
 </div>
 </div>
-<hr class="width-80">
-<div class="columns fragment">
-<pre class="js contenteditable"><code>/* Déclarer une variable
- * avec let */
-let c;
-let d = 5;</code></pre><div class="column-3">
-
-</div><div class="column-60">
-<p><strong><code>let</code></strong> est une instruction plus récente :</p>
-<ul>
-<li>ces variables ont une portée de bloc</li>
-<li>elle est à utilisé de préférence à <code>var</code></li>
-</ul>
-</div>
-</div>
-<hr class="width-80">
-<div class="columns fragment">
-<pre class="js contenteditable"><code>/* Déclarer une constante
- * avec const */
-const E = 5;</code></pre><div class="column-3">
-
-</div><div class="column-60">
-<p><strong><code>const</code></strong> permet de déclarer des constantes :</p>
-<ul>
-<li>elle doit être affectée à la déclaration</li>
-<li>sa valeur ne pourra pas être modifiée</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="point-virgule-et-casse" class="slide level2">
-<h2>Point virgule et casse</h2>
-<div class="centerh width-9">
-<p><img data-src="img/pointVirgule.svg" /></p>
-</div>
-<ul>
-<li>Le point-virgule n’est pas nécessaire mais il est <strong>très fortement recommandé et d’usage</strong> de le mettre après chaque instruction.</li>
-<li>Tous les noms de variables sont quasiment possibles, à l’exception des <a href="https://mathiasbynens.be/notes/reserved-keywords#ecmascript-6">mots-clés réservés</a>.</li>
-<li>Javascript est <strong>sensible à la casse</strong> : <code>maVariable</code> et <code>MaVariable</code> sont deux variables différentes !</li>
-</ul>
-</section>
-<section id="typage" class="slide level2">
-<h2>Typage</h2>
-<div class="columns">
-<div class="centerh">
-<pre class="js contenteditable"><code>let a;
-typeof a;
-// &quot;undefined&quot;</code></pre>
-<p>
-<button onclick="typeofa()">
-alert(typeof a);
-</button>
-</div>
-<div class="centerh">
-<pre class="js contenteditable"><code>let b = true;
-typeof b;
-// &quot;boolean&quot;</code></pre>
-<p>
-<button class="centerh" onclick="typeofb()">
-alert(typeof b);
-</button>
-</p>
-</div>
-<div class="centerh">
-<pre class="js contenteditable"><code>let c = 12;
-typeof c;
-// &quot;number&quot;</code></pre>
-<p>
-<button class="centerh" onclick="typeofc()">
-alert(typeof c);
-</button>
-</p>
-</div>
-<div class="centerh">
-<pre class="js contenteditable"><code>let d = 12.5;
-typeof d;
-// &quot;number&quot;</code></pre>
-<p>
-<button class="centerh" onclick="typeofd()">
-alert(typeof d);
-</button>
-</p>
-</div>
-<div class="centerh">
-<pre class="js contenteditable"><code>let e = &#39;W11&#39;;
-typeof e;
-// &quot;string&quot;</code></pre>
-<p>
-<button class="centerh" onclick="typeofe()">
-alert(typeof e);
-</button>
-</p>
-</div>
-</div>
-<ul>
-<li>Javascript est un langage à <strong>typage dynamique</strong> : il n’y a pas de type déclaré… mais il y a un type quand même !</li>
-<li>Il n’y a qu’<strong>un seul type pour les nombres</strong>, pas de distinction entre les entiers et les décimaux.</li>
-<li>Les chaînes de caractères peuvent se déclarer avec des guillemets simples ou doubles.</li>
-</ul>
-<div class="centerh fragment width-60">
+<div class="fragment centerh">
 <blockquote>
-<p>Attention au typage dynamique !   <button class="centerh" onclick="typageDynamique()">Tester</button></p>
-<pre class="js"><code>let a = 10;         // a est un nombre
-alert(typeof a);    // affiche &quot;number&quot;
-a = &quot;dix&quot;;          // a est maintenant une chaîne
-alert(typeof a);    // affiche &quot;string&quot;</code></pre>
+<p>Attention au typage dynamique !</p>
+<pre class="php contenteditable"><code>$a = 10;          // a est un entier
+echo gettype($a); // &#39;integer&#39;
+$a = &quot;dix&quot;;       // a est maintenant une chaine de caractères
+echo gettype($a); // &#39;string&#39;</code></pre>
 </blockquote>
-</div>
-</section>
-<section id="opérateurs" class="slide level2">
-<h2>Opérateurs</h2>
-<p><strong><code>=</code></strong> permet d’affecter des variables.</p>
-<div class="columns">
-<div>
-<dl>
-<dt><code>+</code></dt>
-<dd>permet d’additionner des nombres et de concaténer des chaînes.
-</dd>
-</dl>
-</div><pre class="js contenteditable centerh"><code>let a = 3+8;      // 11
-let b = &#39;W&#39;+&#39;11&#39;; // W11</code></pre>
-</div>
-<div class="columns">
-<div>
-<dl>
-<dt><code>==</code> et <code>!=</code> : comparateurs “faibles”</dt>
-<dd>Les opérandes sont transtypés avant d’être comparés.
-</dd>
-</dl>
-</div><pre class="js contenteditable centerh"><code>let c = (5 == &#39;5&#39;);  // Vrai
-let d = (5 != &#39;5&#39;);  // Faux</code></pre>
-</div>
-<div class="columns">
-<div>
-<dl>
-<dt><code>===</code> et <code>!==</code> : comparateurs “stricts”</dt>
-<dd>Les opérandes ne sont pas transtypés avant d’être comparés.
-</dd>
-</dl>
-</div><pre class="js contenteditable centerh"><code>let e = (5 === &#39;5&#39;); // Faux
-let f = (5 !== &#39;5&#39;); // Vrai</code></pre>
 </div>
 </section>
 <section id="les-tableaux" class="slide level2">
 <h2>Les tableaux</h2>
+<blockquote>
+<p>En PHP, tous les tableaux sont<br />
+des <strong>tableaux associatifs</strong> (dictionnaires).</p>
+</blockquote>
 <div class="columns">
 <div>
-<pre class="js fragment"><code>// Déclarer un tableau
-let tab1 = [ 11, 22 ];
-let tab2= [ &quot;W&quot;, 11, &quot;A&quot;, 22 ];</code></pre>
-<pre class="js fragment"><code>// Taille d&#39;un tableau
-let size1 = tab1.length;   // 2</code></pre>
-<pre class="js fragment"><code>// Accéder à un élément
-let val1 = tab1[0];        // 11</code></pre>
-<pre class="js fragment"><code>// Modifier un élément
-tab2[0] = &quot;S&quot;;</code></pre>
-<pre class="js fragment"><code>// Indice d&#39;un élément
-let i = tab2.indexOf(&quot;A&quot;); // 2</code></pre>
-</div><div>
-<pre class="js fragment"><code>// Ajouter à la fin
-tab1.push(33);    // [ 11, 22, 33 ]</code></pre>
-<pre class="js fragment"><code>// Supprimer le dernier
-tab1.pop();       // [ 11, 22 ]</code></pre>
-<pre class="js fragment"><code>// Supprimer le premier
-tab1.shift();     // [ 22 ]</code></pre>
-<pre class="js fragment"><code>// Ajouter au début
-tab1.unshift(33); // [ 33, 22 ]</code></pre>
-<pre class="js fragment"><code>// Trier
-tab1.sort();      // [ 22, 33 ]</code></pre>
-</div>
-</div>
-<button class="centerh fragment" onclick="tableaux()">
-Tester
-</button>
-<div class="fragment">
-<ul>
-<li>Les tableaux peuvent contenir des éléments de types différents.</li>
-<li>La classe <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array"><code>Array</code></a> implémente de nombreuses fonctions permettant de manipuler les tableaux : en plus des fonctions ci-dessus, vous pouvez regarder <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/join"><code>join()</code></a>, <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/filter"><code>filter()</code></a>, <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce"><code>reduce()</code></a>, …</li>
-</ul>
-</div>
-</section>
-<section id="les-objets-level-1" class="slide level2">
-<h2>Les objets, level 1</h2>
-<div class="columns centerh width-75">
-<div>
-<pre class="js contenteditable"><code>let moi = {
-    nom: &#39;Papeur&#39;,
-    prenom: &#39;Jé&#39;,
-};</code></pre>
-<pre class="js contenteditable"><code>let lui = {};
-lui.nom = &#39;peur&#39;;
-lui.prenom = &#39;Ila&#39;;
-lui.age = 20;</code></pre>
-</div><div class="centerh">
-<pre class="js contenteditable"><code>console.log( moi.prenom ); // &quot;Jé&quot;
-console.log( lui[&#39;nom&#39;] ); // &quot;peur&quot;
-console.log( lui.age );    // 20</code></pre>
-<p class="centerh">
-<button onclick="objetLevel1()">
-Tester
-</button>
-</p>
-</div>
-</div>
-<p><br />
-</p>
-<p>Un <strong>objet</strong> Javascript :</p>
-<ul>
-<li>se déclare avec des accolades</li>
-<li>est une <strong>structure associative</strong> <code>property: value</code>.</li>
-<li>peut se voir attribuer de nouvelles propriétés <strong>dynamiquement</strong></li>
-</ul>
-</section>
-<section id="les-objets-level-2" class="slide level2">
-<h2>Les objets, level 2</h2>
-<div class="columns">
-<pre class="js contenteditable"><code>let moi = {
-    prenom: &#39;Julien&#39;,
-    age: 28,
-    frere: {
-        prenom: &#39;Mathieu&#39;,
-        age: 25
-    },
-    sports: [ &#39;Échecs&#39;, &#39;Curling&#39; ]
-};</code></pre><div class="centerh">
-<pre class="js contenteditable"><code>console.log( moi.prenom );        // &quot;Julien&quot;
-console.log( moi.frere.prenom );  // &quot;Mathieu&quot;
-console.log( moi.sports.length ); // 2</code></pre>
-<p class="centerh">
-<button onclick="objetLevel2(this)">
-Tester
-</button>
-</p>
-</div>
-</div>
-<p><br />
-</p>
-<p>Une <strong>propriété</strong> d’un objet :</p>
-<ul>
-<li>peut être un type primitif, un tableau, un objet ou une fonction.</li>
-<li>peut être accéder avec <code>obj.property</code> ou <code>obj['property']</code></li>
-</ul>
-</section>
-<section id="dialogue-avec-lutilisateur" class="slide level2">
-<h2>Dialogue avec l’utilisateur</h2>
-<pre class="js contenteditable centerh"><code>let nom = prompt(&#39;Entrez votre nom :&#39;);
-let classe = prompt(&#39;Entrez votre classe :&#39;);
-alert(&#39;Bonjour &#39; + nom + &#39;. Vous êtes un &#39; + classe);
+<pre class="php contenteditable fragment"><code>/* Déclaration d&#39;un tableau */
 
-let start = confirm(&quot;Souhaitez-vous démarrer l&#39;aventure ?&quot;);
-if (start) {
-    alert(&quot;C&#39;est parti !&quot;);
-}</code></pre>
-<button class="centerh" onclick="dialogue()">
-Tester
-</button>
-<dl>
-<dt><code>alert()</code></dt>
-<dd><strong>Affiche du texte</strong> dans une fenêtre surgissante (popup).
-</dd>
-<dt><code>let val = prompt()</code></dt>
-<dd>Demande à l’utilisateur de <strong>saisir une valeur</strong>. La valeur sera <code>null</code> en cas d’appui sur le bouton “Annuler”.
-</dd>
-<dt><code>let val = confirm()</code></dt>
-<dd>Propose un <strong>choix booléen</strong> à l’utilisateur. La valeur dépend du clic sur l’un des boutons “Ok” et “Annuler”.
-</dd>
-</dl>
-</section>
-<section id="le-dom" class="slide level2 chapter">
-<h2>Le DOM</h2>
-</section>
-<section id="le-dom-quest-ce-que-cest" class="slide level2">
-<h2>Le DOM, qu’est-ce que c’est ?</h2>
-<div class="columns centerh">
-<pre class="html contenteditable"><code>&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Mon titre&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Mon titre&lt;/h1&gt;
-        &lt;a href=&quot;#&quot;&gt;Lien&lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre><p><img data-src="img/dom2.svg" class="width-80" /></p>
-</div>
-<p>Le <strong>Document Object Model</strong> est une représentation arborescente d’un document HTML qui peut être manipulé pour :</p>
-<ul>
-<li><strong>ajouter</strong> et <strong>supprimer</strong> des éléments</li>
-<li><strong>modifier</strong> un élément : son <strong>contenu</strong>, ses <strong>attributs</strong> ou son <strong>style</strong></li>
-</ul>
-</section>
-<section id="le-dom-en-javascript" class="slide level2">
-<h2>Le DOM en Javascript</h2>
-<div class="columns centerh">
-<pre class="html contenteditable"><code>&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Mon titre&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;Mon titre&lt;/h1&gt;
-        &lt;a href=&quot;#&quot;&gt;Lien&lt;/a&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre><p><img data-src="img/dom2.svg" class="width-75" /></p>
-</div>
-<dl>
-<dt>L’objet <a href="https://developer.mozilla.org/fr/docs/Web/API/document"><code>document</code></a></dt>
-<dd>regroupe un ensemble de <strong>fonctionnalités globales</strong> pour manipuler le DOM.
-</dd>
-<dt>La classe <a href="https://developer.mozilla.org/fr/docs/Web/API/Element"><code>Element</code></a></dt>
-<dd>représente n’importe quel élément HTML et permet de manipuler ses attributs et ses propriétés CSS.
-</dd>
-</dl>
-</section>
-<section id="dom-document" class="slide level2 chapter">
-<h2>DOM : document</h2>
-</section>
-<section id="sélection-par-id" class="slide level2 centerh">
-<h2>Sélection par id</h2>
-<pre class="js contenteditable"><code>let elem = document.getElementById(&#39;monId&#39;);</code></pre>
-<p>Retourne l’<strong>unique élément</strong> d’identifiant <code>monId</code>.</p>
-<div class="width-60">
-<p><img data-src="img/getElementById.svg" /></p>
-</div>
-</section>
-<section id="selection-par-balise" class="slide level2 centerh">
-<h2>Selection par balise</h2>
-<pre class="js contenteditable"><code>let elems = document.getElementsByTagName(&#39;a&#39;);</code></pre>
-<p>Retourne <strong>un tableau</strong> contenant tous les éléments de type <code>&lt;a&gt;</code>.</p>
-<div class="width-60">
-<p><img data-src="img/getElementByTagName.svg" /></p>
-</div>
-</section>
-<section id="sélection-par-classe" class="slide level2 centerh">
-<h2>Sélection par classe</h2>
-<pre class="js contenteditable"><code>let elems = document.getElementsByClassName(&#39;recent&#39;);</code></pre>
-<p>Retourne <strong>un tableau</strong> contenant tous les éléments de classe <code>recent</code>.</p>
-<div class="width-60">
-<p><img data-src="img/getElementByClassName.svg" /></p>
-</div>
-</section>
-<section id="sélection-css" class="slide level2 centerh">
-<h2>Sélection CSS</h2>
-<pre class="js contenteditable"><code>let elem = document.querySelector(&#39;article &gt; h3&#39;);</code></pre>
-<p>Retourne le <strong>1<span class="math inline">\(^{er}\)</span> élément</strong> correspondant au sélecteur CSS <code>article &gt; h3</code>.</p>
-<div class="width-60">
-<p><img data-src="img/querySelector.svg" /></p>
-</div>
-</section>
-<section id="sélection-css-multiple" class="slide level2 centerh">
-<h2>Sélection CSS multiple</h2>
-<pre class="js contenteditable"><code>let elems = document.querySelectorAll(&#39;article &gt; h3&#39;);</code></pre>
-<p>Retourne <strong>tous les éléments</strong> correspondant au sélecteur <code>article &gt; h3</code>.</p>
-<div class="width-60">
-<p><img data-src="img/querySelectorAll.svg" /></p>
-</div>
-</section>
-<section id="dom-elements" class="slide level2 chapter">
-<h2>DOM : elements</h2>
-</section>
-<section id="accéder-aux-éléments-par-filiation" class="slide level2">
-<h2>Accéder aux éléments par filiation</h2>
-<p>La classe <code>Element</code> propose plusieurs méthodes pour accéder aux éléments relatifs à l’élément courant.</p>
-<div class="columns">
-<pre class="js contenteditable"><code>let p = document.querySelector(&#39;.recent&#39;);
-// Le parent de p
-let body = p.parentElement;
-// Les enfants de p
-let childs = p.childNodes;
-// Le premier enfant de p
-let h3 = p.firstElementChild;
-// Le voisin direct de p
-let a = p.nextElementSibling;</code></pre><div class="anim images centerh">
-<div class="fragment">
-<p><img data-src="img/filiation.svg" /> <code>document.querySelector('.recent')</code></p>
-</div>
-<div class="fragment">
-<p><img data-src="img/parent.svg" /> <code>parentElement</code></p>
-</div>
-<div class="fragment">
-<p><img data-src="img/childs.svg" /> <code>childNodes</code></p>
-</div>
-<div class="fragment">
-<p><img data-src="img/firstChild.svg" /> <code>firstElementChild</code></p>
-</div>
-<div class="fragment">
-<p><img data-src="img/nextSibling.svg" /> <code>nextElementSibling</code></p>
-</div>
-</div>
-</div>
-</section>
-<section id="accéder-aux-attributs-html" class="slide level2">
-<h2>Accéder aux attributs HTML</h2>
-<div class="columns">
-<div>
-<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
-    &lt;h3&gt;Médina&lt;/h3&gt;
-    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
-    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
-&lt;/article&gt;</code></pre>
-<pre class="js contenteditable"><code>let url = document.querySelector(&#39;a&#39;).href;
-let id = document.querySelector(&#39;p&#39;).id;</code></pre>
-</div><div>
-<div class="reset-this">
-<article class="recent">
-<h3>
-Médina
-</h3>
-<a id="aHref" href="m.html">lien</a>
-<p id="i">
-Pas mal
-</p>
-</article>
-</div>
-<div class="images centerh">
-<p>
-<button onclick="aHref()">
-alert( url );
-</button>
-<button onclick="pId()">
-alert( id );
-</button>
-</p>
-</div>
-</div>
-</div>
-<p><br />
-</p>
-<p>On accède à la valeur de l’attribut <code>att</code> d’un élément HTML <code>elem</code> avec la notation <code>elem.att</code>.</p>
-</section>
-<section id="manipuler-les-classes" class="slide level2">
-<h2>Manipuler les classes</h2>
-<style>
-.droite { text-align: right; }
-.vert   { background-color: green; }
-</style>
-<div class="columns">
-<div>
-<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
-    &lt;h3&gt;Médina&lt;/h3&gt;
-    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
-    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
-&lt;/article&gt;</code></pre>
-<pre class="js contenteditable"><code>let p = document.getElementById(&#39;i&#39;);
-p.classList.add(&#39;droite&#39;,&#39;vert&#39;);
-p.classList.remove(&#39;droite&#39;);
-p.classList.toggle(&#39;vert&#39;);</code></pre>
-</div><div>
-<pre class="css contenteditable"><code>.droite { text-align: right; }
-.vert   { background-color: green; }</code></pre>
-<div class="reset-this">
-<article class="recent">
-<h3>
-Médina
-</h3>
-<a href="m.html">lien</a>
-<p id="iClassList">
-Pas mal
-</p>
-</article>
-</div>
-<div class="images centerh">
-<p>
-<button onclick="addDroiteVert()">
-add(‘droite’,‘vert’)
-</button>
-<button onclick="removeDroite()">
-remove(‘droite’)
-</button>
-<button onclick="toggleVert()">
-toggle(‘vert’)
-</button>
-</p>
-</div>
-</div>
-</div>
-<p><br />
-Le membre <code>classList</code> de la class <code>Element</code> permet de manipuler les classes d’un élément, notamment :</p>
-<ul>
-<li>d’en ajouter avec <code>add( String [, String])</code></li>
-<li>d’en supprimer avec <code>remove( String [, String])</code></li>
-<li>d’en inverser la présence avec <code>toggle(String)</code></li>
-</ul>
-</section>
-<section id="modifier-le-contenu" class="slide level2">
-<h2>Modifier le contenu</h2>
-<div class="columns">
-<div>
-<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
-    &lt;h3&gt;Médina&lt;/h3&gt;
-    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
-    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
-&lt;/article&gt;</code></pre>
-<pre class="js contenteditable"><code>let p = document.getElementById(&#39;i&#39;);
-p.innerHTML = &quot;Incroyable !&quot;;
-p.innerHTML = &quot;&lt;a href=&#39;t.html&#39;&gt;lien 2&lt;/a&gt;&quot;;</code></pre>
-</div><div>
-<div class="reset-this">
-<article class="recent">
-<h3>
-Médina
-</h3>
-<a href="m.html">lien</a>
-<p id="iInnerHtml">
-Pas mal
-</p>
-</article>
-</div>
-<div class="images centerh">
-<p>
-<button onclick="innerHtml()">
-p.innerHTML = “Incroyable !”;
-</button>
-<button onclick="innerHtml2()">
-p.innerHTML = “&lt;a href=‘t.html’&gt;lien 2&lt;/a&gt;”;
-</button>
-</p>
-</div>
-</div>
-</div>
-<p><br />
-</p>
-<p>Le membre <code>innerHTML</code> de la class <code>Element</code> donne un accès direct en écriture au contenu de l’élément qui peut être :</p>
-<ul>
-<li>du texte</li>
-<li>du contenu HTML</li>
-</ul>
-</section>
-<section id="combo-manipuler-le-dom" class="slide level2">
-<h2>Combo : manipuler le DOM</h2>
-<div class="columns">
-<div>
-<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
-    &lt;h3&gt;Médina&lt;/h3&gt;
-    &lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
-    &lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
-&lt;/article&gt;</code></pre>
-<pre class="js contenteditable"><code>let ar = document.getElementsByTagName(&#39;article&#39;)[0];
+// 1. Avec des clés implicites
+$tab1 = [1,&#39;deux&#39;,3] // Avant : array(1,2,3);
+echo $tab1[1]; // &#39;deux&#39;
 
-let p = document.createElement(&quot;p&quot;);
-p.innerHTML = &quot;Incroyable !&quot;;
-ar.appendChild(p); // Ajout
-
-let last = ar.lastElementChild;
-ar.removeChild(last); // Suppression</code></pre>
+// 2. Avec clés explicites
+$tab3 = [ 0 =&gt; 1, 1 =&gt; &#39;deux&#39;, 2 =&gt; 3 ];
+echo $tab3[2]; // 3</code></pre>
+<pre class="php contenteditable fragment"><code>// Taille d&#39;un tableau
+count($tab1);</code></pre>
+<pre class="php contenteditable fragment"><code>// Afficher un tableau
+print_r($tab1);
+/* Array ( [0] =&gt; 1
+*          [1] =&gt; 2
+*          [2] =&gt; 3 ) */</code></pre>
 </div><div>
-<div class="reset-this">
-<article id="appendP">
-<h3>
-Médina
-</h3>
-<a href="m.html">lien</a>
-<p id="iInnerHtml">
-Pas mal
-</p>
-</article>
-</div>
-<div class="images centerh">
-<p>
-<button class="centerh" onclick="appendP()">
-ar.appendChild(p);
-</button>
-<button class="centerh" onclick="removeP()">
-ar.removeChild(f);
-</button>
-</p>
+<pre class="php contenteditable fragment"><code>/* - Une clé peut être un entier ou une
+ *   chaine de caractères
+ * - Une valeur peut être de n&#39;importe
+ *   quel type */
+$notes = [
+    &#39;Jean&#39;  =&gt; 3,
+    &#39;Simon&#39; =&gt; 12.3,
+    &#39;Alex&#39;  =&gt; &#39;Absent&#39;,
+    12      =&gt; [&#39;Paul&#39;,&#39;Robert&#39;]
+];
+echo $notes[&#39;Jean&#39;]; // Affiche 3</code></pre>
+<pre class="php contenteditable fragment"><code>// Ajout d&#39;un élément à un tableau
+$notes[&#39;Étienne&#39;] = 8;
+$notes[] = 9; // Ajout (13 =&gt; 9) à $notes</code></pre>
+<pre class="php contenteditable fragment"><code>// Suppression d&#39;un élément
+unset($notes[12]);</code></pre>
 </div>
 </div>
-</div>
-<div class="columns">
-<div class="column-10">
-<dl>
-<dt><code>document.createElement(tagName)</code></dt>
-<dd>Crée un élément.
-</dd>
-</dl>
-</div><div class="column-12">
-<dl>
-<dt><code>elemA.appendChild(elemB)</code></dt>
-<dd>Ajoute <code>elemB</code> comme enfant de <code>elemA</code>
-</dd>
-</dl>
-</div>
-</div>
-<dl>
-<dt><code>elemA.removeChild(elemB)</code></dt>
-<dd>Supprime <code>elemB</code> des enfants de <code>elemA</code>.
-</dd>
-</dl>
 </section>
-<section id="les-événements" class="slide level2 chapter">
-<h2>Les événements</h2>
-</section>
-<section id="un-événement-quest-ce-que-cest" class="slide level2">
-<h2>Un événement, qu’est-ce que c’est ?</h2>
-<div class="centerh">
-<p><img data-src="img/events.svg" class="width-85" /><br />
-</p>
-</div>
-<dl>
-<dt>La class <code>Event</code></dt>
-<dd><p>Elle représente n’importe quel événement survenu lors de l’interaction de l’utilisateur avec le DOM. Tous les événements sont <strong>notifiés au DOM</strong> et JavaScript permet :</p>
-<ul>
-<li>d’<strong>écouter</strong> ces événements</li>
-<li>d’<strong>exécuter du code</strong> lorsqu’ils surviennent.</li>
-</ul>
-</dd>
-</dl>
-</section>
-<section id="exemple-avec-la-souris" class="slide level2">
-<h2>Exemple avec la souris</h2>
+<section id="les-structures-de-contrôle" class="slide level2 centerh">
+<h2>Les structures de contrôle</h2>
 <div class="columns">
 <div>
-<pre class="js contenteditable"><code>function changeColor(event) {
-    event.preventDefault();
-    let a = event.target;
-    a.style.color = &#39;green&#39;;
+<pre class="php contenteditable fragment"><code>// Conditionnelle
+if ($load &lt; 100) {
+    echo &#39;Chargement en cours...&#39;;
 }
+// La directive &#39;else { ... }&#39; est facultative
+else {
+    echo &#39;Chargement terminé !&#39;;
+}</code></pre>
+<pre class="php contenteditable fragment"><code>// Boucle for
+for ($load = 1; $load &lt; 100; $load++) {
+    echo &#39;Chargement : &#39;.$load.&#39;/100&#39;;
+}</code></pre>
+<pre class="php contenteditable fragment"><code>// Boucle while
+$load = 1;
+while ($load &lt; 100) {
+    echo &#39;Chargement : &#39;.$load.&#39;/100&#39;;
+    $load++;
+}</code></pre>
+</div><pre class="php contenteditable fragment"><code>// Itération sur un tableau
+$tab = [&quot;W31&quot;,&quot;W11&quot;,&quot;A31&quot;];
 
-let h = document.getElementsByTagName(&#39;h3&#39;)[0];
+// Si on ne veut traiter que les valeurs
+foreach( $tab as $module ) {
+    echo &quot;J&#39;aime &quot;.$module.&quot;\n&quot;;
+}
+/* Résultat :
+ *   J&#39;aime W31
+ *   J&#39;aime W11
+ *   J&#39;aime A31 */
 
-h.addEventListener(&#39;click&#39;, changeColor);
-h.nextElementSibling
- .addEventListener(&#39;mouseover&#39;, changeColor);</code></pre>
-</div><div>
-<pre class="html contenteditable"><code>&lt;article class=&quot;recent&quot;&gt;
-&lt;h3&gt;Médina&lt;/h3&gt;
-&lt;a href=&quot;m.html&quot;&gt;lien&lt;/a&gt;
-&lt;p id=&quot;i&quot;&gt;Pas mal&lt;/p&gt;
-&lt;/article&gt;</code></pre>
+// Si on veut traiter les couples
+// (clé =&gt; valeur)
+foreach( $tab as $i =&gt; $module ) {
+    echo $i . &quot;) J&#39;aime &quot;.$module;
+}
+/* Résultat :
+ *   1) J&#39;aime W31
+ *   2) J&#39;aime W11
+ *   3) J&#39;aime A31 */</code></pre>
+</div>
+</section>
+<section id="la-doc" class="slide level2">
+<h2>La doc</h2>
+<div class="centerh width-45">
+<blockquote>
+<p>Une seule référence à retenir :<br />
+<strong><a href="http://php.net">http://php.net</a></strong></p>
+</blockquote>
+</div>
+<h3 id="et-stackoverflow-et-autres-forums">Et Stackoverflow (et autres forums) ?</h3>
+<ul>
+<li>C’est pratique… si vous êtes critique !</li>
+<li>Une réponse peut dater et ne plus correspondre à l’API actuelle.</li>
+<li>Toutes <strong>les bonnes réponses sont dans la doc officielle</strong>, et celle de PHP est très complète.</li>
+<li>Une bonne partie des “solutions” cite la doc : gagnez du temps !</li>
+</ul>
+<div class="columns centerh width-70 images">
+<p><img data-src="img/logoPHP.png" class="width-70" /></p><p><span class="math inline">\(\gg\)</span></p><p><img data-src="img/logoStackoverflow.svg" class="width-80" /></p>
+</div>
+</section>
+<section id="php-et-html" class="slide level2">
+<h2>PHP et HTML</h2>
+<div class="columns centerh">
 <div>
-<div class="reset-this">
-<article>
-<h3 id="iChangeColor">
-Médina
-</h3>
-<a href="m.html">lien</a>
-<p id="i">
-Pas mal
-</p>
-</article>
-<script>
-let h = document.getElementById('iChangeColor');
-h.addEventListener('click', changeColor);
-h.nextElementSibling
- .addEventListener('mouseover', changeColor);
-</script>
+<pre class="html contenteditable"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;Ma première page PHP&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Hello W31 !&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><code>fullHTML.php</code></p>
+</div><div>
+<pre class="php contenteditable"><code>&lt;?php echo &#39;&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;Ma première page PHP&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;Hello W31 !&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;&#39;;</code></pre>
+<p><code>fullPHP.php</code></p>
 </div>
 </div>
-</div>
-</div>
-<div class="anim">
-<div class="fragment">
-<p><br />
-<strong>Tous</strong> les <code>Element</code> possèdent la fonction <code>addEventListener</code> à laquelle on passe deux paramètres obligatoires :</p>
+<p>
+<p>Un fichier d’extension <code>.php</code> peut contenir :</p>
 <ul>
-<li>le nom de l’<strong>événement à écouter</strong></li>
-<li>la <strong>fonction à exécuter</strong> lorsque l’événement est déclenché</li>
+<li>uniquement du HTML</li>
+<li>uniquement du PHP</li>
+<li>un mélange de PHP et de HTML</li>
 </ul>
-</div>
-<div class="fragment">
-<p><br />
 </p>
-<ul>
-<li>La fonction passée en paramètre de <code>addEventListerner</code> prend <strong>un paramètre de type <code>Event</code></strong> qui contient des informations sur l’événement déclenché.</li>
-<li>La méthode <code>preventDefault()</code> permet d’<strong>empêcher l’exécution du comportement par défaut</strong> de l’élément à cet événement.</li>
-</ul>
+</section>
+<section id="coexistence-phphtml" class="slide level2">
+<h2>Coexistence PHP/HTML</h2>
+<div class="columns centerh">
+<div>
+<pre class="php contenteditable"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;HTML produit par PHP&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;?php
+        $num = rand(1,10);
+        if ( $num &lt; 5 ) {
+            echo &#39;&lt;p&gt;Inférieur à cinq&lt;/p&gt;&#39;;
+        } else {
+            echo &#39;&lt;p&gt;Supérieur à cinq&lt;/p&gt;&#39;;
+        }
+    ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><code>page.php</code></p>
+</div><div>
+<pre class="php contenteditable"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;HTML controlé par PHP&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;?php
+            $num = rand(1,10);
+            if ( $num &lt; 5 ) {
+        ?&gt;
+            &lt;p&gt;Inférieur à cinq&lt;/p&gt;
+        &lt;?php } else { ?&gt;
+            &lt;p&gt;Supérieur à cinq&lt;/p&gt;
+        &lt;?php } ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><code>memePage.php</code></p>
 </div>
+</div>
+<p>Le PHP peut être alterné avec du HTML :</p>
+<ul>
+<li>cela permet de dissocier le contrôle du contenu</li>
+<li>mais attention à la <strong>cohérence</strong> du code PHP disséminé !</li>
+</ul>
+</section>
+<section id="inclusion-de-fichiers" class="slide level2">
+<h2>Inclusion de fichiers</h2>
+<pre class="php contenteditable centerh"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;?php require(&#39;head.php&#39;); ?&gt;
+    &lt;body&gt;
+        &lt;?php require(&#39;header.php&#39;); ?&gt;
+        &lt;main&gt;...&lt;/main&gt;
+        &lt;?php require(&#39;footer.php&#39;); ?&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p><br />
+Les instructions <a href="http://php.net/manual/fr/function.include.php"><code>include</code></a> et <a href="http://php.net/manual/fr/function.require.php"><code>require</code></a> permettent d’insérer un fichier PHP au sein d’un autre fichier. Cela <strong>évite la redondance de code</strong>.</p>
+<p>Si le fichier demandé n’existe pas :</p>
+<ul>
+<li><a href="http://php.net/manual/fr/function.require.php"><code>require</code></a> <strong>stoppe l’exécution</strong> du script</li>
+<li><a href="http://php.net/manual/fr/function.include.php"><code>include</code></a> se contente de <strong>transmettre un “warning”</strong></li>
+</ul>
+<div class="fragment">
+<p><strong>Variantes</strong> : <a href="http://php.net/manual/fr/function.include-once.php"><code>include_once</code></a> et <a href="http://php.net/manual/fr/function.require-once.php"><code>require_once</code></a> n’insèrent un fichier que si celui-ci n’a pas déjà été inclut.</p>
+<!-- ------------------------------------------------------------------------------- -->
+<!-- ## Pause de 5 minutes {.chapter} -->
 </div>
 </section>
-<section id="requêtes-asynchrones-avec-fetch" class="slide level2 chapter">
-<h2>Requêtes asynchrones avec Fetch</h2>
+<section id="transmettre-des-données" class="slide level2 chapter">
+<h2>Transmettre des données</h2>
 </section>
-<section id="asynchrone-quest-ce-que-cest" class="slide level2">
-<h2>Asynchrone, qu’est-ce que c’est ?</h2>
+<section id="mécanismes-de-transmission" class="slide level2">
+<h2>Mécanismes de transmission</h2>
+<p>PHP exploite deux mécanismes liés à deux protocoles HTTP pour échanger des données avec le client :</p>
 <dl>
-<dt>AJAX <em>(Asynchronous Javascript And XML)</em></dt>
-<dd>Méthode de gestion des requêtes asynchrones en JavaScript
+<dt>L’URL</dt>
+<dd><ul>
+<li>le client concatène les données à la fin de l’url</li>
+<li>le module PHP analyse l’URL et stocke les données dans le tableau global <a href="http://php.net/manual/fr/reserved.variables.get.php"><code>$_GET</code></a></li>
+</ul>
 </dd>
 </dl>
-<div class="centerh width-65">
-<p><img data-src="img/ajax.svg" /></p>
-</div>
-<p>Une <strong>requête asynchrone</strong> :</p>
-<ul>
-<li>est une requête <strong>non bloquante</strong>.</li>
-<li>permet de continuer à manipuler la page web jusqu’à réception de la réponse.</li>
+<div class="fragment">
+<dl>
+<dt>Le formulaire HTML</dt>
+<dd><ul>
+<li>le client insère les données dans l’entête du protocole HTTP</li>
+<li>le module PHP analyse l’entête HTTP et stocke les données dans le tableau global <a href="http://php.net/manual/fr/reserved.variables.post.php"><code>$_POST</code></a></li>
 </ul>
+</dd>
+</dl>
+</div>
 </section>
-<section id="fetch" class="slide level2">
-<h2>Fetch</h2>
-<pre class="js contenteditable centerh"><code>fetch( URL ).then( fonction1 ).then( fonction2 ).catch( fonctionErreur );</code></pre>
-<pre class="js contenteditable centerh"><code>fetch( URL )
-.then( function (response) {
-    // Exécuté lorsque l&#39;on reçoit la réponse
-})
-.then( function (data) {
-    // Exécuté lorsque le 1er then est terminé
-})
-.catch( function (error) {
-    // Exécuté lorsqu&#39;une exception est
-    // déclenchée dans un des blocs fetch
-    // ou then.
-});</code></pre>
-<p>Fetch permet d’effectuer des traitements <strong>asynchrones en cascade</strong> :</p>
-<ul>
-<li><strong><code>fetch()</code></strong> envoie une requête HTTP et transmet la réponse.</li>
-<li>un bloc <strong><code>then</code></strong> exécute une fonction dont l’argument correspond au <strong>à la valeur de retour</strong> du bloc précédent.</li>
-<li>un bloc <strong><code>catch</code></strong> est exécuté lorsqu’une erreur survient dans l’un des blocs précédents.</li>
-</ul>
+<section id="transmission-via-lurl-get" class="slide level2 centerh">
+<h2>Transmission via l’URL (GET)</h2>
+<p>Si le client envoie l’URL suivante comme requête au serveur :</p>
+<pre class="http contenteditable"><code>http://site.fr/index.php?module=W31&amp;nbEns=3</code></pre>
+<div class="fragment centerh images">
+<p>et que le script <code>index.php</code> est le suivant :</p>
+<pre class="php contenteditable"><code>&lt;?php
+    echo &#39;Le module s\&#39;appelle &#39; . $_GET[&#39;module&#39;] . &#39;.&lt;br&gt;&#39;;
+    echo &#39;Il est composé de &#39; . $_GET[&#39;nbEns&#39;] . &#39; intervenants.&#39;;
+?&gt;</code></pre>
+</div>
+<div class="fragment centerh images">
+<p>alors le client recevra le contenu suivant :</p>
+<pre class="html contenteditable"><code>Le module s&#39;appelle W31.&lt;br&gt;Il est composé de de 3 intervenants.</code></pre>
+</div>
+<p class="fragment">
+qui sera interprété comme du HTML.
+</p>
 </section>
-<section id="un-exemple-concret" class="slide level2">
-<h2>Un exemple concret</h2>
-<div class="columns">
-<pre class="js contenteditable centerh"><code>fetch(&#39;http://monsite.fr/api/?s=bond&#39;)
-.then( function (response) {
-    if (response.ok)
-        return response.json();
-    throw new Error(&#39;Response is not OK&#39;);
-})
-.then( function (data) {
-    doSomething(data);
-})
-.catch( function (error) {
-    console.log(error.message);
-});</code></pre><div>
-<pre class="js contenteditable centerh"><code>// Contenu de la réponse au format JSON
-{
-    &#39;nom&#39;: &#39;Bond&#39;,
-    &#39;prenom&#39;: &#39;James&#39;,
-    &#39;age&#39;: 35
-}</code></pre>
-<pre class="js contenteditable centerh"><code>function doSomething(data) {
-    const p = document.querySelector(&#39;#p&#39;);
-    p.innerHTML = `
-        Vous êtes ${data.prenom} ${data.nom}.
-        Vous avez ${data.age} ans.`;
-}</code></pre>
+<section id="transmission-via-un-formulaire-post" class="slide level2 centerh">
+<h2>Transmission via un formulaire (POST)</h2>
+<p>Si le client envoie le formulaire suivant au serveur :</p>
+<pre class="html contenteditable"><code>&lt;form method=&quot;post&quot; action=&quot;index.php&quot;&gt;
+    &lt;input type=&quot;text&quot; name=&quot;nom&quot;&gt;
+    &lt;input type=&quot;number&quot; name=&quot;age&quot;&gt;
+    &lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;</code></pre>
+<div class="fragment centerh images">
+<p>et que le script <code>index.php</code> est le suivant :</p>
+<pre class="php contenteditable"><code>&lt;?php
+    echo &#39;Bonjour &#39; . $_POST[&#39;nom&#39;] . &#39;.&lt;br&gt;&#39;;
+    echo &#39;Êtes-vous sûr d\&#39;avoir &#39; . $_POST[&#39;age&#39;] . &#39; ans ?&#39;;
+?&gt;</code></pre>
 </div>
+<div class="fragment centerh images">
+<p>alors le client recevra un contenu semblable à :</p>
+<pre class="html contenteditable centerm width-82"><code>Bonjour Bilbo.&lt;br&gt;Êtes-vous sûr d&#39;avoir 142 ans ?</code></pre>
 </div>
-<p>Le retour de <code>fetch</code> est de type <a href="https://developer.mozilla.org/fr/docs/Web/API/Response"><code>Response</code></a> et permet :</p>
+<p class="fragment">
+où le nom et l’âge dépendent des valeurs spécifiées dans le formulaire.
+</p>
+</section>
+<section id="confiance-zero-vérifiez" class="slide level2">
+<h2>CONFIANCE ZERO, VÉRIFIEZ !</h2>
+<blockquote>
+<p>Ne jamais faire confiance aux données transmises par le client,<br />
+toujours les vérifier !</p>
+</blockquote>
+<dl>
+<dt>Via une URL</dt>
+<dd><p>Un client peut écrire les paramètres qu’il veut dans l’URL, quelle que soit la valeur que vous attendez. Exemple :</p>
+<pre class="html"><code>http://site.fr/index.php?module=W31&amp;nbEns=90
+http://site.fr/index.php?module=10935&amp;nbEns=&lt;script&gt;alert(&#39;coucou&#39;);&lt;/script&gt;</code></pre>
+</dd>
+<dt>Via un formulaire</dt>
+<dd><p>Un client peut :</p>
 <ul>
-<li>de savoir si c’est un <strong>succès</strong> avec le booléen <code>ok</code>.</li>
-<li>d’obtenir le <strong><code>status</code></strong> de la réponse HTTP (200, 400, etc.).</li>
-<li>d’obtenir les données aux formats <strong>JSON</strong> ou <strong>texte</strong> avec les méthodes <code>.json()</code> et <code>.text()</code>.</li>
+<li>écrire ce qu’il veut dans une balise <code>input</code>.</li>
+<li>écrire son propre formulaire avec pour <code>action</code> votre script.</li>
 </ul>
+</dd>
+</dl>
+</section>
+<section id="comment-vérifier-et-protéger" class="slide level2">
+<h2>Comment vérifier et protéger ?</h2>
+<ul>
+<li>Vérifier l’existence</li>
+</ul>
+<pre class="php centerh"><code>if ( isset($_GET[&#39;param1&#39;]) &amp;&amp; isset($_GET[&#39;param2&#39;]) ) { ... }</code></pre>
+<ul>
+<li>Forcer le type (transtypage)</li>
+</ul>
+<pre class="php centerh"><code>$val = (int) $_GET[&#39;param1&#39;];</code></pre>
+<ul>
+<li>Vérifier la valeur</li>
+</ul>
+<pre class="php centerh"><code>if ($val &lt; 10) { ... }</code></pre>
+<ul>
+<li>Convertir les caractères spéciaux<br />
+<em>Permet d’éviter les injections de code (faille XSS).</em></li>
+</ul>
+<pre class="php centerh"><code>$val = htmlentities($_GET[&#39;param1&#39;]);</code></pre>
+</section>
+<section id="les-cookies" class="slide level2 chapter">
+<h2>Les cookies</h2>
+</section>
+<section id="présentation" class="slide level2">
+<h2>Présentation</h2>
+<div class="columns centerh">
+<div class="column-3">
+<dl>
+<dt>Définition</dt>
+<dd>Un cookie est une information <strong>textuelle</strong> indexée par une clé.
+</dd>
+</dl>
+</div><div class="column-2 images centerh">
+<p><img data-src="img/cookieChoco.png" class="width-50" /></p>
+</div>
+</div>
+<dl>
+<dt><strong>Propriétés</strong></dt>
+<dd><p>Un cookie :</p>
+<ul>
+<li>est <strong>créé par le serveur (PHP)</strong></li>
+<li>est <strong>stocké chez le client</strong></li>
+<li>transite via le protocole HTTP</li>
+<li>a une durée de vie spécifiée à la création</li>
+<li>est automatiquement détruit à expiration</li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="les-cookies-mode-demploi" class="slide level2">
+<h2>Les cookies, mode d’emploi</h2>
+<dl>
+<dt>Comment créer un cookie ?</dt>
+<dd><ol type="1">
+<li>Un client fait une requête HTTP</li>
+<li>Le fichier associé contient la fonction PHP <a href="https://www.php.net/manual/fr/function.setcookie.php"><code>setcookie()</code></a> :</li>
+</ol>
+<pre class="php centerm width-70"><code>&lt;?php setcookie( &#39;nom&#39;, &#39;valeur&#39;, time() + 60*60*24*10); ?&gt;</code></pre>
+<ol start="3" type="1">
+<li>Le cookie <code>'nom' =&gt; 'valeur'</code> est créé lorsque le serveur PHP exécute cette fonction.</li>
+<li>Il est transmis au client dans l’entête de la réponse HTTP :</li>
+</ol>
+<pre class="http centerm width-70"><code>Set-Cookie: nom=valeur; expires=...; path=/; domain=site.fr</code></pre>
+<ol start="5" type="1">
+<li>Le client stocke le cookie dans un fichier.</li>
+</ol>
+</dd>
+</dl>
+<p class="fragment centerm">
+… et le serveur n’en garde aucune trace.
+</p>
+</section>
+<section id="création-dun-cookie" class="slide level2">
+<h2>Création d’un cookie</h2>
+<p class="r-stack">
+<img data-src="img/cookies1.png" class="fragment" /> <img data-src="img/cookies2.png" class="fragment" /> <img data-src="img/cookies3.png" class="fragment" /> <img data-src="img/cookies4.png" class="fragment" /> <img data-src="img/cookies5.png" class="fragment" /> <img data-src="img/cookies6.png" class="fragment" /> <img data-src="img/cookies7.png" class="fragment" /> <img data-src="img/cookies8.png" class="fragment" />
+</p>
+</section>
+<section id="les-cookies-mode-demploi-1" class="slide level2">
+<h2>Les cookies, mode d’emploi</h2>
+<dl>
+<dt>Comment exploiter un cookie existant ?</dt>
+<dd><ol type="1">
+<li>Le client possède un cookie.</li>
+<li>Il fait une requête HTTP vers le même serveur.</li>
+<li>Le cookie du domaine est ajouté à l’entête de la requête :</li>
+</ol>
+<pre class="http centerm width-22"><code>Cookie: nom=valeur</code></pre>
+<ol start="4" type="1">
+<li>Le serveur PHP peut accéder au tableau global <a href="https://www.php.net/manual/fr/reserved.variables.cookies.php"><code>$_COOKIE</code></a> pour exploiter l’information du cookie.</li>
+</ol>
+</dd>
+</dl>
+<p><br></p>
+<div class="fragment">
+<blockquote>
+<p>Un serveur peut stocker <strong>plusieurs cookies pour un même domaine</strong>. Lors d’une requête vers ce domaine, ils sont tous ajoutés à l’entête.</p>
+</blockquote>
+</div>
+</section>
+<section id="utilisation-dun-cookie" class="slide level2">
+<h2>Utilisation d’un cookie</h2>
+<p class="r-stack">
+<img data-src="img/cookies9.png" class="fragment" /> <img data-src="img/cookies10.png" class="fragment" /> <img data-src="img/cookies11.png" class="fragment" /> <img data-src="img/cookies12.png" class="fragment" /> <img data-src="img/cookies13.png" class="fragment" /> <img data-src="img/cookies14.png" class="fragment" /> <img data-src="img/cookies15.png" class="fragment" /> <img data-src="img/cookies16.png" class="fragment" /> <img data-src="img/cookies17.png" class="fragment" />
+</p>
+</section>
+<section id="cookies-les-3-règles-dor" class="slide level2">
+<h2>Cookies, les 3 règles d’or</h2>
+<blockquote>
+<p>Règle n°1 - L’instruction <a href="https://www.php.net/manual/fr/function.setcookie.php"><code>setcookie()</code></a> doit <strong>TOUJOURS</strong> être appelée <strong>AVANT</strong> le code HTML.</p>
+</blockquote>
+<div class="width-100">
+<blockquote>
+<p>Règle n°2 - Un cookie est stocké chez le client, il peut donc le modifier<br />
+<span class="math inline">\(\rightarrow\)</span> <strong>TOUJOURS sécuriser le contenu d’un cookie</strong>.</p>
+</blockquote>
+</div>
+<div class="width-80 centerm">
+<blockquote>
+<p>Règle n°3 - Un client peut refuser de stocker un cookie<br />
+<span class="math inline">\(\rightarrow\)</span> <strong>Ne JAMAIS supposer qu’un cookie existe.</strong></p>
+</blockquote>
+</div>
+</section>
+<section id="les-sessions" class="slide level2 chapter">
+<h2>Les sessions</h2>
+</section>
+<section id="présentation-1" class="slide level2">
+<h2>Présentation</h2>
+<dl>
+<dt>Définition</dt>
+<dd>Une session PHP est un mécanisme permettant de conserver des données d’un client sur le serveur entre plusieurs requêtes.
+</dd>
+<dt><strong>Propriétés</strong></dt>
+<dd><p>Une session :</p>
+<ul>
+<li>est <strong>créé par le serveur (PHP)</strong></li>
+<li>est <strong>stocké sur le serveur</strong></li>
+<li>possède un <strong>identifiant unique</strong> attribué à sa création</li>
+<li>n’a que son identifiant qui transite via le protocole HTTP, <strong>pas ses données</strong></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="les-sessions-mode-demploi" class="slide level2">
+<h2>Les sessions, mode d’emploi</h2>
+<dl>
+<dt>Comment créer une session ?</dt>
+<dd><ol type="1">
+<li>Un client fait une requête HTTP</li>
+<li>Le fichier associé contient la fonction PHP <a href="https://www.php.net/manual/fr/function.session-start.php"><code>session_start()</code></a> :</li>
+</ol>
+<pre class="php centerm width-30"><code>&lt;?php session_start(); ?&gt;</code></pre>
+<ol start="3" type="1">
+<li>Un identifiant unique est créé et associé à la session du client</li>
+<li>Un tableau <a href="https://www.php.net/manual/fr/reserved.variables.session.php"><code>$_SESSION</code></a> associé à l’id est créé sur le serveur</li>
+<li>L’identifiant est transmis au client par cookie :</li>
+</ol>
+<pre class="php centerm width-80"><code>Set-Cookie: PHPSESSID=rvPT5v5QVPJ8H_Dh54yWuTfhBDbHZ_BkDC1TaWBn8RxBcDpy</code></pre>
+</dd>
+</dl>
+<p><br></p>
+<p class="fragment centerm">
+… et le client ne connait donc que son identifiant.
+</p>
+</section>
+<section id="création-dune-session" class="slide level2">
+<h2>Création d’une session</h2>
+<p class="r-stack">
+<img data-src="img/cookies1.png" class="fragment" /> <img data-src="img/cookies2.png" class="fragment" /> <img data-src="img/cookiesSession3.png" class="fragment" /> <img data-src="img/cookiesSession4.png" class="fragment" /> <img data-src="img/cookiesSession5.png" class="fragment" /> <img data-src="img/cookiesSession6.png" class="fragment" /> <img data-src="img/cookiesSession7.png" class="fragment" /> <img data-src="img/cookiesSession8.png" class="fragment" /> <img data-src="img/cookiesSession9.png" class="fragment" />
+</p>
+</section>
+<section id="les-sessions-mode-demploi-1" class="slide level2">
+<h2>Les sessions, mode d’emploi</h2>
+<dl>
+<dt>Comment utiliser une session ?</dt>
+<dd><ol type="1">
+<li>Le client possède un cookie avec son identifiant de session.</li>
+<li>Le client fait une requête HTTP vers le même serveur.</li>
+<li>Le cookie de la session du domaine est ajouté à l’entête de la requête :</li>
+</ol>
+<pre class="http"><code>Cookie: PHPSESSID=rvPT5v5QVPJ8H_Dh54yWuTfhBDbHZ_BkDC1TaWBn8RxBcDpy</code></pre>
+<ol start="4" type="1">
+<li>Le serveur PHP charge le tableau <a href="https://www.php.net/manual/fr/reserved.variables.session.php"><code>$_SESSION</code></a> associé à l’identifiant.</li>
+</ol>
+</dd>
+</dl>
+<p><br></p>
+<p class="fragment centerm">
+… et peut alors accéder aux variables de session du tableau.
+</p>
+</section>
+<section id="utilisation-dune-session" class="slide level2">
+<h2>Utilisation d’une session</h2>
+<p class="r-stack">
+<img data-src="img/cookiesSession10.png" class="fragment" /> <img data-src="img/cookiesSession11.png" class="fragment" /> <img data-src="img/cookiesSession12.png" class="fragment" /> <img data-src="img/cookiesSession13.png" class="fragment" /> <img data-src="img/cookiesSession14.png" class="fragment" /> <img data-src="img/cookiesSession15.png" class="fragment" /> <img data-src="img/cookiesSession16.png" class="fragment" /> <img data-src="img/cookiesSession17.png" class="fragment" /> <img data-src="img/cookiesSession18.png" class="fragment" /> <img data-src="img/cookiesSession19.png" class="fragment" />
+</p>
+</section>
+<section id="sessions-les-2-règles-dor" class="slide level2">
+<h2>Sessions : les 2 règles d’or</h2>
+<blockquote>
+<p>Règle n°1 - L’instruction <a href="https://www.php.net/manual/fr/function.session-start.php"><code>session_start()</code></a> doit <strong>TOUJOURS</strong> être appelée <strong>AVANT</strong> le code HTML.</p>
+</blockquote>
+<div class="width-100">
+<blockquote>
+<p>Règle n°2 - Un client peut refuser de stocker un cookie<br />
+<span class="math inline">\(\rightarrow\)</span> ne <strong>JAMAIS</strong> supposer qu’une session existe.</p>
+</blockquote>
+</div>
 </section>
 
  <!--                         </End Markdown>
@@ -1025,97 +832,252 @@ h.nextElementSibling
 </div>
 </div>
 
-<script src="js/reveal.min.js"></script>
+<script src="dist/reveal.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+<script src="plugin/reveal.js-menu/menu.js"></script>
 
 <script type="text/javascript">
 Reveal.initialize({
 // Display presentation control arrows
 controls: true,
+
 // Help the user learn the controls by providing hints, for example by
 // bouncing the down arrow when they first encounter a vertical slide
 controlsTutorial: false,
+
 // Determines where controls appear, "edges" or "bottom-right"
 controlsLayout: 'edges',
+
 // Visibility rule for backwards navigation arrows; "faded", "hidden"
 // or "visible"
 controlsBackArrows: 'faded',
+
 // Display a presentation progress bar
 progress: true,
+
 // Display the page number of the current slide
 // h.v|h/v|c|c/t
 slideNumber: "c/t",
+
+// Can be used to limit the contexts in which the slide number appears
+// - "all":      Always show the slide number
+// - "print":    Only when printing to PDF
+// - "speaker":  Only in the speaker view
+showSlideNumber: 'all',
+
+// Use 1 based indexing for # links to match slide number (default is zero
+// based)
+hashOneBasedIndex: false,
+
+// Add the current slide number to the URL hash so that reloading the
+// page/copying the URL will return you to the same slide
+hash: false,
+
+// Flags if we should monitor the hash and change slides accordingly
+respondToHashChanges: true,
+
 // Push each slide change to the browser history
 history: true,
+
 // Enable keyboard shortcuts for navigation
 keyboard: true,
+
+// Optional function that blocks keyboard events when retuning false
+//
+// If you set this to 'foucsed', we will only capture keyboard events
+// for embdedded decks when they are in focus
+keyboardCondition: null,
+
+// Disables the default reveal.js slide layout (scaling and centering)
+// so that you can use custom CSS layout
+disableLayout: false,
+
 // Enable the slide overview mode
 overview: true,
+
 // Vertical centering of slides
 center: false,
+
+// Enables touch navigation on devices with touch input
+touch: true,
+
 // Loop the presentation
 loop: true,
+
+// Change the presentation direction to be RTL
+rtl: false,
+
+// Changes the behavior of our navigation directions.
+//
+// "default"
+// Left/right arrow keys step between horizontal slides, up/down
+// arrow keys step between vertical slides. Space key steps through
+// all slides (both horizontal and vertical).
+//
+// "linear"
+// Removes the up/down arrows. Left/right arrows step through all
+// slides (both horizontal and vertical).
+//
+// "grid"
+// When this is enabled, stepping left/right from a vertical stack
+// to an adjacent vertical stack will land you at the same vertical
+// index.
+//
+// Consider a deck with six slides ordered in two vertical stacks:
+// 1.1    2.1
+// 1.2    2.2
+// 1.3    2.3
+//
+// If you're on slide 1.3 and navigate right, you will normally move
+// from 1.3 -> 2.1. If "grid" is used, the same navigation takes you
+// from 1.3 -> 2.3.
+navigationMode: 'default',
+
+// Randomizes the order of slides each time the presentation loads
+shuffle: false,
+
 // Turns fragments on and off globally
 fragments: true,
+
 // Flags whether to include the current fragment in the URL,
 // so that reloading brings you to the same fragment position
-fragmentInURL: true,
-pdfSeparateFragments: false,
+fragmentInURL: false,
+
 // Flags if the presentation is running in an embedded mode,
 // i.e. contained within a limited portion of the screen
 embedded: false,
+
 // Flags if we should show a help overlay when the questionmark
 // key is pressed
 help: true,
+
+// Flags if it should be possible to pause the presentation (blackout)
+pause: true,
+
 // Flags if speaker notes should be visible to all viewers
 showNotes: false,
+
 // Global override for autoplaying embedded media (video/audio/iframe)
 // - null: Media will only autoplay if data-autoplay is present
 // - true: All media will autoplay, regardless of individual setting
 // - false: No media will autoplay, regardless of individual setting
 autoPlayMedia: null,
+
+// Global override for preloading lazy-loaded iframes
+// - null:   Iframes with data-src AND data-preload will be loaded when within
+//           the viewDistance, iframes with only data-src will be loaded when visible
+// - true:   All iframes with data-src will be loaded when within the viewDistance
+// - false:  All iframes with data-src will be loaded only when visible
+preloadIframes: null,
+
+// Can be used to globally disable auto-animation
+autoAnimate: true,
+
+// Optionally provide a custom element matcher that will be
+// used to dictate which elements we can animate between.
+autoAnimateMatcher: null,
+
+// Default settings for our auto-animate transitions, can be
+// overridden per-slide or per-element via data arguments
+autoAnimateEasing: 'ease',
+autoAnimateDuration: 1.0,
+autoAnimateUnmatched: true,
+
+// CSS properties that can be auto-animated. Position & scale
+// is matched separately so there's no need to include styles
+// like top/right/bottom/left, width/height or margin.
+autoAnimateStyles: [
+'opacity',
+'color',
+'background-color',
+'padding',
+'font-size',
+'line-height',
+'letter-spacing',
+'border-width',
+'border-color',
+'border-radius',
+'outline',
+'outline-offset'
+],
+
 // Number of milliseconds between automatically proceeding to the
 // next slide, disabled when set to 0, this value can be overwritten
 // by using a data-autoslide attribute on your slides
 autoSlide: 0,
+
 // Stop auto-sliding after user input
 autoSlideStoppable: true,
+
 // Use this method for navigation when auto-sliding
 autoSlideMethod: Reveal.navigateNext,
+
 // Specify the average time in seconds that you think you will spend
 // presenting each slide. This is used to show a pacing timer in the
 // speaker view
 defaultTiming: 120,
+
 // Enable slide navigation via mouse wheel
 mouseWheel: false,
-// Hides the address bar on mobile devices
-hideAddressBar: true,
+
 // Opens links in an iframe preview overlay
 // Add `data-preview-link` and `data-preview-link="false"` to customise each
 // link individually
 previewLinks: false,
+
+// Exposes the reveal.js API through window.postMessage
+postMessage: true,
+
+// Dispatches all reveal.js events to the parent window through postMessage
+postMessageEvents: true,
+
+// Focuses body when page changes visibility to ensure keyboard shortcuts work
+focusBodyOnPageVisibilityChange: true,
+
 // Transition style
 //     none/default/fade/slide/convex/concave/zoom/cube/page/linear
 transition: 'slide',
+
 // Transition speed
 //     default/fast/slow
 transitionSpeed: 'fast',
+
 // Transition style for full page slide backgrounds
 //    none/fade/slide/convex/concave/zoom
 backgroundTransition: 'fade',
+
+// The maximum number of pages a single slide can expand onto when printing
+// to PDF, unlimited by default
+pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+
+// Prints each fragment on a separate slide
+pdfSeparateFragments: false,
+
+// Offset used to reduce the height of content within exported PDF pages.
+// This exists to account for environment differences based on how you
+// print to PDF. CLI printing options, like phantomjs and wkpdf, can end
+// on precisely the total height of the document whereas in-browser
+// printing has to end one pixel before.
+pdfPageHeightOffset: -1,
+
 // Number of slides away from the current that are visible
 viewDistance: 3,
-// Parallax background image
-parallaxBackgroundImage: '',
-// Parallax background size
-// CSS syntax, e.g. "2100px 900px"
-parallaxBackgroundSize: '',
-// Number of pixels to move the parallax background per slide
-// - Calculated automatically unless specified
-// - Set to 0 to disable movement along an axis
-parallaxBackgroundHorizontal: 0,
-parallaxBackgroundVertical: 0,
+
+// Number of slides away from the current that are visible on mobile
+// devices. It is advisable to set this to a lower number than
+// viewDistance in order to save resources.
+mobileViewDistance: 2,
+
 // The display mode that will be used to show slides
 display: 'flex',
+
+// Hide cursor if inactive
+hideInactiveCursor: true,
+
+// Time before the cursor is hidden (in ms)
+hideCursorTime: 5000,
+
 math: { mathjax: 'plugin/math/MathJax.js' },
 menu: {
 		// Side of the the menu
@@ -1175,23 +1137,12 @@ menu: {
 		// and the menu will not attempt to load the font-awesome library.
 		loadIcons: true
 	},
-dependencies: [
-    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-    { src: 'plugin/math/math.js', async: true },
-    { src: 'plugin/reveal.js-menu/menu.js' },
-]});
-
-Reveal.addEventListener( 'ready', function( event ) {
-    // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
-    document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
+    plugins: [ RevealHighlight, RevealMath, RevealMenu ]
 });
 
-Reveal.addEventListener( 'slidechanged', function( event ) {
-    event.currentSlide.querySelectorAll('.anim.auto').forEach( function(anim) {
-        let childs = anim.children;
-        for( el of childs )
-            el.classList.add('fragment');
-    });
+Reveal.on( 'ready', event => {
+    // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
+    document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
 });
 
 </script>

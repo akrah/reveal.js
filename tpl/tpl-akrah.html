@@ -18,11 +18,11 @@
 $for(author)$
     <meta name="author" content="$author$">
 $endfor$
-    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="dist/reveal.css">
 $for(fonts)$
-    <link rel="stylesheet" href="lib/font/$fonts$/$fonts$.css">
+    <link rel="stylesheet" href="dist/theme/fonts/$fonts$/$fonts$.css">
 $endfor$
-    <link rel="stylesheet" href="css/theme/$if(theme)$$theme$$else$serif$endif$.min.css">
+    <link rel="stylesheet" href="dist/theme/$if(theme)$$theme$$else$serif$endif$.css">
     <style>
     .reveal .first-slide .slide-background-content {
 $if(first-slide-background-image)$
@@ -72,16 +72,7 @@ $if(slide-title-font)$
 $endif$
     </style>
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/$if(highlightcss)$$highlightcss$$else$zenburn$endif$.css">
-    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-    <script>
-    document.write( '<link rel="stylesheet" href="css/print/' +
-        ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) +
-        '.css" type="text/css" media="print">' );
-    </script>
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="plugin/highlight/$if(highlightcss)$$highlightcss$$else$zenburn$endif$.css">
     $for(header-includes)$
     $header-includes$
     $endfor$
@@ -125,22 +116,30 @@ $body$
 </div>
 </div>
 
-<script src="js/reveal.min.js"></script>
+<script src="dist/reveal.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script src="plugin/math/math.js"></script>
+<script src="plugin/reveal.js-menu/menu.js"></script>
 
 <script type="text/javascript">
 Reveal.initialize({
 // Display presentation control arrows
 controls: $if(controls)$$controls$$else$true$endif$,
+
 // Help the user learn the controls by providing hints, for example by
 // bouncing the down arrow when they first encounter a vertical slide
 controlsTutorial: $if(controlsTutorial)$$controlsTutorial$$else$true$endif$,
+
 // Determines where controls appear, "edges" or "bottom-right"
 controlsLayout: '$if(controlsLayout)$$controlsLayout$$else$bottom-right$endif$',
+
 // Visibility rule for backwards navigation arrows; "faded", "hidden"
 // or "visible"
 controlsBackArrows: '$if(controlsBackArrows)$$controlsBackArrows$$else$faded$endif$',
+
 // Display a presentation progress bar
 progress: $if(progress)$$progress$$else$true$endif$,
+
 // Display the page number of the current slide
 // h.v|h/v|c|c/t
 $if(slideNumber)$
@@ -148,78 +147,225 @@ slideNumber: "$slideNumber$",
 $else$
 slideNumber: false,
 $endif$
+
+// Can be used to limit the contexts in which the slide number appears
+// - "all":      Always show the slide number
+// - "print":    Only when printing to PDF
+// - "speaker":  Only in the speaker view
+showSlideNumber: '$if(showSlideNumber)$$showSlideNumber$$else$all$endif$',
+
+// Use 1 based indexing for # links to match slide number (default is zero
+// based)
+hashOneBasedIndex: $if(hashOneBasedIndex)$$hashOneBasedIndex$$else$false$endif$,
+
+// Add the current slide number to the URL hash so that reloading the
+// page/copying the URL will return you to the same slide
+hash: $if(hash)$$hash$$else$false$endif$,
+
+// Flags if we should monitor the hash and change slides accordingly
+respondToHashChanges: $if(respondToHashChanges)$$respondToHashChanges$$else$true$endif$,
+
 // Push each slide change to the browser history
 history: $if(history)$$history$$else$false$endif$,
+
 // Enable keyboard shortcuts for navigation
 keyboard: $if(keyboard)$$keyboard$$else$true$endif$,
+
+// Optional function that blocks keyboard events when retuning false
+//
+// If you set this to 'foucsed', we will only capture keyboard events
+// for embdedded decks when they are in focus
+keyboardCondition: null,
+
+// Disables the default reveal.js slide layout (scaling and centering)
+// so that you can use custom CSS layout
+disableLayout: $if(disableLayout)$$disableLayout$$else$false$endif$,
+
 // Enable the slide overview mode
 overview: $if(overview)$$overview$$else$true$endif$,
+
 // Vertical centering of slides
 center: $if(center)$$center$$else$true$endif$,
+
+// Enables touch navigation on devices with touch input
+touch: $if(touch)$$touch$$else$true$endif$,
+
 // Loop the presentation
 loop: $if(loop)$$loop$$else$false$endif$,
+
+// Change the presentation direction to be RTL
+rtl: $if(rtl)$$rtl$$else$false$endif$,
+
+// Changes the behavior of our navigation directions.
+//
+// "default"
+// Left/right arrow keys step between horizontal slides, up/down
+// arrow keys step between vertical slides. Space key steps through
+// all slides (both horizontal and vertical).
+//
+// "linear"
+// Removes the up/down arrows. Left/right arrows step through all
+// slides (both horizontal and vertical).
+//
+// "grid"
+// When this is enabled, stepping left/right from a vertical stack
+// to an adjacent vertical stack will land you at the same vertical
+// index.
+//
+// Consider a deck with six slides ordered in two vertical stacks:
+// 1.1    2.1
+// 1.2    2.2
+// 1.3    2.3
+//
+// If you're on slide 1.3 and navigate right, you will normally move
+// from 1.3 -> 2.1. If "grid" is used, the same navigation takes you
+// from 1.3 -> 2.3.
+navigationMode: '$if(navigationMode)$$navigationMode$$else$default$endif$',
+
+// Randomizes the order of slides each time the presentation loads
+shuffle: $if(shuffle)$$shuffle$$else$false$endif$,
+
 // Turns fragments on and off globally
 fragments: $if(fragments)$$fragments$$else$true$endif$,
+
 // Flags whether to include the current fragment in the URL,
 // so that reloading brings you to the same fragment position
 fragmentInURL: $if(fragmentInURL)$$fragmentInURL$$else$false$endif$,
-pdfSeparateFragments: $if(pdfSeparateFragments)$$pdfSeparateFragments$$else$false$endif$,
+
 // Flags if the presentation is running in an embedded mode,
 // i.e. contained within a limited portion of the screen
 embedded: $if(embedded)$$embedded$$else$false$endif$,
+
 // Flags if we should show a help overlay when the questionmark
 // key is pressed
 help: $if(help)$$help$$else$true$endif$,
+
+// Flags if it should be possible to pause the presentation (blackout)
+pause: true,
+
 // Flags if speaker notes should be visible to all viewers
 showNotes: $if(showNotes)$$showNotes$$else$false$endif$,
+
 // Global override for autoplaying embedded media (video/audio/iframe)
 // - null: Media will only autoplay if data-autoplay is present
 // - true: All media will autoplay, regardless of individual setting
 // - false: No media will autoplay, regardless of individual setting
 autoPlayMedia: $if(autoPlayMedia)$$autoPlayMedia$$else$null$endif$,
+
+// Global override for preloading lazy-loaded iframes
+// - null:   Iframes with data-src AND data-preload will be loaded when within
+//           the viewDistance, iframes with only data-src will be loaded when visible
+// - true:   All iframes with data-src will be loaded when within the viewDistance
+// - false:  All iframes with data-src will be loaded only when visible
+preloadIframes: null,
+
+// Can be used to globally disable auto-animation
+autoAnimate: $if(autoAnimate)$$autoAnimate$$else$true$endif$,
+
+// Optionally provide a custom element matcher that will be
+// used to dictate which elements we can animate between.
+autoAnimateMatcher: null,
+
+// Default settings for our auto-animate transitions, can be
+// overridden per-slide or per-element via data arguments
+autoAnimateEasing: 'ease',
+autoAnimateDuration: 1.0,
+autoAnimateUnmatched: true,
+
+// CSS properties that can be auto-animated. Position & scale
+// is matched separately so there's no need to include styles
+// like top/right/bottom/left, width/height or margin.
+autoAnimateStyles: [
+'opacity',
+'color',
+'background-color',
+'padding',
+'font-size',
+'line-height',
+'letter-spacing',
+'border-width',
+'border-color',
+'border-radius',
+'outline',
+'outline-offset'
+],
+
 // Number of milliseconds between automatically proceeding to the
 // next slide, disabled when set to 0, this value can be overwritten
 // by using a data-autoslide attribute on your slides
 autoSlide: $if(autoSlide)$$autoSlide$$else$0$endif$,
+
 // Stop auto-sliding after user input
 autoSlideStoppable: $if(autoSlideStoppable)$$autoSlideStoppable$$else$true$endif$,
+
 // Use this method for navigation when auto-sliding
 autoSlideMethod: $if(autoSlideMethod)$$autoSlideMethod$$else$Reveal.navigateNext$endif$,
+
 // Specify the average time in seconds that you think you will spend
 // presenting each slide. This is used to show a pacing timer in the
 // speaker view
 defaultTiming: $if(defaultTiming)$$defaultTiming$$else$120$endif$,
+
 // Enable slide navigation via mouse wheel
 mouseWheel: $if(mouseWheel)$$mouseWheel$$else$false$endif$,
-// Hides the address bar on mobile devices
-hideAddressBar: $if(hideAddressBar)$$hideAddressBar$$else$true$endif$,
+
 // Opens links in an iframe preview overlay
 // Add `data-preview-link` and `data-preview-link="false"` to customise each
 // link individually
 previewLinks: $if(previewLinks)$$previewLinks$$else$false$endif$,
+
+// Exposes the reveal.js API through window.postMessage
+postMessage: $if(postMessage)$$postMessage$$else$true$endif$,
+
+// Dispatches all reveal.js events to the parent window through postMessage
+postMessageEvents: $if(postMessageEvents)$$postMessageEvents$$else$true$endif$,
+
+// Focuses body when page changes visibility to ensure keyboard shortcuts work
+focusBodyOnPageVisibilityChange: $if(focusBodyOnPageVisibilityChange)$$focusBodyOnPageVisibilityChange$$else$true$endif$,
+
 // Transition style
 //     none/default/fade/slide/convex/concave/zoom/cube/page/linear
 transition: '$if(transition)$$transition$$else$slide$endif$',
+
 // Transition speed
 //     default/fast/slow
 transitionSpeed: '$if(transitionSpeed)$$transitionSpeed$$else$default$endif$',
+
 // Transition style for full page slide backgrounds
 //    none/fade/slide/convex/concave/zoom
 backgroundTransition: '$if(backgroundTransition)$$backgroundTransition$$else$fade$endif$',
+
+// The maximum number of pages a single slide can expand onto when printing
+// to PDF, unlimited by default
+pdfMaxPagesPerSlide: $if(pdfMaxPagesPerSlide)$$pdfMaxPagesPerSlide$$else$Number.POSITIVE_INFINITY$endif$,
+
+// Prints each fragment on a separate slide
+pdfSeparateFragments: $if(pdfSeparateFragments)$$pdfSeparateFragments$$else$false$endif$,
+
+// Offset used to reduce the height of content within exported PDF pages.
+// This exists to account for environment differences based on how you
+// print to PDF. CLI printing options, like phantomjs and wkpdf, can end
+// on precisely the total height of the document whereas in-browser
+// printing has to end one pixel before.
+pdfPageHeightOffset: $if(pdfPageHeightOffset)$$pdfPageHeightOffset$$else$-1$endif$,
+
 // Number of slides away from the current that are visible
 viewDistance: $if(viewDistance)$$viewDistance$$else$3$endif$,
-// Parallax background image
-parallaxBackgroundImage: '$if(parallaxBackgroundImage)$$parallaxBackgroundImage$$endif$',
-// Parallax background size
-// CSS syntax, e.g. "2100px 900px"
-parallaxBackgroundSize: '$if(parallaxBackgroundSize)$$parallaxBackgroundSize$$endif$',
-// Number of pixels to move the parallax background per slide
-// - Calculated automatically unless specified
-// - Set to 0 to disable movement along an axis
-parallaxBackgroundHorizontal: $if(parallaxBackgroundHorizontal)$$parallaxBackgroundHorizontal$$else$0$endif$,
-parallaxBackgroundVertical: $if(parallaxBackgroundVertical)$$parallaxBackgroundVertical$$else$0$endif$,
+
+// Number of slides away from the current that are visible on mobile
+// devices. It is advisable to set this to a lower number than
+// viewDistance in order to save resources.
+mobileViewDistance: $if(mobileViewDistance)$$mobileViewDistance$$else$2$endif$,
+
 // The display mode that will be used to show slides
 display: '$if(display)$$display$$else$block$endif$',
+
+// Hide cursor if inactive
+hideInactiveCursor: $if(hideInactiveCursor)$$hideInactiveCursor$$else$true$endif$,
+
+// Time before the cursor is hidden (in ms)
+hideCursorTime: $if(hideCursorTime)$$hideCursorTime$$else$5000$endif$,
+
 math: { mathjax: 'plugin/math/MathJax.js' },
 menu: {
 		// Side of the the menu
@@ -279,23 +425,12 @@ menu: {
 		// and the menu will not attempt to load the font-awesome library.
 		loadIcons: true
 	},
-dependencies: [
-    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-    { src: 'plugin/math/math.js', async: true },
-    { src: 'plugin/reveal.js-menu/menu.js' },
-]});
-
-Reveal.addEventListener( 'ready', function( event ) {
-    // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
-    document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
+    plugins: [ RevealHighlight, RevealMath, RevealMenu ]
 });
 
-Reveal.addEventListener( 'slidechanged', function( event ) {
-    event.currentSlide.querySelectorAll('.anim.auto').forEach( function(anim) {
-        let childs = anim.children;
-        for( el of childs )
-            el.classList.add('fragment');
-    });
+Reveal.on( 'ready', event => {
+    // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
+    document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
 });
 
 </script>
