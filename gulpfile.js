@@ -20,6 +20,7 @@ const eslint = require('gulp-eslint')
 const minify = require('gulp-clean-css')
 const connect = require('gulp-connect')
 const autoprefixer = require('gulp-autoprefixer')
+const merge = require('merge-stream');
 
 const readYAML = require('read-yaml');
 const pandoc = require('node-pandoc');
@@ -277,18 +278,25 @@ gulp.task('default', gulp.series(gulp.parallel('js', 'css', 'plugins', 'pandoc')
 
 gulp.task('build', gulp.parallel('js', 'css', 'plugins'))
 
-gulp.task('package', gulp.series('default', () =>
-
+gulp.task('package', /*gulp.series('default',*/ () =>
     gulp.src([
-        './index.html',
-        './dist/**',
-        './images/**',
-        './plugin/**',
+        root[0]+'/index.html',
+        root[0]+'/dist/**',
+        root[0]+'/images/**',
+        root[0]+'/plugin/**',
+    ],{
+        base: '.'
+    })
+    .pipe(gulp.src([
         root[1]+'/img/**',
-        root[1]+'/js/**',
-    ]).pipe(zip('reveal-js-presentation.zip')).pipe(gulp.dest('./'))
-
-))
+        root[1]+'/js/**'
+    ],{
+        base: root[1]
+    })
+    )
+    .pipe(zip('reveal-js-presentation.zip'))
+    .pipe(gulp.dest(root[1]+'/zip2/'))
+)//)
 
 gulp.task('reload', () => gulp.src(['*.html', '*.md'])
     .pipe(connect.reload()));
