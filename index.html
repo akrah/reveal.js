@@ -23,8 +23,8 @@
     <link rel="stylesheet" href="dist/theme/iutrs.css">
     <style>
     .reveal .first-slide .slide-background-content {
-        background-image: url(img/firstPage2.png);
-        opacity: 0.3;
+        background-image: url(img/firstPage.jpg);
+        opacity: 0.4;
     }
     .reveal .slides .first-slide h4 {
         font-family: monospace;
@@ -59,11 +59,11 @@
 
 <section class="slide level2 first-slide">
 <h1>W31 - Programmation Web<br>côté serveur</h1>
-<h4><?php echo "1. Introduction à PHP"; ?></h4>
+<h4>&lt;?= “2. PDO et POO” ?&gt;</h4>
 <address>
     <a href="http://adrien.krahenbuhl.fr">Adrien Krähenbühl</a>
     
-<time>3 septembre 2020</time>
+<time>25 septembre 2020</time>
     <a href="http://iutrs.unistra.fr/formation/dut/dut-informatique">IUT Robert Schuman</a>
     
 </address>
@@ -72,758 +72,760 @@
 <!--===========================================================================
                               <Begin Markdown>                              -->
 
-<section id="déroulement-du-module" class="slide level2 chapter">
-<h2>Déroulement du module</h2>
-</section>
-<section id="présentations" class="slide level2">
-<h2>Présentations</h2>
-<h3 id="équipe-pédagogique">Équipe pédagogique</h3>
-<dl>
-<dt>Adrien Krähenbühl</dt>
-<dd>CMx + Groupe 12 de TDs/TPs
-</dd>
-</dl>
+<section id="avant-de-commencer" class="slide level2">
+<h2>Avant de commencer</h2>
 <div class="columns">
-<div>
+<div class="column-5">
 <dl>
-<dt>Gabriel Frey</dt>
-<dd>Groupe 34 de TDs/TPs
+<dt>Version de PHP</dt>
+<dd>Ce cours se base entièrement sur <strong>PHP 7</strong>.<br> =&gt; PHP 8 sortira le 26 Novembre.
 </dd>
 </dl>
-</div><div>
-<dl>
-<dt>Gil Gross</dt>
-<dd>Groupe 56 de TDs/TPs
-</dd>
-</dl>
+</div><div class="images centerh column-3">
+<p><img data-src="img/php7.png" class="width-40" /></p>
 </div>
-</div>
-<h3 id="séances">Séances</h3>
-<pre class="php contenteditable centerh"><code>&lt;?php
-    $CM     =  3;
-    $TDs    =  4;
-    $TPs    = 13;
-    $nbHeures = ($CM + $TDs + $TPs) * 2;
-
-    echo &#39;Nb. heures = &#39;.$nbHeures;
-?&gt;</code></pre>
-</section>
-<section id="détail-des-séances" class="slide level2">
-<h2>Détail des séances</h2>
-<h3 id="contenu">Contenu</h3>
-<div class="columns centerh images">
-<ol type="1">
-<li>Syntaxe PHP</li>
-<li>Communication avec un serveur</li>
-<li>Programmation objet</li>
-<li>BDD : persistance des données</li>
-<li>Framework PHP : Laravrel</li>
-</ol><p><img data-src="img/logoPhpMysql.png" class="width-70" /></p>
-</div>
-<p><em>Note : Le contenu est construit sur la base du <a href="http://www.iut.fr/files/fck/File/documents/PPN/fran%C3%A7ais/PPN_INFORMATIQUE_256097.pdf">PPN 2013</a> (page 45).</em></p>
-<h3 id="répartition">Répartition</h3>
-<ul>
-<li>Syntaxe et serveur : <strong>1</strong> CM + <strong>1</strong> TD + <strong>3</strong> TPs</li>
-<li>POO et BDD : <strong>1</strong> CM + <strong>1</strong> TD + <strong>3</strong> TPs</li>
-<li>Laravel : <strong>1</strong> CM + <strong>2</strong> TD + <strong>7</strong> TPs</li>
-</ul>
-</section>
-<section id="évaluation-du-module" class="slide level2">
-<h2>Évaluation du module</h2>
-<h3 id="trois-notes">Trois notes</h3>
-<dl>
-<dt>2 notes de suivi</dt>
-<dd>Après les deux derniers CMx.
-</dd>
-<dt>1 note finale</dt>
-<dd>Examen sous forme de TP noté en Janvier.
-</dd>
-</dl>
-<h3 id="calcul-de-votre-moyenne">Calcul de votre moyenne</h3>
-<pre class="php contenteditable centerh"><code>&lt;?php
-    /* $note1   QCM sur la 1ère partie
-     * $note2   QCM sur la 2nde partie
-     * $noteTP  TP noté sur machine en Janvier */
-    function noteFinale( $note1, $note2, $noteTP )
-    {
-        return ($note1 + $note2) / 2 * 0.4 + $noteTP * 0.6;
-    }
-?&gt;</code></pre>
-</section>
-<section id="lenvironnement-php" class="slide level2 chapter">
-<h2>L’environnement PHP</h2>
-</section>
-<section id="php-cest-quoi" class="slide level2">
-<h2>PHP, c’est quoi ?</h2>
-<pre class="php contenteditable centerh"><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;...&lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;&lt;?php echo &quot;Hello IUT !&quot;; ?&gt;&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><br />
-<strong>PHP</strong> est un langage de programmation :</p>
-<ul>
-<li>principalement utilisé <strong>côté serveur</strong></li>
-<li>qui peut être embarqué dans du HTML</li>
-<li>open source</li>
-<li><span><strong>interprété</strong></span> <span class="fragment"><em>(En fait non, mais on va faire comme si ;))</em><br>                                 <img data-src="img/thinksmart.gif" class="width-30" /></span></li>
-</ul>
-</section>
-<section id="php-pourquoi" class="slide level2">
-<h2>PHP, pourquoi ?</h2>
-<p><strong>PHP</strong>, c’est le langage de programmation utilisé par <strong>80%</strong> des sites web au niveau mondial.</p>
-<div class="images centerh">
-<p><a href="https://w3techs.com/technologies/history_overview/programming_language"><img data-src="https://w3techs.com/diagram/history_overview/programming_language/ms/m" class="width-80" /></a></p>
-</div>
-<p class="centerh">
-<em>Javascript, c’est seulement <span class="math inline">\(\approx0.8\%\)</span></em>
-</p>
-</section>
-<section id="php-sur-un-serveur" class="slide level2 chapter">
-<h2>PHP sur un serveur</h2>
-</section>
-<section id="quelques-définitions" class="slide level2">
-<h2>Quelques définitions</h2>
-<div class="columns">
-<div>
-<dl>
-<dt>Client</dt>
-<dd>Envoie une requête et attend une réponse.
-</dd>
-</dl>
-</div><div>
-<dl>
-<dt>Serveur</dt>
-<dd>Attend une requête, la traite et envoie une réponse.
-</dd>
-</dl>
-</div>
-</div>
-<hr>
-<dl>
-<dt>Protocole HTTP</dt>
-<dd>Ensemble de <strong>règles</strong> à respecter pour transmettre des informations entre un client et un serveur. Ce protocole dispose de plusieurs <strong>méthodes</strong> dont GET et POST.
-</dd>
-</dl>
-<hr>
-<div class="columns">
-<div>
-<dl>
-<dt>Requête/réponse HTTP</dt>
-<dd>Messages entre client et serveur via le <strong>protocole</strong> HTTP.
-</dd>
-</dl>
-</div>
-<div>
-<dl>
-<dt>Serveur HTTP</dt>
-<dd><strong>Logiciel</strong> qui traite les requêtes HTTP reçues par le serveur web.
-</dd>
-</dl>
-</div>
-</section>
-<section id="interactions-client-serveur" class="slide level2">
-<h2>Interactions client-serveur</h2>
-<p class="r-stack">
-<img data-src="img/clientserveur1.png" class="fragment" /> <img data-src="img/clientserveur2.png" class="fragment" /> <img data-src="img/clientserveur3.png" class="fragment" /> <img data-src="img/clientserveur4.png" class="fragment" /> <img data-src="img/clientserveur5.png" class="fragment" /> <img data-src="img/clientserveur6.png" class="fragment" /> <img data-src="img/clientserveur7.png" class="fragment" /> <img data-src="img/clientserveur8.png" class="fragment" /> <img data-src="img/clientserveur1.png" class="fragment" /> <img data-src="img/clientserveur9.png" class="fragment" /> <img data-src="img/clientserveur10.png" class="fragment" /> <img data-src="img/clientserveur11.png" class="fragment" /> <img data-src="img/clientserveur12.png" class="fragment" /> <img data-src="img/clientserveur13.png" class="fragment" /> <img data-src="img/clientserveur14.png" class="fragment" /> <img data-src="img/clientserveur15.png" class="fragment" /> <img data-src="img/clientserveur16.png" class="fragment" /> <img data-src="img/clientserveur17.png" class="fragment" />
-</p>
-</section>
-<section id="configuration-du-serveur-http" class="slide level2 centerh">
-<h2>Configuration du serveur HTTP</h2>
-<div class="columns images centerh">
-<p><img data-src="img/logoNginx.png" class="width-70" /></p><p><img data-src="img/logoApache.png" class="width-50" /></p>
-</div>
-<div class="r-stack">
-<div class="fragment fade-out">
-<p>C’est la configuration du serveur HTTP qui précise les <strong>conditions nécessaires</strong> pour qu’une requête soit transmise au module PHP.</p>
-<p>Cela peut être :</p>
-<ul>
-<li>si la requête comporte une URL spécifique</li>
-<li>si la requête comporte une extension .php</li>
-<li>si la requête est envoyé sur un port particulier</li>
-<li>une combinaison de ces règles</li>
-<li>une autre règle</li>
-</ul>
 </div>
 <div class="fragment">
-<pre class="contenteditable"><code>server {
-    listen 80;
-    server_name site.fr;
-
-    # Path to the root of your installation
-    root /var/www/site.fr/;
-    index index.php;
-
-    location ~ \.php$ {
-        ...
-        fastcgi_pass module-php;
-        ...
-    }
-}</code></pre>
-<p><em>Exemple de fichier de configuration de Nginx.</em></p>
+<dl>
+<dt>Rappel doc &amp; stackoverflow-like</dt>
+<dd><span class="math inline">\(\rightarrow\)</span> ne recopiez pas bêtement<br />
+<span class="math inline">\(\rightarrow\)</span> la seule aide fiable est la doc officielle sur <a href="http://php.net">php.net</a>
+</dd>
+</dl>
+</div>
+<div class="columns fragment">
+<div class="column-5">
+<dl>
+<dt>Premier QCM noté</dt>
+<dd><span class="math inline">\(\rightarrow\)</span> sur Moodle<br />
+<span class="math inline">\(\rightarrow\)</span> au début du prochain TD
+</dd>
+</dl>
+</div><div class="images centerh column-3">
+<p><img data-src="img/qcm.svg" class="width-25" /></p>
 </div>
 </div>
 </section>
-<section id="syntaxe-environnement" class="slide level2 chapter">
-<h2>Syntaxe &amp; environnement</h2>
+<section id="ce-que-lon-a-vu" class="slide level2">
+<h2>Ce que l’on a vu</h2>
+<ol type="1">
+<li><strong>Concept client-serveur</strong>
+<ul>
+<li>mécanisme de requête/réponse via le protocole HTTP</li>
+</ul></li>
+<li><strong>Intro PHP</strong>
+<ul>
+<li>intégration intrinsèque dans du code HTML</li>
+<li>syntaxe : variables, tableaux, boucles et conditions</li>
+<li>inclusion de fichiers</li>
+</ul></li>
+<li><strong>Échange de données client <span class="math inline">\(\leftrightarrow\)</span> serveur</strong>
+<ul>
+<li>méthodes GET (<code>$_GET</code>) et POST (<code>$_POST</code>)</li>
+<li>vérification <strong>et</strong> protection des données transmises par le client : <code>isset</code>, <code>htmlentities</code></li>
+</ul></li>
+<li><strong>Persistance des données</strong>
+<ul>
+<li>cookies (<code>$_COOKIE</code>) <span class="math inline">\(\rightarrow\)</span> données stockées <strong>chez le client</strong></li>
+<li>sessions (<code>$_SESSSION</code>) <span class="math inline">\(\rightarrow\)</span> données stockées <strong>sur le serveur</strong></li>
+</ul></li>
+</ol>
 </section>
-<section id="les-variables" class="slide level2">
-<h2>Les variables</h2>
-<div class="columns">
+<section id="au-programme-aujourdhui" class="slide level2">
+<h2>Au programme aujourd’hui</h2>
+<ol type="1">
+<li><strong>Fonctions</strong> : syntaxe, typage</li>
+<li><strong>POO</strong> : classes et objets, mot-clé <code>this</code></li>
+<li><strong>Exceptions</strong> : <code>try</code> / <code>catch</code> / <code>throw</code></li>
+<li><strong>SQLite &amp; PDO</strong> : requêtes simples et préparées</li>
+<li><strong>MVC</strong> : spécificités d’une application client-serveur</li>
+<li><strong>Héritage</strong> (bonus) : interfaces et classes abstraites</li>
+</ol>
+<div class="fragment centerh">
+<p><img data-src="img/eddStark.gif" class="width-100" /></p>
+</div>
+</section>
+<section id="et-jusquaux-vacances-doctobre" class="slide level2">
+<h2>Et jusqu’aux vacances d’octobre</h2>
+<p>Deux cycles vont s’enchaîner :</p>
+<dl>
+<dt>1 TD + 3 TPs</dt>
+<dd>Gestionnaire de comptes utilisateurs en POO avec SQLite et PDO.
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>1 CM + 1 TD + 1 TP</dt>
+<dd><ul>
+<li>MVC avec le framework <a href="https://laravel.com">Laravel</a></li>
+<li>Début du mini-projet</li>
+<li>Second QCM au début du TD</li>
+</ul>
+</dd>
+</dl>
+</div>
+<p><br />
+</p>
+<div class="fragment box">
+<p><em>Attention, chaque TP est basé sur le précédent,<br />
+ne prenez pas de retard !</em></p>
+</div>
+</section>
+<section id="les-fonctions" class="slide level2 chapter">
+<h2>Les fonctions</h2>
+</section>
+<section id="syntaxe" class="slide level2">
+<h2>Syntaxe</h2>
+<div class="columns centerh">
 <div>
-<pre class="php contenteditable fragment"><code>// Commentaire sur une ligne
+<pre class="php contenteditable"><code>function doIt( bool $arg, int $i ) : void
+{
+    // Traitements...
 
-/* Commentaire sur
- * plusieurs lignes */</code></pre>
-<pre class="php contenteditable fragment"><code>// Déclaration et affectation de variables
-$a;
-$a = 8;
-$b = 10;</code></pre>
-<pre class="php contenteditable fragment"><code>// Définition d&#39;une constante
-const NOM_MODULE = &#39;W31&#39;;</code></pre>
-<pre class="php contenteditable fragment"><code>// Chaînes de caractères
-$message = &#39;calcul sur &#39; . $a . &#39; et &#39; . $b;</code></pre>
+}</code></pre>
+<pre class="php contenteditable"><code>doIt( true, 1 );</code></pre>
+<p><em>Sans retour</em></p>
 </div><div>
-<pre class="php contenteditable fragment"><code>// Opérateurs arithmétiques
-$res = $a + $b;
-$res *= $b - $a;</code></pre>
-<pre class="php contenteditable fragment"><code>// Test d&#39;existence d&#39;une variable
-isset($res);</code></pre>
-<pre class="php contenteditable fragment"><code>// Test sur le type d&#39;une variable
-is_int($a);    // true
-is_string($b); // false</code></pre>
-<pre class="php contenteditable fragment"><code>/* Obtenir le type d&#39;une variable
-   sous forme de chaine de caractères */
-gettype($a);       // &#39;integer&#39;
-gettype($message); // &#39;string&#39;</code></pre>
+<pre class="php contenteditable"><code>function doItAgain() : string
+{
+    // Traitements...
+    return $result;
+}</code></pre>
+<pre class="php contenteditable"><code>$myString = doItAgain();</code></pre>
+<p><em>Avec retour</em></p>
 </div>
+</div>
+<p><br></p>
+<div class="fragment">
+<ul>
+<li>Du <strong>typage statique</strong> (enfin depuis la v. 7 !) dans PHP pour :
+<ul>
+<li>les arguments,</li>
+<li>la valeur de retour d’une fonction.</li>
+</ul></li>
+<li>Le typage n’est pas obligatoire mais <strong>fortement recommandé</strong>.</li>
+<li>Les principaux types : <code>array</code>, <code>bool</code>, <code>float</code>, <code>int</code>, <code>string</code> et <code>object</code>.</li>
+</ul>
+</div>
+</section>
+<section id="transtypage-cast-coercitif" class="slide level2">
+<h2>Transtypage (cast) coercitif</h2>
+<p>En PHP, <strong>typer</strong> signifie <strong>transtyper</strong> si le type utilisé n’est pas le bon.</p>
+<br>
+<div class="columns centerh">
+<div>
+<pre class="php contenteditable"><code>function add( float $a, float $b ) : float {
+    return $a + $b;
+}
+echo add( 3, 4 );      // Affiche 7
+echo add( 3, 4.99 );   // Affiche 7.99
+echo add( 3, &quot;4.3&quot; );  // Affiche 7.3
+echo add( 3, &quot;plop&quot; ); // Error</code></pre>
+<p><em>Transtypage des arguments</em></p>
+</div><div class="fragment">
+<pre class="php contenteditable"><code>function add( float $a, float $b ) : int {
+    return $a + $b;
+}
+echo add( 3, 4 );      // Affiche 7
+echo add( 3, 4.99 );   // Affiche 7
+echo add( 3, &quot;4.3&quot; );  // Affiche 7
+echo add( 3, &quot;plop&quot; ); // Error</code></pre>
+<p><em>Transtypage de la valeur de retour</em></p>
+</div>
+</div>
+<p><br></p>
+<div class="fragment box">
+<p><strong>Note</strong> : Il est possible d’imposer un <strong>typage strict</strong> en déclarant cette instruction <strong>en début de fichier</strong> :</p>
+<pre class="php contenteditable"><code>&lt;?php
+        declare(strict_types=1);
+        ...</code></pre>
 </div>
 <div class="fragment centerh">
-<blockquote>
-<p>Attention au typage dynamique !</p>
-<pre class="php contenteditable"><code>$a = 10;          // a est un entier
-echo gettype($a); // &#39;integer&#39;
-$a = &quot;dix&quot;;       // a est maintenant une chaine de caractères
-echo gettype($a); // &#39;string&#39;</code></pre>
-</blockquote>
+<p><em><span class="math inline">\(\rightarrow\)</span> <a href="https://thevaluable.dev/php-7-type-hinting-pitfalls/">Un lien intéressant qui triture le typage en PHP 7</a></em></p>
 </div>
 </section>
-<section id="les-tableaux" class="slide level2">
-<h2>Les tableaux</h2>
-<blockquote>
-<p>En PHP, tous les tableaux sont<br />
-des <strong>tableaux associatifs</strong> (dictionnaires).</p>
-</blockquote>
-<div class="columns">
-<div>
-<pre class="php contenteditable fragment"><code>/* Déclaration d&#39;un tableau */
-
-// 1. Avec des clés implicites
-$tab1 = [1,&#39;deux&#39;,3] // Avant : array(1,2,3);
-echo $tab1[1]; // &#39;deux&#39;
-
-// 2. Avec clés explicites
-$tab3 = [ 0 =&gt; 1, 1 =&gt; &#39;deux&#39;, 2 =&gt; 3 ];
-echo $tab3[2]; // 3</code></pre>
-<pre class="php contenteditable fragment"><code>// Taille d&#39;un tableau
-count($tab1);</code></pre>
-<pre class="php contenteditable fragment"><code>// Afficher un tableau
-print_r($tab1);
-/* Array ( [0] =&gt; 1
-*          [1] =&gt; 2
-*          [2] =&gt; 3 ) */</code></pre>
-</div><div>
-<pre class="php contenteditable fragment"><code>/* - Une clé peut être un entier ou une
- *   chaine de caractères
- * - Une valeur peut être de n&#39;importe
- *   quel type */
-$notes = [
-    &#39;Jean&#39;  =&gt; 3,
-    &#39;Simon&#39; =&gt; 12.3,
-    &#39;Alex&#39;  =&gt; &#39;Absent&#39;,
-    12      =&gt; [&#39;Paul&#39;,&#39;Robert&#39;]
-];
-echo $notes[&#39;Jean&#39;]; // Affiche 3</code></pre>
-<pre class="php contenteditable fragment"><code>// Ajout d&#39;un élément à un tableau
-$notes[&#39;Étienne&#39;] = 8;
-$notes[] = 9; // Ajout (13 =&gt; 9) à $notes</code></pre>
-<pre class="php contenteditable fragment"><code>// Suppression d&#39;un élément
-unset($notes[12]);</code></pre>
-</div>
-</div>
+<section id="classes-et-objets" class="slide level2 chapter">
+<h2>Classes et objets</h2>
 </section>
-<section id="les-structures-de-contrôle" class="slide level2 centerh">
-<h2>Les structures de contrôle</h2>
-<div class="columns">
-<div>
-<pre class="php contenteditable fragment"><code>// Conditionnelle
-if ($load &lt; 100) {
-    echo &#39;Chargement en cours...&#39;;
-}
-// La directive &#39;else { ... }&#39; est facultative
-else {
-    echo &#39;Chargement terminé !&#39;;
-}</code></pre>
-<pre class="php contenteditable fragment"><code>// Boucle for
-for ($load = 1; $load &lt; 100; $load++) {
-    echo &#39;Chargement : &#39;.$load.&#39;/100&#39;;
-}</code></pre>
-<pre class="php contenteditable fragment"><code>// Boucle while
-$load = 1;
-while ($load &lt; 100) {
-    echo &#39;Chargement : &#39;.$load.&#39;/100&#39;;
-    $load++;
-}</code></pre>
-</div><pre class="php contenteditable fragment"><code>// Itération sur un tableau
-$tab = [&quot;W31&quot;,&quot;W11&quot;,&quot;A31&quot;];
-
-// Si on ne veut traiter que les valeurs
-foreach( $tab as $module ) {
-    echo &quot;J&#39;aime &quot;.$module.&quot;\n&quot;;
-}
-/* Résultat :
- *   J&#39;aime W31
- *   J&#39;aime W11
- *   J&#39;aime A31 */
-
-// Si on veut traiter les couples
-// (clé =&gt; valeur)
-foreach( $tab as $i =&gt; $module ) {
-    echo $i . &quot;) J&#39;aime &quot;.$module;
-}
-/* Résultat :
- *   1) J&#39;aime W31
- *   2) J&#39;aime W11
- *   3) J&#39;aime A31 */</code></pre>
-</div>
-</section>
-<section id="la-doc" class="slide level2">
-<h2>La doc</h2>
-<div class="centerh width-45">
-<blockquote>
-<p>Une seule référence à retenir :<br />
-<strong><a href="http://php.net">http://php.net</a></strong></p>
-</blockquote>
-</div>
-<h3 id="et-stackoverflow-et-autres-forums">Et Stackoverflow (et autres forums) ?</h3>
-<ul>
-<li>C’est pratique… si vous êtes critique !</li>
-<li>Une réponse peut dater et ne plus correspondre à l’API actuelle.</li>
-<li>Toutes <strong>les bonnes réponses sont dans la doc officielle</strong>, et celle de PHP est très complète.</li>
-<li>Une bonne partie des “solutions” cite la doc : gagnez du temps !</li>
-</ul>
-<div class="columns centerh width-70 images">
-<p><img data-src="img/logoPHP.png" class="width-70" /></p><p><span class="math inline">\(\gg\)</span></p><p><img data-src="img/logoStackoverflow.svg" class="width-80" /></p>
-</div>
-</section>
-<section id="php-et-html" class="slide level2">
-<h2>PHP et HTML</h2>
+<section id="syntaxe-1" class="slide level2">
+<h2>Syntaxe</h2>
 <div class="columns centerh">
 <div>
-<pre class="html contenteditable"><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;Ma première page PHP&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;Hello W31 !&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><code>fullHTML.php</code></p>
+<pre class="php contenteditable"><code>class Truc
+{
+    public $membre;
+    public function methode() { ... }
+}</code></pre>
+<p><em>Définition de la classe <code>Truc</code></em></p>
 </div><div>
-<pre class="php contenteditable"><code>&lt;?php echo &#39;&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;title&gt;Ma première page PHP&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;Hello W31 !&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;&#39;;</code></pre>
-<p><code>fullPHP.php</code></p>
+<pre class="php contenteditable"><code>$obj = new Truc();
+
+echo var_dump($obj);
+// Affiche :
+//    object(Truc)#1 (1) { [&quot;membre&quot;]=&gt; NULL }</code></pre>
+<p><em>Instanciation d’un objet de type <code>Truc</code></em></p>
 </div>
 </div>
-<p>
-<p>Un fichier d’extension <code>.php</code> peut contenir :</p>
-<ul>
-<li>uniquement du HTML</li>
-<li>uniquement du PHP</li>
-<li>un mélange de PHP et de HTML</li>
-</ul>
-</p>
-</section>
-<section id="coexistence-phphtml" class="slide level2">
-<h2>Coexistence PHP/HTML</h2>
-<div class="columns centerh">
-<div>
-<pre class="php contenteditable"><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;HTML produit par PHP&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-    &lt;?php
-        $num = rand(1,10);
-        if ( $num &lt; 5 ) {
-            echo &#39;&lt;p&gt;Inférieur à cinq&lt;/p&gt;&#39;;
-        } else {
-            echo &#39;&lt;p&gt;Supérieur à cinq&lt;/p&gt;&#39;;
-        }
-    ?&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><code>page.php</code></p>
-</div><div>
-<pre class="php contenteditable"><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;HTML controlé par PHP&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;?php
-            $num = rand(1,10);
-            if ( $num &lt; 5 ) {
-        ?&gt;
-            &lt;p&gt;Inférieur à cinq&lt;/p&gt;
-        &lt;?php } else { ?&gt;
-            &lt;p&gt;Supérieur à cinq&lt;/p&gt;
-        &lt;?php } ?&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><code>memePage.php</code></p>
-</div>
-</div>
-<p>Le PHP peut être alterné avec du HTML :</p>
-<ul>
-<li>cela permet de dissocier le contrôle du contenu</li>
-<li>mais attention à la <strong>cohérence</strong> du code PHP disséminé !</li>
-</ul>
-</section>
-<section id="inclusion-de-fichiers" class="slide level2">
-<h2>Inclusion de fichiers</h2>
-<pre class="php contenteditable centerh"><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;?php require(&#39;head.php&#39;); ?&gt;
-    &lt;body&gt;
-        &lt;?php require(&#39;header.php&#39;); ?&gt;
-        &lt;main&gt;...&lt;/main&gt;
-        &lt;?php require(&#39;footer.php&#39;); ?&gt;
-    &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<p><br />
-Les instructions <a href="http://php.net/manual/fr/function.include.php"><code>include</code></a> et <a href="http://php.net/manual/fr/function.require.php"><code>require</code></a> permettent d’insérer un fichier PHP au sein d’un autre fichier. Cela <strong>évite la redondance de code</strong>.</p>
-<p>Si le fichier demandé n’existe pas :</p>
-<ul>
-<li><a href="http://php.net/manual/fr/function.require.php"><code>require</code></a> <strong>stoppe l’exécution</strong> du script</li>
-<li><a href="http://php.net/manual/fr/function.include.php"><code>include</code></a> se contente de <strong>transmettre un “warning”</strong></li>
-</ul>
+<p><br></p>
+<h3 id="définition-classe-vs.-objet-rappels" class="fragment">Définition classe vs. objet (rappels)</h3>
 <div class="fragment">
-<p><strong>Variantes</strong> : <a href="http://php.net/manual/fr/function.include-once.php"><code>include_once</code></a> et <a href="http://php.net/manual/fr/function.require-once.php"><code>require_once</code></a> n’insèrent un fichier que si celui-ci n’a pas déjà été inclut.</p>
-<!-- ------------------------------------------------------------------------------- -->
-<!-- ## Pause de 5 minutes {.chapter} -->
+<dl>
+<dt>Une <strong>classe</strong></dt>
+<dd>C’est la <strong>description</strong> d’un objet comme ensemble d’<strong>attributs</strong> et de <strong>méthodes</strong>. Une classe n’a pas d’existence propre.
+</dd>
+<dt>Un <strong>objet</strong></dt>
+<dd>C’est une <strong>instance</strong> d’une classe donnée. Il <strong>existe</strong> de sa création<br />
+avec <code>new</code> jusqu’à sa destruction.
+</dd>
+</dl>
 </div>
 </section>
-<section id="transmettre-des-données" class="slide level2 chapter">
-<h2>Transmettre des données</h2>
-</section>
-<section id="mécanismes-de-transmission" class="slide level2">
-<h2>Mécanismes de transmission</h2>
-<p>PHP exploite deux mécanismes liés à deux protocoles HTTP pour échanger des données avec le client :</p>
+<section id="les-attributs" class="slide level2">
+<h2>Les attributs</h2>
+<div class="columns">
+<pre class="php contenteditable centerh"><code>class MaClasse {
+    public string $attribut1;
+    public int $attribut2 = 31;
+}</code></pre><pre class="php contenteditable centerh"><code>// Création d&#39;un objet
+// de type MaClasse
+
+$obj = new MaClasse();</code></pre><pre class="php contenteditable centerh"><code>// Accès aux attributs publics
+echo $obj-&gt;attribut2;
+// Modification d&#39;un attribut
+$obj-&gt;attribut1 = &quot;W31&quot;;</code></pre>
+</div>
 <dl>
-<dt>L’URL</dt>
-<dd><ul>
-<li>le client concatène les données à la fin de l’url</li>
-<li>le module PHP analyse l’URL et stocke les données dans le tableau global <a href="http://php.net/manual/fr/reserved.variables.get.php"><code>$_GET</code></a></li>
-</ul>
+<dt>Définition</dt>
+<dd>Aussi appelé “propriété”, c’est une <strong>variable interne</strong> d’une classe.
 </dd>
 </dl>
 <div class="fragment">
 <dl>
-<dt>Le formulaire HTML</dt>
+<dt>Un attribut :</dt>
 <dd><ul>
-<li>le client insère les données dans l’entête du protocole HTTP</li>
-<li>le module PHP analyse l’entête HTTP et stocke les données dans le tableau global <a href="http://php.net/manual/fr/reserved.variables.post.php"><code>$_POST</code></a></li>
+<li>peut (<strong>doit !</strong>) être spécifié avec une <a href="https://www.php.net/manual/fr/language.oop5.visibility.php"><strong>visibilité</strong></a></li>
+<li>peut (<strong>doit !</strong>) être spécifié avec un <a href="https://www.php.net/manual/en/language.types.php"><strong>type</strong></a></li>
+<li>est accessible depuis un objet avec le symbole <strong><code>-&gt;</code></strong> suivi de son nom <strong>sans le symbole <code>$</code></strong></li>
 </ul>
 </dd>
 </dl>
 </div>
+<div class="fragment box">
+<p><em><strong>Attention</strong>, le <a href="https://wiki.php.net/rfc/typed_properties_v2">typage des attributs</a> ne fonctionne qu’avec PHP &gt;= 7.4 !<br />
+(donc pas sur les serveurs de l’IUT qui ont PHP 7.3)</em></p>
+</div>
 </section>
-<section id="transmission-via-lurl-get" class="slide level2 centerh">
-<h2>Transmission via l’URL (GET)</h2>
-<p>Si le client envoie l’URL suivante comme requête au serveur :</p>
-<pre class="http contenteditable"><code>http://site.fr/index.php?module=W31&amp;nbEns=3</code></pre>
-<div class="fragment centerh images">
-<p>et que le script <code>index.php</code> est le suivant :</p>
-<pre class="php contenteditable"><code>&lt;?php
-    echo &#39;Le module s\&#39;appelle &#39; . $_GET[&#39;module&#39;] . &#39;.&lt;br&gt;&#39;;
-    echo &#39;Il est composé de &#39; . $_GET[&#39;nbEns&#39;] . &#39; intervenants.&#39;;
-?&gt;</code></pre>
+<section id="les-méthodes" class="slide level2">
+<h2>Les méthodes</h2>
+<div class="columns centerh">
+<div>
+<pre class="php contenteditable centerh"><code>class MaClasse
+{
+    private int $_val;
+    public function __construct( int $valeur )   { $this-&gt;_val = $valeur; }
+    public function __destruct()                 {}
+    public function getVal() : int               { return $this-&gt;_val; }
+    public function setVal( int $valeur ) : void { $this-&gt;_val = $valeur; }
+}</code></pre>
+</div><div>
+<pre class="php contenteditable centerh"><code>// Création d&#39;un objet
+$obj = new MaClasse(5);
+
+echo $obj-&gt;getVal();
+// Affiche &quot;5&quot;
+$obj-&gt;setVal( 31 );
+echo $obj-&gt;getVal();
+// Affiche &quot;31&quot;</code></pre>
 </div>
-<div class="fragment centerh images">
-<p>alors le client recevra le contenu suivant :</p>
-<pre class="html contenteditable"><code>Le module s&#39;appelle W31.&lt;br&gt;Il est composé de de 3 intervenants.</code></pre>
 </div>
-<p class="fragment">
-qui sera interprété comme du HTML.
-</p>
-</section>
-<section id="transmission-via-un-formulaire-post" class="slide level2 centerh">
-<h2>Transmission via un formulaire (POST)</h2>
-<p>Si le client envoie le formulaire suivant au serveur :</p>
-<pre class="html contenteditable"><code>&lt;form method=&quot;post&quot; action=&quot;index.php&quot;&gt;
-    &lt;input type=&quot;text&quot; name=&quot;nom&quot;&gt;
-    &lt;input type=&quot;number&quot; name=&quot;age&quot;&gt;
-    &lt;input type=&quot;submit&quot;&gt;
-&lt;/form&gt;</code></pre>
-<div class="fragment centerh images">
-<p>et que le script <code>index.php</code> est le suivant :</p>
-<pre class="php contenteditable"><code>&lt;?php
-    echo &#39;Bonjour &#39; . $_POST[&#39;nom&#39;] . &#39;.&lt;br&gt;&#39;;
-    echo &#39;Êtes-vous sûr d\&#39;avoir &#39; . $_POST[&#39;age&#39;] . &#39; ans ?&#39;;
-?&gt;</code></pre>
-</div>
-<div class="fragment centerh images">
-<p>alors le client recevra un contenu semblable à :</p>
-<pre class="html contenteditable centerm width-82"><code>Bonjour Bilbo.&lt;br&gt;Êtes-vous sûr d&#39;avoir 142 ans ?</code></pre>
-</div>
-<p class="fragment">
-où le nom et l’âge dépendent des valeurs spécifiées dans le formulaire.
-</p>
-</section>
-<section id="confiance-zero-vérifiez" class="slide level2">
-<h2>CONFIANCE ZERO, VÉRIFIEZ !</h2>
-<blockquote>
-<p>Ne jamais faire confiance aux données transmises par le client,<br />
-toujours les vérifier !</p>
-</blockquote>
 <dl>
-<dt>Via une URL</dt>
-<dd><p>Un client peut écrire les paramètres qu’il veut dans l’URL, quelle que soit la valeur que vous attendez. Exemple :</p>
-<pre class="html"><code>http://site.fr/index.php?module=W31&amp;nbEns=90
-http://site.fr/index.php?module=10935&amp;nbEns=&lt;script&gt;alert(&#39;coucou&#39;);&lt;/script&gt;</code></pre>
+<dt>Définition</dt>
+<dd>Une méthode est une fonction interne à une classe. Elle est appelée sur un objet pour connaître son état ou le modifier.
 </dd>
-<dt>Via un formulaire</dt>
-<dd><p>Un client peut :</p>
-<ul>
-<li>écrire ce qu’il veut dans une balise <code>input</code>.</li>
-<li>écrire son propre formulaire avec pour <code>action</code> votre script.</li>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Le mot-clé <a href="https://www.php.net/manual/fr/language.oop5.basic.php"><code>$this</code></a> :</dt>
+<dd><ul>
+<li>représente n’importe quel objet <strong>instance</strong> de cette classe.</li>
+<li>est <strong>obligatoire</strong> en PHP (à l’inverse de Java par exemple)</li>
 </ul>
 </dd>
 </dl>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\rightarrow\)</span> L’implémentation d’une méthode définit un comportement <strong>pour tous les objets <code>$this</code></strong> sur lesquels elle sera appelée.</p>
+</div>
 </section>
-<section id="comment-vérifier-et-protéger" class="slide level2">
-<h2>Comment vérifier et protéger ?</h2>
-<ul>
-<li>Vérifier l’existence</li>
-</ul>
-<pre class="php centerh"><code>if ( isset($_GET[&#39;param1&#39;]) &amp;&amp; isset($_GET[&#39;param2&#39;]) ) { ... }</code></pre>
-<ul>
-<li>Forcer le type (transtypage)</li>
-</ul>
-<pre class="php centerh"><code>$val = (int) $_GET[&#39;param1&#39;];</code></pre>
-<ul>
-<li>Vérifier la valeur</li>
-</ul>
-<pre class="php centerh"><code>if ($val &lt; 10) { ... }</code></pre>
-<ul>
-<li>Convertir les caractères spéciaux<br />
-<em>Permet d’éviter les injections de code (faille XSS).</em></li>
-</ul>
-<pre class="php centerh"><code>$val = htmlentities($_GET[&#39;param1&#39;]);</code></pre>
+<section id="exceptions" class="slide level2 chapter">
+<h2>Exceptions</h2>
 </section>
-<section id="les-cookies" class="slide level2 chapter">
-<h2>Les cookies</h2>
+<section id="syntaxe-2" class="slide level2">
+<h2>Syntaxe</h2>
+<div class="columns centerh">
+<div>
+<pre class="php contenteditable centerh"><code>function diviser( int $num, int $denom ) : float
+{
+    if ( $denom == 0 ) {
+        throw new Exception(&quot;Division par zéro&quot;);
+    }
+    return $num / $denom;
+}</code></pre>
+<p><em>Déclenchement d’une exception.</em></p>
+</div><div>
+<pre class="php contenteditable centerh"><code>try {
+    echo diviser(4,5);
+    echo diviser(4,0);
+}
+catch ( Exception $e ) {
+    echo &quot;Erreur : &quot; . $e-&gt;getMessage();
+}
+</code></pre>
+<p><em>Capture d’une exception.</em></p>
+</div>
+</div>
+<dl>
+<dt>Définition</dt>
+<dd>Les exceptions sont un mécanisme de <strong>gestion des comportements indésirables</strong> qui <strong>interrompt l’exécution</strong> d’une instruction.
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Une exception :</dt>
+<dd><ul>
+<li><strong>se lance</strong> avec l’instruction <strong><code>throw</code></strong></li>
+<li><strong>se capture</strong> avec un bloc <strong><code>try</code></strong></li>
+<li><strong>se traite</strong> avec un bloc <strong><code>catch</code></strong></li>
+<li>doit être de type <code>Exception</code> ou d’un sous-type</li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+<section id="sqlite-pdo" class="slide level2 chapter">
+<h2>SQlite &amp; PDO</h2>
 </section>
 <section id="présentation" class="slide level2">
 <h2>Présentation</h2>
+<div class="images centerh">
+<p><img data-src="img/pdo.svg" /></p>
+</div>
+<p>En PHP, il est nécessaire d’utiliser une extension pour manipuler une base de données. La référence en la matière est l’extension <strong>PDO</strong>.</p>
+<p>PDO est une <strong>interface d’abstraction</strong>, c’est-à-dire qu’elle permet d’écrire du code <strong>indépendamment du SGBD utilisé</strong>.</p>
+</section>
+<section id="création-dun-objet-pdo" class="slide level2">
+<h2>Création d’un objet PDO</h2>
+<div class="columns">
+<div class="centerh">
+<pre class="php contenteditable centerh"><code>$SQL_DSN = &#39;sqlite:/home/.../bdd.db&#39;;
+
+
+
+try {
+    $pdo = new PDO($SQL_DSN);
+}
+catch( PDOException $e ) {
+    echo &#39;Erreur : &#39;.$e-&gt;getMessage();
+    exit;
+}</code></pre>
+<p><em>SQLite</em></p>
+</div><div class="centerh">
+<pre class="php contenteditable centerh"><code>$SQL_DSN   = &#39;mysql:host=bdd.site.fr;dbname=w31&#39;;
+$SQL_LOGIN = &#39;login&#39;;
+$SQL_PASS  = &#39;password&#39;;
+
+try {
+    $pdo = new PDO($SQL_DSN, $SQL_LOGIN, $SQL_PASS);
+}
+catch( PDOException $e ) {
+    echo &#39;Erreur : &#39;.$e-&gt;getMessage();
+    exit;
+}</code></pre>
+<p><em>MySQL/MariaDB</em></p>
+</div>
+</div>
+<p>La création d’un objet PDO pour SQLite nécessite <strong>un seul argument</strong>, le <a href="https://fr.wikipedia.org/wiki/Data_Source_Name"><strong>DSN</strong></a>, contenant le type de SGBD et le chemin absolu du fichier de BDD.<br> <br></p>
+<div class="box">
+<p><em><strong>Attention</strong> : Une <code>PDOException</code> est déclenchée si la connexion échoue,<br />
+il faut toujours la “try-catcher” !</em></p>
+</div>
+</section>
+<section id="requêtes-simples" class="slide level2">
+<h2>Requêtes simples</h2>
+<dl>
+<dt><a href="https://www.php.net/manual/en/pdo.query.php"><code>PDO::query( string $statement ) : PDOStatement</code></a></dt>
+<dd><ul>
+<li>Pour <strong>interroger</strong> la BDD (<code>SELECT</code>).</li>
+<li>Retourne un objet <code>PDOStatement</code> contenant les données trouvées.</li>
+<li>Retourne <code>false</code> en cas d’erreur.</li>
+</ul>
+</dd>
+</dl>
+<pre class="php contenteditable centerh"><code>$request = $pdo-&gt;query( &quot;SELECT * FROM Students&quot; );</code></pre>
+<dl>
+<dt><a href="https://www.php.net/manual/en/pdo.exec.php"><code>PDO::exec( string $statement ) : int</code></a></dt>
+<dd><ul>
+<li>Pour <strong>modifier</strong> la BDD (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, etc.)</li>
+<li>Retourne le nombre de lignes modifiées.</li>
+</ul>
+</dd>
+</dl>
+<pre class="php contenteditable centerh"><code>$nbInsertions = $pdo-&gt;exec( &quot;INSERT INTO Students(name) VALUES(&#39;Josh&#39;)&quot; );
+    $nbUpates = $pdo-&gt;exec( &quot;UPDATE Students SET name=&#39;John&#39; WHERE name=&#39;Josh&#39;&quot; );
+ $nbDeletions = $pdo-&gt;exec( &quot;DELETE FROM Students WHERE name=&#39;John&#39;&quot; );</code></pre>
+</section>
+<section id="parcours-dun-pdostatement" class="slide level2">
+<h2>Parcours d’un “PDOStatement”</h2>
+<div class="centerh">
+<pre class="php contenteditable"><code>$request = $pdo-&gt;query( &quot;SELECT name FROM Students&quot; );</code></pre>
+<p><em><code>$request</code> est un objet de la classe <code>PDOStatement</code></em>.</p>
+</div>
 <div class="columns centerh">
-<div class="column-3">
-<dl>
-<dt>Définition</dt>
-<dd>Un cookie est une information <strong>textuelle</strong> indexée par une clé.
-</dd>
-</dl>
-</div><div class="column-2 images centerh">
-<p><img data-src="img/cookieChoco.png" class="width-50" /></p>
+<div>
+<pre class="php contenteditable"><code>foreach( $request as $row ) {
+    echo &#39;Nom : &#39; . $row[&#39;name&#39;];
+}</code></pre>
+<p><em>Parcours avec <code>foreach</code></em>.</p>
+</div><div>
+<pre class="php contenteditable"><code>while ( $row = $request-&gt;fetch() ) {
+    echo &#39;Nom : &#39; . $row[&#39;name&#39;];
+}</code></pre>
+<p><em>Parcours avec <code>while</code> et <code>fetch</code></em>.</p>
 </div>
 </div>
+<p>En complément de <code>foreach</code>, la méthode <code>fetch()</code> de la classe <code>PDOStatement</code> permet de parcourir les données obtenues :</p>
 <dl>
-<dt><strong>Propriétés</strong></dt>
-<dd><p>Un cookie :</p>
-<ul>
-<li>est <strong>créé par le serveur (PHP)</strong></li>
-<li>est <strong>stocké chez le client</strong></li>
-<li>transite via le protocole HTTP</li>
-<li>a une durée de vie spécifiée à la création</li>
-<li>est automatiquement détruit à expiration</li>
+<dt><a href="https://www.php.net/manual/fr/pdostatement.fetch.php"><code>PDOStatement::fetch() : mixed</code></a></dt>
+<dd><ul>
+<li>Retourne la <strong>prochaine</strong> ligne de données d’un <code>PDOStatement</code>.</li>
+<li>Retourne <code>false</code> s’il n’y a pas de prochaine ligne.</li>
 </ul>
 </dd>
 </dl>
+<div class="box">
+<p><em>L’intérêt de la méthode <code>fetch</code> se trouve dans les <strong>paramètres</strong> qu’on peut lui spécifier <span class="math inline">\(\rightarrow\)</span> <a href="https://www.php.net/manual/fr/pdostatement.fetch.php">voir documentation</a>.</em></p>
+</div>
 </section>
-<section id="les-cookies-mode-demploi" class="slide level2">
-<h2>Les cookies, mode d’emploi</h2>
-<dl>
-<dt>Comment créer un cookie ?</dt>
-<dd><ol type="1">
-<li>Un client fait une requête HTTP</li>
-<li>Le fichier associé contient la fonction PHP <a href="https://www.php.net/manual/fr/function.setcookie.php"><code>setcookie()</code></a> :</li>
-</ol>
-<pre class="php centerm width-70"><code>&lt;?php setcookie( &#39;nom&#39;, &#39;valeur&#39;, time() + 60*60*24*10); ?&gt;</code></pre>
-<ol start="3" type="1">
-<li>Le cookie <code>'nom' =&gt; 'valeur'</code> est créé lorsque le serveur PHP exécute cette fonction.</li>
-<li>Il est transmis au client dans l’entête de la réponse HTTP :</li>
-</ol>
-<pre class="http centerm width-70"><code>Set-Cookie: nom=valeur; expires=...; path=/; domain=site.fr</code></pre>
-<ol start="5" type="1">
-<li>Le client stocke le cookie dans un fichier.</li>
-</ol>
-</dd>
-</dl>
-<p class="fragment centerm">
-… et le serveur n’en garde aucune trace.
-</p>
-</section>
-<section id="création-dun-cookie" class="slide level2">
-<h2>Création d’un cookie</h2>
+<section id="le-parcours-en-action" class="slide level2">
+<h2>Le parcours en action</h2>
 <p class="r-stack">
-<img data-src="img/cookies1.png" class="fragment" /> <img data-src="img/cookies2.png" class="fragment" /> <img data-src="img/cookies3.png" class="fragment" /> <img data-src="img/cookies4.png" class="fragment" /> <img data-src="img/cookies5.png" class="fragment" /> <img data-src="img/cookies6.png" class="fragment" /> <img data-src="img/cookies7.png" class="fragment" /> <img data-src="img/cookies8.png" class="fragment" />
+<img data-src="img/queryFetch01.png" class="fragment" /> <img data-src="img/queryFetch02.png" class="fragment" /> <img data-src="img/queryFetch03.png" class="fragment" /> <img data-src="img/queryFetch04.png" class="fragment" /> <img data-src="img/queryFetch05.png" class="fragment" /> <img data-src="img/queryFetch06.png" class="fragment" /> <img data-src="img/queryFetch07.png" class="fragment" /> <img data-src="img/queryFetch08.png" class="fragment" /> <img data-src="img/queryFetch09.png" class="fragment" /> <img data-src="img/queryFetch10.png" class="fragment" /> <img data-src="img/queryFetch11.png" class="fragment" /> <img data-src="img/queryFetch12.png" class="fragment" /> <img data-src="img/queryFetch13.png" class="fragment" /> <img data-src="img/queryFetch14.png" class="fragment" /> <img data-src="img/queryFetch15.png" class="fragment" /> <img data-src="img/queryFetch16.png" class="fragment" /> <img data-src="img/queryFetch17.png" class="fragment" /> <img data-src="img/queryFetch18.png" class="fragment" /> <img data-src="img/queryFetch19.png" class="fragment" /> <img data-src="img/queryFetch20.png" class="fragment" />
 </p>
 </section>
-<section id="les-cookies-mode-demploi-1" class="slide level2">
-<h2>Les cookies, mode d’emploi</h2>
+<section id="requêtes-préparées" class="slide level2">
+<h2>Requêtes préparées</h2>
 <dl>
-<dt>Comment exploiter un cookie existant ?</dt>
-<dd><ol type="1">
-<li>Le client possède un cookie.</li>
-<li>Il fait une requête HTTP vers le même serveur.</li>
-<li>Le cookie du domaine est ajouté à l’entête de la requête :</li>
-</ol>
-<pre class="http centerm width-22"><code>Cookie: nom=valeur</code></pre>
-<ol start="4" type="1">
-<li>Le serveur PHP peut accéder au tableau global <a href="https://www.php.net/manual/fr/reserved.variables.cookies.php"><code>$_COOKIE</code></a> pour exploiter l’information du cookie.</li>
-</ol>
+<dt><a href="https://www.php.net/manual/en/pdo.prepare.php"><code>PDO::prepare( string $statement ) : PDOStatement</code></a></dt>
+<dd><ul>
+<li><strong>Prépare</strong> une requête mais ne l’exécute pas.</li>
+<li>Se paramétre avec des <strong>marqueurs</strong></li>
+<li>Retourne un objet de type <code>PDOStatement</code>.</li>
+</ul>
 </dd>
 </dl>
-<p><br></p>
+<pre class="php contenteditable centerh"><code>$request = $pdo-&gt;prepare( &quot;SELECT * FROM Students WHERE age &gt; :value&quot; );</code></pre>
+<dl>
+<dt><a href="https://www.php.net/manual/fr/pdostatement.bindvalue.php"><code>PDOStatement::bindValue( mixed $param, mixed $val [, int $type ] ) : bool</code></a></dt>
+<dd><ul>
+<li>Associe la valeur <code>$val</code> au marqueur <code>$param</code></li>
+</ul>
+</dd>
+</dl>
+<pre class="php contenteditable centerh"><code>$request-&gt;bindvalue( &#39;:value&#39;, 20, PDO::PARAM_INT );</code></pre>
+<dl>
+<dt><a href="https://www.php.net/manual/fr/pdostatement.execute.php"><code>PDOStatement::execute() : bool</code></a></dt>
+<dd><ul>
+<li>Exécute la requête préparée</li>
+</ul>
+</dd>
+</dl>
+<pre class="php contenteditable centerh"><code>$request-&gt;execute();</code></pre>
+</section>
+<section id="marqueurs-indexés-vs.-nommés" class="slide level2">
+<h2>Marqueurs indexés vs. nommés</h2>
+<div class="columns centerh">
+<div>
+<pre class="php contenteditable centerh"><code>// 1.a Prépare la requête
+$request = $pdo-&gt;prepare(
+    &quot;SELECT name FROM Students
+     WHERE note &lt; ? AND note &gt; ?&quot;
+);
+// 2.a Assigne 10 au 1er paramètre
+$ok1 = $request-&gt;bindValue(
+    1, 10, PDO::PARAM_INT
+);
+// 3.a Assigne 10 au 2ème paramètre
+$ok1 &amp;= $request-&gt;bindValue(
+    2, 20, PDO::PARAM_INT
+);</code></pre>
+<p>Marqueurs <strong>indexés</strong> : <code>?</code></p>
+</div><div>
+<pre class="php contenteditable centerh"><code>// 1.b Prépare la requête
+$request = $pdo-&gt;prepare(
+    &quot;SELECT name FROM Students
+     WHERE note &lt; :min AND note &gt; :max&quot;
+);
+// 2.b Assigne 10 au paramètre :min
+$ok1 = $request-&gt;bindValue(
+    &#39;:min&#39;, 10, PDO::PARAM_INT
+);
+// 3.b Assigne 10 au paramètre :max
+$ok1 &amp;= $request-&gt;bindValue(
+    &#39;:max&#39;, 20, PDO::PARAM_INT
+);</code></pre>
+<p>Marqueurs <strong>nommés</strong> : <code>:name</code></p>
+</div>
+</div>
+<pre class="php contenteditable centerh"><code>// 4. On exécute la requête $request
+$ok2 = $request-&gt;execute();
+
+// 5. On parcourt et affiche les données trouvées dans la base
+foreach ( $request as $row ) {
+    echo &quot;M. &quot; . $row[&#39;name&#39;] . &#39; a une note &lt; 10&#39;;
+}</code></pre>
+<p class="centerh">
+Parcours des données identique.
+</p>
+</section>
+<section id="requêtes-simples-vs.-préparées" class="slide level2">
+<h2>Requêtes simples vs. préparées</h2>
+<div class="images centerh width-50">
+<p><img data-src="img/injectionSql.jpg" /></p>
+</div>
+<dl>
+<dt>Les requêtes préparées</dt>
+<dd><ul>
+<li><strong>protègent</strong> des injections SQL grâce aux marqueurs</li>
+<li>sont <strong>réutilisables</strong></li>
+<li>permettent d’utiliser <strong>moins de resources</strong></li>
+<li>s’exécutent <strong>plus rapidement</strong></li>
+<li>affranchissent de la préoccupation des guillemets</li>
+</ul>
+</dd>
+</dl>
+<div class="centerh width-90">
+<blockquote>
+<p>Illustration des injections SQL au prochain TD.</p>
+</blockquote>
+</div>
+</section>
+<section id="conception-mvc" class="slide level2 chapter">
+<h2>Conception MVC</h2>
+</section>
+<section id="maîtrisez-vous-a31" class="slide level2">
+<h2>Maîtrisez-vous A31 ?</h2>
+<p class="r-stack">
+<img data-src="img/mvc01.png" class="fragment" /> <img data-src="img/mvc02.png" class="fragment" /> <img data-src="img/mvc03.png" class="fragment" /> <img data-src="img/mvc04.png" class="fragment" /> <img data-src="img/mvc05.png" class="fragment" /> <img data-src="img/mvc06.png" class="fragment" /> <img data-src="img/mvc07.png" class="fragment" /> <img data-src="img/mvc08.png" class="fragment" /> <img data-src="img/mvc09.png" class="fragment" /> <img data-src="img/mvc10.png" class="fragment" /> <img data-src="img/mvc11.png" class="fragment" />
+</p>
+</section>
+<section id="principe" class="slide level2">
+<h2>Principe</h2>
+<div class="images centerh width-70">
+<p><img data-src="img/mvc11.png" /></p>
+</div>
+<p><strong>MVC</strong> <em>(Modèle-Vue-Contrôleur)</em> est une architecture logicielle qui propose un découpage en trois entités :</p>
+<ul>
+<li>les <strong>Modèles</strong> qui contiennent les données,</li>
+<li>les <strong>Vues</strong> qui définissent l’affichage du modèle,</li>
+<li>les <strong>Contrôleurs</strong> qui contiennent la logique de l’application et répondent aux requêtes en coordonnant les modèles et les vues.</li>
+</ul>
+</section>
+<section id="en-pratique" class="slide level2">
+<h2>En pratique</h2>
+<p>Vous avez mis en place sans le savoir une architecture MVC avec l’authentification du TP2.</p>
+<p class="r-stack">
+<img data-src="img/mvcFiles1.png" class="fragment" /> <img data-src="img/mvcFiles2.png" class="fragment" /> <img data-src="img/mvcFiles3.png" class="fragment" /> <img data-src="img/mvcFiles4.png" class="fragment" />
+</p>
+</section>
+<section id="en-pratique-1" class="slide level2">
+<h2>En pratique</h2>
+<div class="images centerh width-70">
+<p><img data-src="img/mvcFiles4.png" /></p>
+</div>
+<div class="r-stack">
+<div class="fragment fade-out">
+<dl>
+<dt><strong>Contrôleurs</strong></dt>
+<dd><ul>
+<li><code>authenticate.php</code> <strong>manipule</strong> <code>users.php</code> pour vérifier si l’utilisateur à le droit de se connecter et suivant le cas, <strong>sélectionne</strong> <code>welcome.php</code> ou <code>signin.php</code>.</li>
+<li><code>signout.php</code> déconnecte l’utilisateur et <strong>sélectionne</strong> <code>signin.php</code>.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="fragment fade-in">
+<div class="fragment fade-out">
+<dl>
+<dt><strong>Modèle</strong></dt>
+<dd><ul>
+<li><code>users.php</code> est un modèle sous forme de tableau.</li>
+<li>Il est <strong>manipulé</strong> par <code>authenticate.php</code> pour <strong>mettre à jour</strong> <code>welcome.php</code> lorsque l’utilisateur se connecte.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="fragment fade-in">
+<dl>
+<dt><strong>Vues</strong></dt>
+<dd><ul>
+<li><code>signin.php</code> <strong>affiche</strong> le formulaire d’authentification.</li>
+<li><code>welcome.php</code> <strong>affiche</strong> la page d’accueil personnalisée.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</section>
+<section id="bonus-héritage" class="slide level2 chapter">
+<h2>Bonus : Héritage</h2>
+</section>
+<section id="les-interfaces" class="slide level2">
+<h2>Les interfaces</h2>
+<div class="columns centerh">
+<pre class="php contenteditable centerh"><code>interface Module
+{
+    function getName() : string;
+    function setProf( string $nom ) : void;
+}</code></pre><pre class="php contenteditable centerh"><code>class W31 implements Module
+{
+    public $_prof;
+    function getName() : string {
+        return &quot;W31&quot;;
+    }
+    function setProf( string $nom ) : void {
+        $this-&gt;prof = $nom;
+    }
+}</code></pre>
+</div>
+<dl>
+<dt>Définition</dt>
+<dd>Une interface <strong>spécifie la signature des méthodes</strong> que doit définir une classe qui l’implémente.
+</dd>
+</dl>
 <div class="fragment">
-<blockquote>
-<p>Un serveur peut stocker <strong>plusieurs cookies pour un même domaine</strong>. Lors d’une requête vers ce domaine, ils sont tous ajoutés à l’entête.</p>
-</blockquote>
-</div>
-</section>
-<section id="utilisation-dun-cookie" class="slide level2">
-<h2>Utilisation d’un cookie</h2>
-<p class="r-stack">
-<img data-src="img/cookies9.png" class="fragment" /> <img data-src="img/cookies10.png" class="fragment" /> <img data-src="img/cookies11.png" class="fragment" /> <img data-src="img/cookies12.png" class="fragment" /> <img data-src="img/cookies13.png" class="fragment" /> <img data-src="img/cookies14.png" class="fragment" /> <img data-src="img/cookies15.png" class="fragment" /> <img data-src="img/cookies16.png" class="fragment" /> <img data-src="img/cookies17.png" class="fragment" />
-</p>
-</section>
-<section id="cookies-les-3-règles-dor" class="slide level2">
-<h2>Cookies, les 3 règles d’or</h2>
-<blockquote>
-<p>Règle n°1 - L’instruction <a href="https://www.php.net/manual/fr/function.setcookie.php"><code>setcookie()</code></a> doit <strong>TOUJOURS</strong> être appelée <strong>AVANT</strong> le code HTML.</p>
-</blockquote>
-<div class="width-100">
-<blockquote>
-<p>Règle n°2 - Un cookie est stocké chez le client, il peut donc le modifier<br />
-<span class="math inline">\(\rightarrow\)</span> <strong>TOUJOURS sécuriser le contenu d’un cookie</strong>.</p>
-</blockquote>
-</div>
-<div class="width-80 centerm">
-<blockquote>
-<p>Règle n°3 - Un client peut refuser de stocker un cookie<br />
-<span class="math inline">\(\rightarrow\)</span> <strong>Ne JAMAIS supposer qu’un cookie existe.</strong></p>
-</blockquote>
-</div>
-</section>
-<section id="les-sessions" class="slide level2 chapter">
-<h2>Les sessions</h2>
-</section>
-<section id="présentation-1" class="slide level2">
-<h2>Présentation</h2>
 <dl>
-<dt>Définition</dt>
-<dd>Une session PHP est un mécanisme permettant de conserver des données d’un client sur le serveur entre plusieurs requêtes.
-</dd>
-<dt><strong>Propriétés</strong></dt>
-<dd><p>Une session :</p>
-<ul>
-<li>est <strong>créé par le serveur (PHP)</strong></li>
-<li>est <strong>stocké sur le serveur</strong></li>
-<li>possède un <strong>identifiant unique</strong> attribué à sa création</li>
-<li>n’a que son identifiant qui transite via le protocole HTTP, <strong>pas ses données</strong></li>
+<dt>Une interface :</dt>
+<dd><ul>
+<li>ne spécifie que des fonctions publiques</li>
+<li>ne peut pas contenir d’attribut</li>
+<li>ne peut pas définir l’implémentation d’une méthode</li>
 </ul>
 </dd>
 </dl>
-</section>
-<section id="les-sessions-mode-demploi" class="slide level2">
-<h2>Les sessions, mode d’emploi</h2>
-<dl>
-<dt>Comment créer une session ?</dt>
-<dd><ol type="1">
-<li>Un client fait une requête HTTP</li>
-<li>Le fichier associé contient la fonction PHP <a href="https://www.php.net/manual/fr/function.session-start.php"><code>session_start()</code></a> :</li>
-</ol>
-<pre class="php centerm width-30"><code>&lt;?php session_start(); ?&gt;</code></pre>
-<ol start="3" type="1">
-<li>Un identifiant unique est créé et associé à la session du client</li>
-<li>Un tableau <a href="https://www.php.net/manual/fr/reserved.variables.session.php"><code>$_SESSION</code></a> associé à l’id est créé sur le serveur</li>
-<li>L’identifiant est transmis au client par cookie :</li>
-</ol>
-<pre class="php centerm width-80"><code>Set-Cookie: PHPSESSID=rvPT5v5QVPJ8H_Dh54yWuTfhBDbHZ_BkDC1TaWBn8RxBcDpy</code></pre>
-</dd>
-</dl>
-<p><br></p>
-<p class="fragment centerm">
-… et le client ne connait donc que son identifiant.
-</p>
-</section>
-<section id="création-dune-session" class="slide level2">
-<h2>Création d’une session</h2>
-<p class="r-stack">
-<img data-src="img/cookies1.png" class="fragment" /> <img data-src="img/cookies2.png" class="fragment" /> <img data-src="img/cookiesSession3.png" class="fragment" /> <img data-src="img/cookiesSession4.png" class="fragment" /> <img data-src="img/cookiesSession5.png" class="fragment" /> <img data-src="img/cookiesSession6.png" class="fragment" /> <img data-src="img/cookiesSession7.png" class="fragment" /> <img data-src="img/cookiesSession8.png" class="fragment" /> <img data-src="img/cookiesSession9.png" class="fragment" />
-</p>
-</section>
-<section id="les-sessions-mode-demploi-1" class="slide level2">
-<h2>Les sessions, mode d’emploi</h2>
-<dl>
-<dt>Comment utiliser une session ?</dt>
-<dd><ol type="1">
-<li>Le client possède un cookie avec son identifiant de session.</li>
-<li>Le client fait une requête HTTP vers le même serveur.</li>
-<li>Le cookie de la session du domaine est ajouté à l’entête de la requête :</li>
-</ol>
-<pre class="http"><code>Cookie: PHPSESSID=rvPT5v5QVPJ8H_Dh54yWuTfhBDbHZ_BkDC1TaWBn8RxBcDpy</code></pre>
-<ol start="4" type="1">
-<li>Le serveur PHP charge le tableau <a href="https://www.php.net/manual/fr/reserved.variables.session.php"><code>$_SESSION</code></a> associé à l’identifiant.</li>
-</ol>
-</dd>
-</dl>
-<p><br></p>
-<p class="fragment centerm">
-… et peut alors accéder aux variables de session du tableau.
-</p>
-</section>
-<section id="utilisation-dune-session" class="slide level2">
-<h2>Utilisation d’une session</h2>
-<p class="r-stack">
-<img data-src="img/cookiesSession10.png" class="fragment" /> <img data-src="img/cookiesSession11.png" class="fragment" /> <img data-src="img/cookiesSession12.png" class="fragment" /> <img data-src="img/cookiesSession13.png" class="fragment" /> <img data-src="img/cookiesSession14.png" class="fragment" /> <img data-src="img/cookiesSession15.png" class="fragment" /> <img data-src="img/cookiesSession16.png" class="fragment" /> <img data-src="img/cookiesSession17.png" class="fragment" /> <img data-src="img/cookiesSession18.png" class="fragment" /> <img data-src="img/cookiesSession19.png" class="fragment" />
-</p>
-</section>
-<section id="sessions-les-2-règles-dor" class="slide level2">
-<h2>Sessions : les 2 règles d’or</h2>
-<blockquote>
-<p>Règle n°1 - L’instruction <a href="https://www.php.net/manual/fr/function.session-start.php"><code>session_start()</code></a> doit <strong>TOUJOURS</strong> être appelée <strong>AVANT</strong> le code HTML.</p>
-</blockquote>
-<div class="width-100">
-<blockquote>
-<p>Règle n°2 - Un client peut refuser de stocker un cookie<br />
-<span class="math inline">\(\rightarrow\)</span> ne <strong>JAMAIS</strong> supposer qu’une session existe.</p>
-</blockquote>
 </div>
+</section>
+<section id="intérêt-des-interfaces" class="slide level2">
+<h2>Intérêt des interfaces</h2>
+<div class="columns">
+<pre class="php contenteditable"><code>interface Module
+{
+    function name() : string;
+    function prof() : string;
+}
+function printModule( Module $mod )
+{
+    echo $mod-&gt;name().&#39; : &#39;.$mod-&gt;prof();
+}</code></pre><pre class="php contenteditable"><code>class W31 implements Module {
+    function name() : string { return &quot;W31&quot;; }
+    function prof() : string { return &quot;KRA&quot;; }
+}
+
+class M31 implements Module {
+    function name() : string { return &quot;M31&quot;; }
+    function prof() : string { return &quot;HAJ&quot;; }
+}</code></pre>
+</div>
+<p>Définir une fonction qui manipule <strong>un objet implémentant une interface donnée</strong> garantit qu’il possède les méthodes de l’interface.<br />
+<br />
+</p>
+<div class="columns fragment">
+<pre class="php contenteditable"><code>$mod1 = new W31();
+printModule($mod1);
+// Affiche &quot;W31 : Kra&quot;</code></pre><pre class="php contenteditable"><code>$mod2 = new M31();
+printModule($mod2);
+// Affiche &quot;M31 : HAJ&quot;</code></pre>
+</div>
+<p><br></p>
+<div class="centerh fragment">
+<p><span class="math inline">\(\rightarrow\)</span> la fonction est donc… <span class="fragment"> <strong>générique</strong> par <strong>polymorphisme</strong> ! </span></p>
+</div>
+</section>
+<section id="les-classes-abstraites" class="slide level2">
+<h2>Les classes abstraites</h2>
+<div class="columns centerh">
+<pre class="php contenteditable centerh"><code>abstract class Module
+{
+    private $_name;
+
+    function __construct( string $name ) {
+        $this-&gt;_name = $name;
+    }
+    function print() : void {
+        echo $this-&gt;_name.&#39; : &#39;.$this-&gt;prof();
+    }
+    abstract function prof() : string;
+}</code></pre><div>
+<pre class="php contenteditable centerh"><code>class W31 extends Module
+{
+    function __construct() {
+        parent::__construct(&quot;W31&quot;);
+    }
+    function prof() : string {
+        return &quot;Adrien&quot;;
+    }
+}</code></pre>
+<pre class="php contenteditable centerh"><code>$obj = new W31();
+$obj-&gt;print(); // Affiche &quot;W31 : Adrien&quot;</code></pre>
+</div>
+</div>
+<dl>
+<dt>Définition</dt>
+<dd>Une classe abstraite est à mi-chemin entre interface et classe concrète. Elle <strong>peut</strong> comporter des méthodes abstraites <strong>ET</strong> concrètes.
+</dd>
+</dl>
+<div class="fragment">
+<dl>
+<dt>Une classe abstraite :</dt>
+<dd><ul>
+<li>ne peut pas être instanciée</li>
+<li>peut contenir des attributs</li>
+</ul>
+</dd>
+</dl>
+</div>
+</section>
+<section id="intérêt-des-classes-abstraites" class="slide level2">
+<h2>Intérêt des classes abstraites</h2>
+<div class="columns centerh">
+<pre class="php contenteditable centerh"><code>abstract class MaClasseAbstraite
+{
+    private   $_attribut1;
+    protected $_attribut2;
+
+    abstract public function methode1();
+    abstract public function methode2();
+    public function methode3() { ... }
+    public function methode4() { ... }
+}</code></pre><div>
+<pre class="php contenteditable centerh"><code>class MaClasse extends MaClasseAbstraite
+{
+    public function methode1() { ... }
+    public function methode2() { ... }
+    public function methode4() { ... }
+}</code></pre>
+<pre class="php contenteditable centerh"><code>$obj = new MaClasse();
+$obj-&gt;methode2(); // OK
+$obj-&gt;methode3(); // OK
+$obj-&gt;methode4(); // OK</code></pre>
+</div>
+</div>
+<p>Comme les interfaces, elles permettent d’écrire du code <strong>générique</strong>. De plus, elles permettent de <strong>mutualiser</strong> du code.</p>
+<p>Une classe qui hérite d’une classe abstraite :</p>
+<ul>
+<li>doit définir <strong>toutes</strong> les méthodes <code>abstract</code> de la classe mère</li>
+<li><strong>peut surcharger</strong> une méthode concrète</li>
+</ul>
 </section>
 
  <!--                         </End Markdown>
@@ -868,17 +870,17 @@ showSlideNumber: 'all',
 
 // Use 1 based indexing for # links to match slide number (default is zero
 // based)
-hashOneBasedIndex: false,
+hashOneBasedIndex: true,
 
 // Add the current slide number to the URL hash so that reloading the
 // page/copying the URL will return you to the same slide
-hash: false,
+hash: true,
 
 // Flags if we should monitor the hash and change slides accordingly
 respondToHashChanges: true,
 
 // Push each slide change to the browser history
-history: true,
+history: false,
 
 // Enable keyboard shortcuts for navigation
 keyboard: true,
@@ -932,7 +934,7 @@ rtl: false,
 // If you're on slide 1.3 and navigate right, you will normally move
 // from 1.3 -> 2.1. If "grid" is used, the same navigation takes you
 // from 1.3 -> 2.3.
-navigationMode: 'default',
+navigationMode: 'linear',
 
 // Randomizes the order of slides each time the presentation loads
 shuffle: false,
@@ -1078,17 +1080,23 @@ hideInactiveCursor: true,
 // Time before the cursor is hidden (in ms)
 hideCursorTime: 5000,
 
-math: { mathjax: 'plugin/math/MathJax.js' },
+math: {
+    mathjax: 'plugin/math/MathJax.js',
+    tex2jax: {
+        inlineMath: [['\\(','\\)']] // Disable "dollard...dollard" as delimiter
+    }
+},
+
 menu: {
 		// Side of the the menu
         // left|right
 		side: 'left',
 		// Specifies the width of the menu.
 		// normal|wide|third|half|full|any valid css length value
-		width: 'normal',
+		width: 'half',
 		// Slide numbers to the titles in the slide list.
 		// false|true|h.v|h/v|c|c/t
-		numbers: false,
+		numbers: "h",
 		// Slide elements used for generating the slide titles
 		titleSelector: 'h1, h2',
 		// If slides do not have a matching title, attempt to use the
@@ -1098,7 +1106,7 @@ menu: {
 		hideMissingTitles: false,
 		// Adds markers to the slide titles to indicate the
 		// progress through the presentation.
-		markers: false,
+		markers: true,
 		// Specify custom panels to be included in the menu, by
 		// providing an array of objects with 'title', 'icon'
 		// properties, and either a 'src' or 'content' property.
@@ -1137,7 +1145,7 @@ menu: {
 		// and the menu will not attempt to load the font-awesome library.
 		loadIcons: true
 	},
-    multiplex: {
+    /* multiplex: {
         // Example values. To generate your own, see the socket.io server instructions.
         secret: '15990667632399177968', // null so the clients do not have control of the master presentation
         id: '792d8d97a4db6875', // id, obtained from socket.io server
@@ -1147,7 +1155,7 @@ menu: {
     dependencies: [
         { src: 'http://127.0.0.1:1948/socket.io/socket.io.js', async: true },
         { src: (new URLSearchParams(window.location.search)).get('s') == 'akrah' ? 'http://127.0.0.1:1948/master.js' : 'http://127.0.0.1:1948/client.js', async: true },
-    ],
+    ], */
     plugins: [ RevealHighlight, RevealMath, RevealMenu ]
 });
 

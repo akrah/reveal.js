@@ -72,9 +72,8 @@ babelConfigESM.presets[0][1].targets = { browsers: [
 
 let cache = {};
 
-const conf = readYAML.sync(root[1]+'/config.yml');
-
 gulp.task('pandoc', () => {
+    const conf = readYAML.sync(root[1]+'/config.yml');
     let confArgs = Object.entries(conf).map(
         tab => {
             if (typeof tab[1] === 'object')

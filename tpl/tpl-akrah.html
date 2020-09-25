@@ -241,7 +241,7 @@ embedded: $if(embedded)$$embedded$$else$false$endif$,
 help: $if(help)$$help$$else$true$endif$,
 
 // Flags if it should be possible to pause the presentation (blackout)
-pause: true,
+pause: $if(pause)$$pause$$else$true$endif$,
 
 // Flags if speaker notes should be visible to all viewers
 showNotes: $if(showNotes)$$showNotes$$else$false$endif$,
@@ -257,7 +257,7 @@ autoPlayMedia: $if(autoPlayMedia)$$autoPlayMedia$$else$null$endif$,
 //           the viewDistance, iframes with only data-src will be loaded when visible
 // - true:   All iframes with data-src will be loaded when within the viewDistance
 // - false:  All iframes with data-src will be loaded only when visible
-preloadIframes: null,
+preloadIframes: $if(preloadIframes)$$preloadIframes$$else$null$endif$,
 
 // Can be used to globally disable auto-animation
 autoAnimate: $if(autoAnimate)$$autoAnimate$$else$true$endif$,
@@ -366,17 +366,23 @@ hideInactiveCursor: $if(hideInactiveCursor)$$hideInactiveCursor$$else$true$endif
 // Time before the cursor is hidden (in ms)
 hideCursorTime: $if(hideCursorTime)$$hideCursorTime$$else$5000$endif$,
 
-math: { mathjax: 'plugin/math/MathJax.js' },
+math: {
+    mathjax: 'plugin/math/MathJax.js',
+    tex2jax: {
+        inlineMath: [['\\(','\\)']] // Disable "dollard...dollard" as delimiter
+    }
+},
+
 menu: {
 		// Side of the the menu
         // left|right
 		side: 'left',
 		// Specifies the width of the menu.
 		// normal|wide|third|half|full|any valid css length value
-		width: 'normal',
+		width: 'half',
 		// Slide numbers to the titles in the slide list.
 		// false|true|h.v|h/v|c|c/t
-		numbers: false,
+		numbers: "h",
 		// Slide elements used for generating the slide titles
 		titleSelector: 'h1, h2',
 		// If slides do not have a matching title, attempt to use the
@@ -386,7 +392,7 @@ menu: {
 		hideMissingTitles: false,
 		// Adds markers to the slide titles to indicate the
 		// progress through the presentation.
-		markers: false,
+		markers: true,
 		// Specify custom panels to be included in the menu, by
 		// providing an array of objects with 'title', 'icon'
 		// properties, and either a 'src' or 'content' property.
@@ -425,7 +431,7 @@ menu: {
 		// and the menu will not attempt to load the font-awesome library.
 		loadIcons: true
 	},
-    multiplex: {
+    /* multiplex: {
         // Example values. To generate your own, see the socket.io server instructions.
         secret: '15990667632399177968', // null so the clients do not have control of the master presentation
         id: '792d8d97a4db6875', // id, obtained from socket.io server
@@ -435,7 +441,7 @@ menu: {
     dependencies: [
         { src: 'http://127.0.0.1:1948/socket.io/socket.io.js', async: true },
         { src: (new URLSearchParams(window.location.search)).get('s') == 'akrah' ? 'http://127.0.0.1:1948/master.js' : 'http://127.0.0.1:1948/client.js', async: true },
-    ],
+    ], */
     plugins: [ RevealHighlight, RevealMath, RevealMenu ]
 });
 
