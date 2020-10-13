@@ -145,7 +145,7 @@ progress: $if(progress)$$progress$$else$true$endif$,
 $if(slideNumber)$
 slideNumber: "$slideNumber$",
 $else$
-slideNumber: false,
+slideNumber: slide => { return [(Reveal.getIndices( slide ).h+1)+'/'+Reveal.getTotalSlides()]; },
 $endif$
 
 // Can be used to limit the contexts in which the slide number appears
@@ -448,6 +448,7 @@ menu: {
 Reveal.on( 'ready', event => {
     // Add "contenteditable" attribute to all tags with the "contenteditable" CSS class.
     document.querySelectorAll('.contenteditable').forEach( el => el.setAttribute("contenteditable","true"));
+    document.querySelectorAll('pre').forEach( el => el.setAttribute("contenteditable","true"));
 });
 
 </script>
