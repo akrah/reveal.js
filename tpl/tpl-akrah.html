@@ -73,12 +73,12 @@ $endif$
     </style>
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="plugin/highlight/$if(highlightcss)$$highlightcss$$else$zenburn$endif$.css">
-    $for(header-includes)$
+$for(header-includes)$
     $header-includes$
-    $endfor$
-    $for(header-includes-js)$
-    <script src="$header-includes-js$"></script>
-    $endfor$
+$endfor$
+$for(header-includes-js)$
+    <script type="text/javascript" src="$header-includes-js$"></script>
+$endfor$
 </head>
 <body>
 

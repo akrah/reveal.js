@@ -13,3 +13,9 @@ dist/*.map
 *.min.css
 *.min.js
 index.html
+plugin/
+reveal.css
+reveal.js
+reveal.esm.js
+dist/*.css
+dist/theme/*.css

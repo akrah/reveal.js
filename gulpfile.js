@@ -294,7 +294,7 @@ gulp.task('package', /*gulp.series('default',*/ () =>
     })
     )
     .pipe(zip('reveal-js-presentation.zip'))
-    .pipe(gulp.dest(root[1]+'/zip2/'))
+    .pipe(gulp.dest(root[1]))
 )//)
 
 gulp.task('reload', () => gulp.src(['*.html', '*.md'])
