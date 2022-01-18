@@ -136,6 +136,11 @@ $selectionColor: #eee;
     width: 100%;
     border-bottom: 2px dashed rgb(200,200,200);
     text-align: center;
+    &:not(pre) > code {
+        font-size: .7em;
+        line-height: 1.5em;
+        vertical-align: bottom;
+    }
 }
 .reveal .slides .pdf-page .chapter h2 {
     margin-top: 30%;
@@ -507,7 +512,14 @@ $selectionColor: #eee;
 
 .reveal .slides .nomargin {
     margin: 0;
+    & > h2 {
+        margin-bottom: .1em;
+    }
+    & > pre {
+        margin-bottom: 0;
+    }
 }
+
 
 .reveal .slides .nopadding {
     padding: 0;
