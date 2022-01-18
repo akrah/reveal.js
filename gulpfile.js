@@ -28,13 +28,14 @@ const pandoc = require('node-pandoc');
 
 const root = yargs.argv.root || '.'
 const port = yargs.argv.port || 8000
+const host = yargs.argv.host || 'localhost'
 
 const banner = `/*!
 * reveal.js ${pkg.version}
 * ${pkg.homepage}
 * MIT licensed
 *
-* Copyright (C) 2020 Hakim El Hattab, https://hakim.se
+* Copyright (C) 2011-2022 Hakim El Hattab, https://hakim.se
 */\n`
 
 // Prevents warnings from opening too many test pages
@@ -64,11 +65,11 @@ const babelConfig = {
 // polyfilling older browsers and a larger bundle.
 const babelConfigESM = JSON.parse( JSON.stringify( babelConfig ) );
 babelConfigESM.presets[0][1].targets = { browsers: [
-    'last 2 Chrome versions', 'not Chrome < 60',
-    'last 2 Safari versions', 'not Safari < 10.1',
-    'last 2 iOS versions', 'not iOS < 10.3',
-    'last 2 Firefox versions', 'not Firefox < 60',
-    'last 2 Edge versions', 'not Edge < 16',
+    'last 2 Chrome versions',
+    'last 2 Safari versions',
+    'last 2 iOS versions',
+    'last 2 Firefox versions',
+    'last 2 Edge versions',
 ] };
 
 let cache = {};
@@ -228,7 +229,7 @@ gulp.task('qunit', () => {
     let serverConfig = {
         root,
         port: 8009,
-        host: '0.0.0.0',
+        host: 'localhost',
         name: 'test-server'
     }
 
@@ -329,13 +330,13 @@ gulp.task('serve', () => {
     connect.server({
         root: root,
         port: port,
-        host: '0.0.0.0',
+        host: host,
         livereload: true
     })
 
     gulp.watch(['*.html', '*.md'], gulp.series('reload'))
 
-    gulp.watch(['js/**', root[1]+'/js/**'], gulp.series('js', 'reload', 'test'))
+    gulp.watch(['js/**', root[1]+'/js/**'], gulp.series('js', 'reload', 'eslint'))
 
     gulp.watch(['plugin/**/plugin.js'], gulp.series('plugins', 'reload'))
 
