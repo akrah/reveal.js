@@ -319,7 +319,6 @@ $selectionColor: #eee;
 .reveal .slides .centertext {
     text-align: center;
 }
-
 .reveal .slides .centerm {
     margin-left: auto;
     margin-right: auto;
@@ -518,11 +517,55 @@ $selectionColor: #eee;
     & > pre {
         margin-bottom: 0;
     }
+    & > ul,
+    & > ol {
+        margin: 0;
+    }
+}
+
+.reveal .slides .nosidemargin {
+    margin-left: 0;
+    margin-right: 0;
+    & > ul,
+    & > ol {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.reveal .slides .noverticalmargin {
+    margin-top: 0;
+    margin-bottom: 0;
+    & > h2 {
+        margin-bottom: .1em;
+    }
+    & > pre {
+        margin-bottom: 0;
+    }
+    & > ul {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.reveal .slides .nomargintop {
+    margin-top: 0;
+    & > ul {
+        margin-top: 0;
+    }
 }
 
 
 .reveal .slides .nopadding {
     padding: 0;
+}
+
+.reveal .slides .margintop {
+    margin-top: $blockMargin;
+}
+
+.reveal .slides .marginbottom {
+    margin-bottom: $blockMargin;
 }
 
 .reveal .slides .r-stack div {
