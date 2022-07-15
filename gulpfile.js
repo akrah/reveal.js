@@ -3,7 +3,7 @@ const path = require('path')
 const glob = require('glob')
 const yargs = require('yargs')
 const colors = require('colors')
-const through = require('through2')
+const through = require('through2');
 const qunit = require('node-qunit-puppeteer')
 
 const {rollup} = require('rollup')
@@ -338,7 +338,7 @@ gulp.task('serve', () => {
 
     gulp.watch(['js/**', root[1]+'/js/**'], gulp.series('js', 'reload', 'eslint'))
 
-    gulp.watch(['plugin/**/plugin.js'], gulp.series('plugins', 'reload'))
+    gulp.watch(['plugin/**/plugin.js', 'plugin/**/*.html'], gulp.series('plugins', 'reload'))
 
     gulp.watch([
         'css/theme/source/*.{sass,scss}',
