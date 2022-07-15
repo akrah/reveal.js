@@ -99,6 +99,7 @@
     }
   },
   "dependencies": {
+    "node-pandoc": "^0.3.0",
     "node-static": "^0.7.11",
     "read-yaml": "^1.1.0",
     "reveal-multiplex": "^0.1.0"
