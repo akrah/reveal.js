@@ -208,12 +208,12 @@ $selectionColor: #eee;
     border: initial;
     box-shadow: initial;
     align-self: center;
+    max-width: 100%;
+    max-height: 100%;
     &.pixelated {
         image-rendering: pixelated;
         image-rendering: crisp-edges;
     }
-    max-width: 100%;
-    max-height: 100%;
 }
 // ----------------------------------------------------------------------------
 
